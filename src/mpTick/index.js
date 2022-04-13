@@ -3,7 +3,7 @@
 import "./index.scss";
 import "../../resources/function/loadComplete";
 import "../../resources/function/isOverlayPlugin";
-
+import "../../resources/function/loadOverlayPluginCommon.js";
 const tick = document.querySelector("main");
 let playerID;
 

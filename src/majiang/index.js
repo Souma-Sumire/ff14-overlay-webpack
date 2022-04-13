@@ -2,7 +2,7 @@ import { TTS } from "../../resources/function/TTS";
 import "./index.scss";
 import "../../resources/function/loadComplete";
 import "../../resources/function/isOverlayPlugin";
-
+import "../../resources/function/loadOverlayPluginCommon.js";
 let playerID = "";
 let party = [];
 let markingList = new Set();

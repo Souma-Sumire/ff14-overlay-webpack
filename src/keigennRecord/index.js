@@ -1,4 +1,5 @@
 "use strict";
+import "../../resources/function/loadOverlayPluginCommon.js";
 import { statusForCN } from "../../resources/data/statusForCN";
 import { getJobByID } from "../../resources/data/job";
 import { status } from "../../resources/data/status";

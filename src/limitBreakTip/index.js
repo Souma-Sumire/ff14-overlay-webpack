@@ -1,5 +1,5 @@
 "use strict";
-
+import "../../resources/function/loadOverlayPluginCommon.js";
 import "./index.scss";
 import "../../resources/function/loadComplete";
 import { testLogLine } from "../../resources/function/testLogLine";

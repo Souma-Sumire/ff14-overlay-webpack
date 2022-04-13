@@ -12,7 +12,7 @@ import { sortRule } from "../../resources/data/sortRule";
 import "./index.scss";
 import { sortParty } from "../../resources/function/sortParty";
 import "../../resources/function/isOverlayPlugin";
-
+import "../../resources/function/loadOverlayPluginCommon.js";
 const namespace = "TeamWatch4";
 const load = (t, a = undefined) => loadItem(namespace, t, a);
 const sortRuleUsed = load("sortRuleUser", sortRule);

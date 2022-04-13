@@ -1,4 +1,5 @@
 "use strict";
+import "../../resources/function/loadOverlayPluginCommon.js";
 import "../../resources/function/loadComplete";
 import { logProcessing } from "../../resources/function/logProcessing";
 import { TTS } from "../../resources/function/TTS";
@@ -39,7 +40,7 @@ addOverlayListener("LogLine", (e) => {
         (() => {
           let res = roomajiEnable ? toRoomaji(log.actionName) : log.actionName;
           // if (res === log.actionName) {
-            // console.log(log.actionID, parseInt(log.actionID, 16));
+          // console.log(log.actionID, parseInt(log.actionID, 16));
           // }
           return res;
         })(),

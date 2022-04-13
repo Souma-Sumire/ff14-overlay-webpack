@@ -1,5 +1,5 @@
 "use strict";
-
+import "../../resources/function/loadOverlayPluginCommon.js";
 import { actionChinese } from "../../resources/data/actionChinese.js";
 import { loadItem, saveItem } from "../../resources/function/localStorage";
 import { logProcessing } from "../../resources/function/logProcessing.js";

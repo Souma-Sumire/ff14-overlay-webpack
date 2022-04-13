@@ -1,7 +1,7 @@
 "use strict";
 import "../../resources/function/isOverlayPlugin";
 import "./index.scss";
-
+import "../../resources/function/loadOverlayPluginCommon.js";
 let focusTargetID;
 let settings = document.querySelector("#settings");
 let show = document.querySelector("#show");
