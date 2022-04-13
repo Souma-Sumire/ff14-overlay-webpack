@@ -65,9 +65,9 @@ addOverlayListener("LogLine", (e) => {
         const itemReg = /^item_(.+)$/;
         if (itemReg.test(l?.actionName)) {
           const item = getItem(parseInt(l.actionName.match(itemReg)[1], 16));
-          img.src = `https://souma.diemoe.net/resources/icon/${item?.Url ?? "000000/000405"}.png`;
+          img.src = `http://cafemaker.wakingsands.com/i/${item?.Url ?? "000000/000405"}.png`;
         } else {
-          img.src = `https://souma.diemoe.net/resources/icon/${action?.Url ?? "000000/000405"}.png`;
+          img.src = `http://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png`;
         }
         if (e.line[0] === "20") {
           section.classList.add("casting");

@@ -111,7 +111,7 @@ function partyChanged(party) {
           if (action.ID === undefined) {
             memberActionDOM.style.opacity = "0";
           } else {
-            memberActionDOM.style.background = `url(https://souma.diemoe.net/resources/icon/${action.Url}.png) no-repeat`;
+            memberActionDOM.style.background = `url(http://cafemaker.wakingsands.com/i/${action.Url}.png) no-repeat`;
             memberActionDOM.style.animationDuration = action?.Recast100ms * 100 + "ms";
             memberActionDOM.setAttribute("data-action-proto-recastNow", "");
             memberActionDOM.setAttribute("data-action-proto-chargesNow", action?.MaxCharges);

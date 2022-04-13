@@ -180,7 +180,7 @@ addOverlayListener("LogLine", (e) => {
           let img = new Image();
           img.style.height = parseInt(params?.get("imgHeight") ?? 22) + "px";
           let statusNow = status[parseInt(key, 16)] ?? { "CN": "未知", "url": "000000/000405" };
-          img.src = `https://souma.diemoe.net/resources/icon/${stackUrl(statusNow.url)}.png`;
+          img.src = `http://cafemaker.wakingsands.com/i/${stackUrl(statusNow.url)}.png`;
           function stackUrl(url) {
             return stack > 1 && stack <= 16
               ? url.substring(0, 7) + (Array(6).join(0) + (parseInt(url.substring(7)) + stack - 1)).slice(-6)

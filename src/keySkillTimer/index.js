@@ -107,7 +107,7 @@ function show(party) {
         aside.innerText = "";
         art.append(aside);
         let section = document.createElement("section");
-        section.style.backgroundImage = `url(https://souma.diemoe.net/resources/icon/${action?.Url ?? "000000/000405"}.png)`;
+        section.style.backgroundImage = `url(http://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png)`;
         art.append(section);
         let shadow = document.createElement("div");
         shadow.classList.add("shadow");

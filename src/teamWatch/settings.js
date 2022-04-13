@@ -146,7 +146,7 @@ function newTD(id) {
   let icon = document.createElement("aside");
   let img = new Image();
   // cafeOrXiavpiUrl(action?.Url, img);
-  img.src = `https://souma.diemoe.net/resources/icon/${action?.Url ?? "000000/000405"}.png`;
+  img.src = `http://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png`;
   img.classList.add("icon");
   icon.appendChild(img);
   td.appendChild(icon);
@@ -248,7 +248,7 @@ function editWatch(dom, td) {
       actionNameDom.innerText = `${action.Name}\n${action.ID} (${parseInt(action.ID).toString(16).toUpperCase()})`;
       let actionIconDom = document.createElement("aside");
       let actionIconImg = new Image();
-      actionIconImg.src = `https://souma.diemoe.net/resources/icon/${action?.Url ?? "000000/000405"}.png`;
+      actionIconImg.src = `http://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png`;
       actionIconDom.appendChild(actionIconImg);
       let actionRecast100ms = document.createElement("footer");
       actionRecast100ms.innerText = action.Recast100ms / 10 + "S";
