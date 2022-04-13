@@ -1,0 +1,68 @@
+@font-face{
+  font-family:'SmartisanHei';
+  src: url("https://act.diemoe.net/overlays/common/SmartisanHei.woff2") format("woff2"),
+       url("https://act.diemoe.net/overlays/common/SmartisanHei.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  overflow: hidden;
+  main {
+    position: relative;
+    color: rgb(254, 254, 253);
+    text-shadow: -1px 0 3px rgb(179, 137, 21), 0 1px 3px rgb(179, 137, 21), 1px 0 3px rgb(179, 137, 21), 0 -1px 3px rgb(179, 137, 21);
+    //伤害类型
+    #type {
+      padding: 0px 3px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    //倒计时
+    #countdown {
+      padding: 0px 3px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: right;
+    }
+
+    //进度条
+    article {
+      overflow: hidden;
+      position: absolute;
+      top: 22px;
+      background-size: 10px;
+      border-radius: 5px;
+      border: 2px solid rgb(248, 161, 0);
+      box-shadow: 0 0 3px rgb(179, 137, 21);
+      background-color: rgb(56, 38, 11);
+      // height: 10px;
+      width: calc(100% - 1px);
+      aside {
+        background-color: #fff;
+        height: 100%;
+        width: 0%;
+      }
+    }
+
+    //技能名
+    section {
+      padding: 0px 3px;
+      position: absolute;
+      // top: 30px;
+      right: 0;
+      // font-weight: bold;
+      text-align: right;
+      overflow: hidden;
+    }
+  }
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  user-select: none;
+}

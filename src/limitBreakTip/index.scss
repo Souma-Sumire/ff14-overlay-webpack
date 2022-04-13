@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-size: 20px;
+  color: white;
+  padding: 2px 4px;
+}
+#show {
+  &::before {
+    content: "LB:";
+  }
+  font-size: 14px;
+  text-shadow: -1px 0 1.5px rgb(145, 186, 94), 0 1.5px 1.5px rgb(145, 186, 94), 1px 0 1.5px rgb(145, 186, 94),
+    0 -1.5px 1.5px rgb(145, 186, 94);
+}
+#extra {
+  text-shadow: -1px 0 2px rgb(169, 26, 22), 0 1.5px 2px rgb(169, 26, 22), 1px 0 2px rgb(169, 26, 22), 0 -1.5px 2px rgb(169, 26, 22);
+  font-weight: bold;
+}
+#extraAll {
+  &::before {
+    content: "奖励:";
+  }
+  position: absolute;
+  top: 21px;
+  right: 0;
+  font-size: 14px;
+  text-shadow: -1px 0 2px rgb(169, 26, 22), 0 1.5px 2px rgb(169, 26, 22), 1px 0 2px rgb(169, 26, 22), 0 -1.5px 2px rgb(169, 26, 22);
+}
+.anime {
+  animation: anime 5s;
+  animation-fill-mode: forwards;
+}
+@keyframes anime {
+  0% {
+    opacity: 0;
+    height: 0px;
+    font-size: 0.5em;
+  }
+  4% {
+    opacity: 1;
+    height: 26px;
+    font-size: 1.2em;
+  }
+  6% {
+    font-size: 1em;
+  }
+  70% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+    height: 26px;
+  }
+  100% {
+    opacity: 0;
+    height: 0px;
+  }
+}

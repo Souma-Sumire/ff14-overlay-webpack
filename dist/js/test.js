@@ -1,0 +1,1 @@
+!function(){"use strict";var o;o=Number("123/456".split("/")[0]),console.log(o)}();

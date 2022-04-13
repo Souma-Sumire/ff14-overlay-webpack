@@ -1,0 +1,373 @@
+html {
+  font-family: "微软雅黑", "Microsoft Yahei UI", Lato, Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  body {
+    overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    main {
+      float: left;
+      transform: scale(0.8);
+      transform-origin: left top;
+      padding: 8px;
+      .members {
+        display: flex;
+        height: 50px;
+        article {
+          width: 40px;
+          height: 40px;
+          position: relative;
+          padding: 5px 2px;
+        }
+      }
+    }
+  }
+}
+.menu {
+  position: fixed;
+  // top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 21;
+  button {
+    // margin-left: 2px;
+    padding: 0;
+    margin: 0;
+    float: right;
+    // height: 10px;
+  }
+  display: none;
+}
+article.oGCDActionAnimation::before {
+  content: "";
+  animation-timing-function: steps(1);
+  animation-iteration-count: infinite;
+  animation-name: move;
+  animation-duration: inherit;
+  background-image: url(https://souma.diemoe.net/resources/img/oGCD.png);
+  background-size: 3564px 48px !important;
+
+  padding-left: 2px;
+  width: 42px;
+  height: 48px;
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: -4px;
+}
+article.GCDActionAnimation::before {
+  content: "";
+  animation-timing-function: steps(1);
+  animation-iteration-count: infinite;
+  animation-name: move;
+  animation-duration: inherit;
+  background-image: url(https://souma.diemoe.net/resources/img/GCD.png);
+  background-size: 3564px 48px !important;
+
+  padding-left: 2px;
+  width: 44px;
+  height: 48px;
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: -4px;
+}
+article.normalActionAnimation::after {
+  content: "";
+  animation-timing-function: steps(1);
+  animation-iteration-count: 1;
+  animation-name: move;
+  animation-duration: inherit;
+  background-image: url(https://souma.diemoe.net/resources/img/recast.png);
+  background-size: 3564px 48px !important;
+  clip-path: polygon(4% 0, 100% 0, 100% 100%, 4% 100%);
+}
+.nocharges {
+  filter: contrast(0.8);
+}
+.charges {
+  position: absolute;
+  left: 33px;
+  top: 25px;
+  font-size: 14px;
+  color: white;
+  text-shadow: -1px 0 3px rgb(202, 81, 0), 0 1px 3px rgb(202, 81, 0), 1px 0 3px rgb(202, 81, 0), 0 -1px 3px rgb(202, 81, 0);
+  font-weight: bold;
+  z-index: 3;
+}
+#member1 > article.skill_icon.hideText::after {
+  content: "" !important;
+}
+.useful_false {
+  opacity: 0;
+}
+.skill_icon::after {
+  background: url(https://souma.diemoe.net/resources/img/frame.png) no-repeat;
+  padding-left: 2px;
+  width: 44px;
+  height: 48px;
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: -4px;
+  z-index: 2;
+  content: attr(data-action-proto-recastNow) !important;
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 3px #000, 0 1px 3px #000, 1px 0 3px #000, 0 -1px 3px #000;
+  font-weight: bold;
+  line-height: 44px;
+  font-size: 18px;
+}
+@keyframes move {
+  0% {
+    background-position: -0px;
+  }
+  1.23% {
+    background-position: -44px;
+  }
+  2.47% {
+    background-position: -88px;
+  }
+  3.7% {
+    background-position: -132px;
+  }
+  4.94% {
+    background-position: -176px;
+  }
+  6.17% {
+    background-position: -220px;
+  }
+  7.41% {
+    background-position: -264px;
+  }
+  8.64% {
+    background-position: -308px;
+  }
+  9.88% {
+    background-position: -352px;
+  }
+  11.11% {
+    background-position: -396px;
+  }
+  12.35% {
+    background-position: -440px;
+  }
+  13.58% {
+    background-position: -484px;
+  }
+  14.81% {
+    background-position: -528px;
+  }
+  16.05% {
+    background-position: -572px;
+  }
+  17.28% {
+    background-position: -616px;
+  }
+  18.52% {
+    background-position: -660px;
+  }
+  19.75% {
+    background-position: -704px;
+  }
+  20.99% {
+    background-position: -748px;
+  }
+  22.22% {
+    background-position: -792px;
+  }
+  23.46% {
+    background-position: -836px;
+  }
+  24.69% {
+    background-position: -880px;
+  }
+  25.93% {
+    background-position: -924px;
+  }
+  27.16% {
+    background-position: -968px;
+  }
+  28.4% {
+    background-position: -1012px;
+  }
+  29.63% {
+    background-position: -1056px;
+  }
+  30.86% {
+    background-position: -1100px;
+  }
+  32.1% {
+    background-position: -1144px;
+  }
+  33.33% {
+    background-position: -1188px;
+  }
+  34.57% {
+    background-position: -1232px;
+  }
+  35.8% {
+    background-position: -1276px;
+  }
+  37.04% {
+    background-position: -1320px;
+  }
+  38.27% {
+    background-position: -1364px;
+  }
+  39.51% {
+    background-position: -1408px;
+  }
+  40.74% {
+    background-position: -1452px;
+  }
+  41.98% {
+    background-position: -1496px;
+  }
+  43.21% {
+    background-position: -1540px;
+  }
+  44.44% {
+    background-position: -1584px;
+  }
+  45.68% {
+    background-position: -1628px;
+  }
+  46.91% {
+    background-position: -1672px;
+  }
+  48.15% {
+    background-position: -1716px;
+  }
+  49.38% {
+    background-position: -1760px;
+  }
+  50.62% {
+    background-position: -1804px;
+  }
+  51.85% {
+    background-position: -1848px;
+  }
+  53.09% {
+    background-position: -1892px;
+  }
+  54.32% {
+    background-position: -1936px;
+  }
+  55.56% {
+    background-position: -1980px;
+  }
+  56.79% {
+    background-position: -2024px;
+  }
+  58.02% {
+    background-position: -2068px;
+  }
+  59.26% {
+    background-position: -2112px;
+  }
+  60.49% {
+    background-position: -2156px;
+  }
+  61.73% {
+    background-position: -2200px;
+  }
+  62.96% {
+    background-position: -2244px;
+  }
+  64.2% {
+    background-position: -2288px;
+  }
+  65.43% {
+    background-position: -2332px;
+  }
+  66.67% {
+    background-position: -2376px;
+  }
+  67.9% {
+    background-position: -2420px;
+  }
+  69.14% {
+    background-position: -2464px;
+  }
+  70.37% {
+    background-position: -2508px;
+  }
+  71.6% {
+    background-position: -2552px;
+  }
+  72.84% {
+    background-position: -2596px;
+  }
+  74.07% {
+    background-position: -2640px;
+  }
+  75.31% {
+    background-position: -2684px;
+  }
+  76.54% {
+    background-position: -2728px;
+  }
+  77.78% {
+    background-position: -2772px;
+  }
+  79.01% {
+    background-position: -2816px;
+  }
+  80.25% {
+    background-position: -2860px;
+  }
+  81.48% {
+    background-position: -2904px;
+  }
+  82.72% {
+    background-position: -2948px;
+  }
+  83.95% {
+    background-position: -2992px;
+  }
+  85.19% {
+    background-position: -3036px;
+  }
+  86.42% {
+    background-position: -3080px;
+  }
+  87.65% {
+    background-position: -3124px;
+  }
+  88.89% {
+    background-position: -3168px;
+  }
+  90.12% {
+    background-position: -3212px;
+  }
+  91.36% {
+    background-position: -3256px;
+  }
+  92.59% {
+    background-position: -3300px;
+  }
+  93.83% {
+    background-position: -3344px;
+  }
+  95.06% {
+    background-position: -3388px;
+  }
+  96.3% {
+    background-position: -3432px;
+  }
+  97.53% {
+    background-position: -3476px;
+  }
+  98.77% {
+    background-position: -3520px;
+  }
+  99.99% {
+    background-position: -3520px;
+  }
+  100% {
+    background-position: -3564px;
+  }
+}

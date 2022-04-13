@@ -1,0 +1,7 @@
+ActionCategory
+ClassJobCategory 
+IsPvP = false
+Recast<100ms> >=100 
+
+Trait:
+Trait.csv+TraitTransient.csv

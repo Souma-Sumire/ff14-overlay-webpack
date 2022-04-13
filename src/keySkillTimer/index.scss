@@ -1,0 +1,68 @@
+@import "../../resources/style/jobColor.scss";
+html {
+  body {
+    overflow: hidden;
+    > div {
+      margin: 0 auto;
+      transform-origin: top;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      article {
+        // margin-top:40px !important;
+        flex-shrink: 0;
+        margin: 4px 3px;
+        width: 40px;
+        height: 40px;
+        position: relative;
+        font-weight: bold;
+        font-family: "emoji";
+        aside {
+          width: 60px;
+          text-align: center;
+          position: absolute;
+          left: -10px;
+          line-height: 40px;
+          z-index: 1;
+          font-size: 18px;
+          color: white;
+          text-shadow: -1px 0 2px #000, 0 1px 2px #000, 1px 0 2px #000, 0 -1px 2px #000;
+        }
+        section {
+          filter: drop-shadow(1px 2px 2px #000);
+          box-shadow: 0 0 1px 1px black;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          background-repeat: no-repeat;
+          position: absolute;
+        }
+        .shadow {
+          clip-path: inset(100% 0 0 0);
+          background-color: #111;
+          opacity: 0.75;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          position: absolute;
+        }
+        footer {
+          z-index: 454;
+          position: absolute;
+          bottom: -6px;
+          font-size: 8px;
+          color: white;
+          width: 40px;
+          text-align: center;
+          white-space: nowrap;
+          font-family: "宋体";
+        }
+      }
+    }
+  }
+}
+
+.useful_false {
+  display: none;
+}

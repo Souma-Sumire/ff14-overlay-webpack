@@ -1,0 +1,239 @@
+@import "../../resources/style/jobColor.scss";
+body {
+  > main {
+    > button,
+    p {
+      display: inline-block;
+      margin: 0px 5px;
+    }
+    > table {
+      text-align: center;
+      border-collapse: collapse;
+      tr {
+        > article {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: right;
+          // width: 2em;
+          padding: 0px 0.45em;
+        }
+        vertical-align: bottom;
+        height: 50px;
+        .dragArea {
+          display: flex;
+          flex-direction: column;
+          user-select: none;
+          div {
+            &:hover {
+              background-color: rgba(155, 255, 255, 0.7);
+              cursor: pointer;
+            }
+            flex: 1;
+            width: 15px;
+            outline: gray solid 1px;
+          }
+        }
+        td {
+          height: 60px;
+        }
+        td:not(.dragArea) {
+          border: 1px gray solid;
+          font-size: 12px;
+          position: relative;
+          &:hover {
+            &::before {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              width: 100%;
+              transform: translateX(-50%);
+              content: "编辑";
+              font-weight: bold;
+              // color: darkblue;
+            }
+            background-color: rgba(255, 255, 5, 0.7);
+            cursor: pointer;
+            article {
+              opacity: 0;
+            }
+          }
+          //技能名称
+          article {
+            width: 80px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          //图标部分
+          aside {
+            user-select: none;
+            justify-content: center;
+            display: inline-flex;
+            position: relative;
+            height: 48px;
+            top: 3px;
+            img {
+              position: absolute;
+            }
+            &::after {
+              position: absolute;
+              top: -3px;
+              content: "";
+              background: url(https://souma.diemoe.net/resources/img/frame.png) no-repeat;
+              width: 48px;
+              height: 48px;
+            }
+          }
+        }
+        > aside:last-child {
+          button {
+            position: relative;
+            top: 20px;
+            left: 10px;
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "微软雅黑", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.job {
+  font-weight: bold;
+  color: white;
+}
+
+#editDiv {
+  #closeButton {
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  height: 462px;
+  width: 400px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 2px gray solid;
+  z-index: 30;
+  //技能详情
+  ul {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    list-style: none;
+    li:not(:last-child) {
+      padding-left: 54px;
+    }
+    li:last-child {
+      justify-content: center;
+      display: inline-flex;
+      position: relative;
+      height: 48px;
+      top: -40px;
+      left: 25px;
+      img {
+        position: absolute;
+      }
+      &::after {
+        position: absolute;
+        top: -3px;
+        content: "";
+        background: url(https://souma.diemoe.net/resources/img/frame.png) no-repeat;
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  //候选技能
+  .candidate {
+    &::after {
+      content: "在下面列表中点击选择需要替换成的技能：";
+      position: absolute;
+      font-weight: bold;
+      top: 90px;
+      left: 40px;
+    }
+    display: flex;
+    border: 1px rgb(128 128 128) solid;
+    padding: 5px;
+    margin-top: 30%;
+    height: 300px;
+    width: 385px;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-content: flex-start;
+    border-collapse: collapse;
+    > div {
+      position: relative;
+      display: flex;
+      margin: 0.5px;
+      flex-direction: column;
+      width: calc(25% - 1px);
+      min-height: 62px;
+      outline: 1px solid black;
+      justify-content: space-between;
+      &:hover {
+        background-color: lightgreen;
+        cursor: pointer;
+      }
+      article {
+        // justify-content: center;
+        text-align: center;
+        font-size: 12px;
+      }
+      aside {
+        margin-top: 2px;
+        justify-content: center;
+        display: inline-flex;
+        position: relative;
+        height: 44px;
+        img {
+          position: absolute;
+        }
+        &::after {
+          position: absolute;
+          top: -3px;
+          content: "";
+          background: url(https://souma.diemoe.net/resources/img/frame.png) no-repeat;
+          width: 48px;
+          height: 48px;
+        }
+      }
+      footer {
+        position: absolute;
+        right: 0;
+        // bottom: 1px;
+        // left: 50%;
+        // transform: translateX(-50%);
+        color: white;
+        font-size: 12px;
+        font-family: monospace;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 0px 1px;
+      }
+    }
+  }
+}
+.opacity {
+  filter: opacity(0.5);
+}
+.hide {
+  display: none;
+}
+#share {
+  margin-top: 10px;
+}
