@@ -1,5 +1,4 @@
 "use strict";
-import "../../resources/function/loadOverlayPluginCommon.js";
 import { statusForCN } from "../../resources/data/statusForCN";
 import { getJobByID } from "../../resources/data/job";
 import { status } from "../../resources/data/status";
@@ -11,6 +10,7 @@ import "../../resources/function/xianyu";
 import "../../resources/function/loadComplete";
 import "./index.scss";
 import "../../resources/function/isOverlayPlugin";
+import "../../resources/function/loadOverlayPluginCommon.js";
 
 const params = new URLSearchParams(new URL(window.location).search);
 const body = document.body;

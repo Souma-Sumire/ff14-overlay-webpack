@@ -1,4 +1,5 @@
 "use strict";
+
 import "../../resources/function/loadOverlayPluginCommon.js";
 import { getAction } from "../../resources/data/actions";
 import { compareSame } from "../../resources/function/compareSameGroup";
