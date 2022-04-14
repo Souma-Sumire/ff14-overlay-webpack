@@ -1,5 +1,5 @@
 if (!window.OverlayPluginApi) {
-  console.log("1");
+  console.log("从CDN获取common.min.js失败，加载本地版本。");
   !(function () {
     let e = /[\?&]OVERLAY_WS=([^&]+)/.exec(location.href),
       n = null,
