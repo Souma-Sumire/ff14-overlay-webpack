@@ -1,4 +1,5 @@
 if (!window.OverlayPluginApi) {
+  console.log("1");
   !(function () {
     let e = /[\?&]OVERLAY_WS=([^&]+)/.exec(location.href),
       n = null,
