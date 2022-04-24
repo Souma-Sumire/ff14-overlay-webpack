@@ -23,7 +23,7 @@ export default (function () {
   readMe.style.justifyContent = "center";
   readMe.id = "readMe";
   let text = document.createElement("span");
-  text.innerText = `🔒这是供用户调整悬浮窗尺寸的蓝色背景，在ACT的Overlay(ngld)插件中锁定此悬浮窗便即会消失。`;
+  text.innerText = `🔒在Overlay悬浮窗(ngld)插件中锁定此悬浮窗以开始使用。`;
   readMe.appendChild(text);
   document.body.appendChild(readMe);
   document.addEventListener(
