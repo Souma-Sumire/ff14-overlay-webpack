@@ -84,7 +84,7 @@ function loadAction(watchJobsActionsIDShow) {
   for (const jobID of sortRuleShow) {
     let tr = document.createElement("tr");
     const jobInfo = getJobByID(jobID);
-    tr.setAttribute("data-job-name", jobInfo.jp);
+    tr.setAttribute("data-job", jobInfo.ID);
     let name = document.createElement("article");
     name.classList.add(jobInfo?.en);
     name.classList.add("job");
@@ -231,13 +231,16 @@ function editWatch(dom, td) {
 
   for (const id in actions) {
     const action = getAction(id);
+    // console.log(action,action.ClassJobCategory.toString(),dom?.parentNode?.getAttribute("data-job"));
     if (
-      ((action.ClassJobCategory.indexOf(dom?.parentNode?.getAttribute("data-job-name")) > -1 &&
+      action.ID === "0" ||
+      (((action.ClassJob.toString() === dom?.parentNode?.getAttribute("data-job") &&
+        // action.ClassJobCategory.indexOf(dom?.parentNode?.getAttribute("data-job-name")) > -1 &&
         action.ClassJobLevel > 0 &&
         compareSame(id) === id &&
         (action.Recast100ms >= 100 || params.get("ignoreRecast") === "true")) ||
         id === "0") &&
-      !tdList?.some((value) => value === id)
+        !tdList?.some((value) => value === id))
     ) {
       action.Name = action.Name;
       let actionDom = document.createElement("div");

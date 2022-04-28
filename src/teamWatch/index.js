@@ -117,7 +117,7 @@ function partyChanged(party) {
             memberActionDOM.setAttribute("data-action-proto-chargesNow", action?.MaxCharges);
             memberActionDOM.timerCharges = null;
             let maxCharges = action.MaxCharges;
-            if (maxCharges !== "0") {
+            if (maxCharges !== 0) {
               const chargesCountDOM = document.createElement("span");
               chargesCountDOM.classList.add("charges");
               chargesCountDOM.innerText = maxCharges;
