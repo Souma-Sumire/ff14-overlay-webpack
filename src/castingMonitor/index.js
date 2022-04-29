@@ -59,7 +59,7 @@ addOverlayListener("LogLine", (e) => {
     let l = logProcessing(e.line, "action");
     if (l.casterID === targetID) {
       let action = getAction(parseInt(l.actionID, 16));
-      if (action.ActionCategory !== "自动攻击") {
+      if (action.ActionCategory !== 1) {
         let section = document.createElement("section");
         section.setAttribute("data-action-name", l.actionName);
         const img = new Image();
@@ -74,7 +74,7 @@ addOverlayListener("LogLine", (e) => {
           section.classList.add("casting");
         } else {
           clearCasting();
-          if (action.ActionCategory === "能力") {
+          if (action.ActionCategory === 4) {
             section.classList.add("oGCD");
           }
         }
@@ -90,7 +90,7 @@ addOverlayListener("LogLine", (e) => {
             tetrisDiv.appendChild(tetrisImg);
             aside.appendChild(tetrisDiv);
             tetrisDiv.classList.add("icon");
-            if (action.ActionCategory === "能力") tetrisDiv.classList.add("oGCD");
+            if (action.ActionCategory === 4) tetrisDiv.classList.add("oGCD");
             if (aside.clientHeight > (1 + tetrisDiv.clientHeight) * 2) aside.firstChild?.remove();
           }
         }
