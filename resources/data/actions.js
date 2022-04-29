@@ -1,3 +1,4 @@
+import { actionChinese } from "../../resources/data/actionChinese.js";
 const actions = {
   0: [405, 0, 0, false, 0, 0, 0],
   1: [405, 8, 0, 0, false, 0, 0],
@@ -27175,6 +27176,7 @@ const actions = {
   29777: [405, 3, -1, 0, false, 20, 0],
   29778: [405, 3, -1, 0, false, 20, 0],
 };
+
 const rule = {
   Url: 0,
   ActionCategory: 1,
@@ -27196,7 +27198,6 @@ export function getOtherName(id, lang) {
     });
   return result;
 }
-import { actionChinese } from "../../resources/data/actionChinese.js";
 
 function createIconUrl(icon) {
   if (!icon) return;
@@ -27219,7 +27220,7 @@ class Action {
     this.Url = createIconUrl(action[rule.Url]);
     this.ActionCategory = action[rule.ActionCategory];
     this.ClassJobLevel = action[rule.ClassJobLevel];
-    this.IsRoleAction = this.ClassJobLevel === 0 ? "FALSE" : action[rule.IsRoleAction];
+    this.IsRoleAction = this.ClassJobLevel === 0 ? false : action[rule.IsRoleAction];
     this.Recast100ms = getTrait(this.ID, "Recast100ms", level);
     this.MaxCharges = getTrait(this.ID, "MaxCharges", level);
     this.ClassJob = action[rule.ClassJob];
@@ -27227,41 +27228,41 @@ class Action {
   }
 }
 const TraitRecast100ms = {
-  3606: { trait: (level) => (level >= 68 ? "900" : "1200") }, //光速
-  7521: { trait: (level) => (level >= 74 ? "1100" : "1200") }, //倍增
-  7519: { trait: (level) => (level >= 78 ? "350" : "450") }, //六分反击
-  3574: { trait: (level) => (level >= 74 ? "300" : "600") }, //激情咏唱
-  24300: { trait: (level) => (level >= 88 ? "900" : "1200") }, //命源
-  7405: { trait: (level) => (level >= 88 ? "900" : "1200") }, //行吟
-  16889: { trait: (level) => (level >= 88 ? "900" : "1200") }, //策动
-  16012: { trait: (level) => (level >= 88 ? "900" : "1200") }, //守护之桑巴
-  158: { trait: (level) => (level >= 84 ? "120" : "1800") }, //转魔
-  3585: { trait: (level) => (level >= 88 ? "900" : "1200") }, //展开战术
+  3606: { trait: (level) => (level >= 68 ? 900 : 1200) }, //光速
+  7521: { trait: (level) => (level >= 74 ? 1100 : 1200) }, //倍增
+  7519: { trait: (level) => (level >= 78 ? 350 : 450) }, //六分反击
+  3574: { trait: (level) => (level >= 74 ? 300 : 600) }, //激情咏唱
+  24300: { trait: (level) => (level >= 88 ? 900 : 1200) }, //命源
+  7405: { trait: (level) => (level >= 88 ? 900 : 1200) }, //行吟
+  16889: { trait: (level) => (level >= 88 ? 900 : 1200) }, //策动
+  16012: { trait: (level) => (level >= 88 ? 900 : 1200) }, //守护之桑巴
+  158: { trait: (level) => (level >= 84 ? 120 : 1800) }, //转魔
+  3585: { trait: (level) => (level >= 88 ? 900 : 1200) }, //展开战术
 };
 const TraitMaxCharges = {
-  16151: { trait: (level) => (level >= 84 ? "2" : "1") }, //极光
-  25762: { trait: (level) => (level >= 84 ? "3" : "2") }, //抜重歩法
-  24380: { trait: (level) => (level >= 78 ? "2" : "1") }, //调和的灵魂
-  3640: { trait: (level) => (level >= 78 ? "2" : "1") }, //跳斩
-  7432: { trait: (level) => (level >= 88 ? "2" : "1") }, //神祝祷
-  7518: { trait: (level) => (level >= 88 ? "2" : "1") }, //促进
-  3574: { trait: (level) => (level >= 88 ? "2" : "1") }, //激情咏唱
-  2874: { trait: (level) => (level >= 74 ? "3" : "2") }, //虹吸弹
-  2876: { trait: (level) => (level >= 84 ? "2" : "1") }, //整备
-  95: { trait: (level) => (level >= 84 ? "2" : "1") }, //破碎冲 84 1~2
-  83: { trait: (level) => (level >= 88 ? "2" : "1") }, //龙剑 88 1~2
-  2262: { trait: (level) => (level >= 74 ? "2" : "1") }, //缩地 74 1~2
-  16483: { trait: (level) => (level >= 84 ? "2" : "1") }, //燕返 84 1~2
-  16484: { trait: (level) => (level >= 84 ? "2" : "1") }, //燕返彼岸花 84 1~2
-  16485: { trait: (level) => (level >= 84 ? "2" : "1") }, //燕返天下五剑 84 1~2
-  16486: { trait: (level) => (level >= 84 ? "2" : "1") }, //燕返纷乱雪月花 84 1~2
-  7499: { trait: (level) => (level >= 88 ? "2" : "1") }, //明镜止水 88 1~2
-  110: { trait: (level) => (level >= 84 ? "3" : "2") }, //失血箭 84 2~3
-  16010: { trait: (level) => (level >= 68 ? (level >= 78 ? "3" : "2") : "1") }, //前冲步
-  3614: { trait: (level) => (level >= 78 ? "2" : "1") }, //先天禀赋
-  16556: { trait: (level) => (level >= 88 ? "2" : "1") }, //星天交错
-  7386: { trait: (level) => (level >= 88 ? "3" : "2") }, //猛攻
-  25799: { trait: (level) => (level >= 88 ? "2" : "1") }, //守护之光
+  16151: { trait: (level) => (level >= 84 ? 2 : 1) }, //极光
+  25762: { trait: (level) => (level >= 84 ? 3 : 2) }, //抜重歩法
+  24380: { trait: (level) => (level >= 78 ? 2 : 1) }, //调和的灵魂
+  3640: { trait: (level) => (level >= 78 ? 2 : 1) }, //跳斩
+  7432: { trait: (level) => (level >= 88 ? 2 : 1) }, //神祝祷
+  7518: { trait: (level) => (level >= 88 ? 2 : 1) }, //促进
+  3574: { trait: (level) => (level >= 88 ? 2 : 1) }, //激情咏唱
+  2874: { trait: (level) => (level >= 74 ? 3 : 2) }, //虹吸弹
+  2876: { trait: (level) => (level >= 84 ? 2 : 1) }, //整备
+  95: { trait: (level) => (level >= 84 ? 2 : 1) }, //破碎冲 84 1~2
+  83: { trait: (level) => (level >= 88 ? 2 : 1) }, //龙剑 88 1~2
+  2262: { trait: (level) => (level >= 74 ? 2 : 1) }, //缩地 74 1~2
+  16483: { trait: (level) => (level >= 84 ? 2 : 1) }, //燕返 84 1~2
+  16484: { trait: (level) => (level >= 84 ? 2 : 1) }, //燕返彼岸花 84 1~2
+  16485: { trait: (level) => (level >= 84 ? 2 : 1) }, //燕返天下五剑 84 1~2
+  16486: { trait: (level) => (level >= 84 ? 2 : 1) }, //燕返纷乱雪月花 84 1~2
+  7499: { trait: (level) => (level >= 88 ? 2 : 1) }, //明镜止水 88 1~2
+  110: { trait: (level) => (level >= 84 ? 3 : 2) }, //失血箭 84 2~3
+  16010: { trait: (level) => (level >= 68 ? (level >= 78 ? 3 : 2) : 1) }, //前冲步
+  3614: { trait: (level) => (level >= 78 ? 2 : 1) }, //先天禀赋
+  16556: { trait: (level) => (level >= 88 ? 2 : 1) }, //星天交错
+  7386: { trait: (level) => (level >= 88 ? 3 : 2) }, //猛攻
+  25799: { trait: (level) => (level >= 88 ? 2 : 1) }, //守护之光
 };
 function getTrait(id, traitName, level = 999) {
   let obj;
@@ -27276,23 +27277,24 @@ function getTrait(id, traitName, level = 999) {
   return obj?.[id]?.trait(level) ?? actions?.[id]?.[rule?.[traitName]] ?? 0;
 }
 for (const s of [
-  { ID: "2", index: rule.Url, to: "123" }, //任务指令
-  { ID: "3", index: rule.Url, to: "104" }, //冲刺
-  { ID: "4", index: rule.Url, to: "118" }, //坐骑
-  { ID: "7", index: rule.Url, to: "101" }, //攻击
-  { ID: "16003", index: rule.Recast100ms, to: "300" }, //标准舞步结束
-  { ID: "16191", index: rule.Recast100ms, to: "300" }, //标准舞步结束
-  { ID: "16192", index: rule.Recast100ms, to: "300" }, //标准舞步结束
-  { ID: "16004", index: rule.Recast100ms, to: "1200" }, //技巧舞步结束
-  { ID: "16193", index: rule.Recast100ms, to: "1200" }, //技巧舞步结束
-  { ID: "16194", index: rule.Recast100ms, to: "1200" }, //技巧舞步结束
-  { ID: "16195", index: rule.Recast100ms, to: "1200" }, //技巧舞步结束
-  { ID: "16196", index: rule.Recast100ms, to: "1200" }, //技巧舞步结束
-  { ID: "16483", index: rule.ActionCategory, to: "战技" }, //燕回返
-  { ID: "16484", index: rule.ActionCategory, to: "战技" }, //回返彼岸花
-  { ID: "16485", index: rule.ActionCategory, to: "战技" }, //回返天下五剑
-  { ID: "16486", index: rule.ActionCategory, to: "战技" }, //回返纷乱雪月花
-  { ID: "11415", index: rule.Recast100ms, to: "300" }, //月之笛
+  { ID: 2, index: rule.Url, to: 123 }, //任务指令
+  { ID: 3, index: rule.Url, to: 104 }, //冲刺
+  { ID: 4, index: rule.Url, to: 118 }, //坐骑
+  { ID: 7, index: rule.Url, to: 101 }, //攻击
+  { ID: 8, index: rule.Url, to: 101 }, //攻击
+  { ID: 16003, index: rule.Recast100ms, to: 300 }, //标准舞步结束
+  { ID: 16191, index: rule.Recast100ms, to: 300 }, //标准舞步结束
+  { ID: 16192, index: rule.Recast100ms, to: 300 }, //标准舞步结束
+  { ID: 16004, index: rule.Recast100ms, to: 1200 }, //技巧舞步结束
+  { ID: 16193, index: rule.Recast100ms, to: 1200 }, //技巧舞步结束
+  { ID: 16194, index: rule.Recast100ms, to: 1200 }, //技巧舞步结束
+  { ID: 16195, index: rule.Recast100ms, to: 1200 }, //技巧舞步结束
+  { ID: 16196, index: rule.Recast100ms, to: 1200 }, //技巧舞步结束
+  { ID: 16483, index: rule.ActionCategory, to: 3 }, //燕回返
+  { ID: 16484, index: rule.ActionCategory, to: 3 }, //回返彼岸花
+  { ID: 16485, index: rule.ActionCategory, to: 3 }, //回返天下五剑
+  { ID: 16486, index: rule.ActionCategory, to: 3 }, //回返纷乱雪月花
+  { ID: 11415, index: rule.Recast100ms, to: 300 }, //月之笛
 ]) {
   try {
     actions[s.ID][s.index] = s.to;

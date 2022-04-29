@@ -231,16 +231,14 @@ function editWatch(dom, td) {
 
   for (const id in actions) {
     const action = getAction(id);
-    // console.log(action,action.ClassJobCategory.toString(),dom?.parentNode?.getAttribute("data-job"));
     if (
-      action.ID === "0" ||
-      (((action.ClassJob.toString() === dom?.parentNode?.getAttribute("data-job") &&
-        // action.ClassJobCategory.indexOf(dom?.parentNode?.getAttribute("data-job-name")) > -1 &&
+      (((action.ClassJob.toString() === dom?.parentNode?.getAttribute("data-job") ||
+        baseClass?.[action.ClassJob]?.toString() === dom?.parentNode?.getAttribute("data-job")) &&
         action.ClassJobLevel > 0 &&
         compareSame(id) === id &&
-        (action.Recast100ms >= 100 || params.get("ignoreRecast") === "true")) ||
-        id === "0") &&
-        !tdList?.some((value) => value === id))
+        (action.Recast100ms >= 50 || params.get("ignoreRecast") === "true")) ||
+        id == "0") &&
+      !tdList?.some((value) => value === id)
     ) {
       action.Name = action.Name;
       let actionDom = document.createElement("div");

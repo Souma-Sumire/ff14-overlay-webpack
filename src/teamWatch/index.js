@@ -157,7 +157,7 @@ function use(dom) {
           if (chargesNow === 0) dom.classList.add("nocharges");
           dom.querySelector(".charges").innerText = chargesNow;
           dom.setAttribute("data-action-proto-chargesnow", chargesNow);
-          dom.classList.add(dom.getAttribute("data-action-proto-actioncategory") === "能力" ? "oGCDActionAnimation" : "GCDActionAnimation");
+          dom.classList.add(dom.getAttribute("data-action-proto-actioncategory") == "4" ? "oGCDActionAnimation" : "GCDActionAnimation");
         } else {
           dom.classList.add("normalActionAnimation");
         }
