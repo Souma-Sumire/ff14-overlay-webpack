@@ -137,6 +137,7 @@ function loadAction(watchJobsActionsIDShow) {
   main.appendChild(sortRuleDiv);
 }
 loadAction(watchJobsActionsIDShow);
+
 function newTD(id) {
   let td = document.createElement("td");
   const action = getAction(id);
@@ -145,8 +146,11 @@ function newTD(id) {
   td.appendChild(skillName);
   let icon = document.createElement("aside");
   let img = new Image();
-  // cafeOrXiavpiUrl(action?.Url, img);
   img.src = `https://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png`;
+  img.onerror = () => {
+    img.src = `https://xivapi.com/i/${action?.Url ?? "000000/000405"}.png`;
+    img.onerror = null;
+  };
   img.classList.add("icon");
   icon.appendChild(img);
   td.appendChild(icon);
@@ -250,6 +254,10 @@ function editWatch(dom, td) {
       let actionIconDom = document.createElement("aside");
       let actionIconImg = new Image();
       actionIconImg.src = `https://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png`;
+      actionIconImg.onerror = () => {
+        actionIconImg.src = `https://xivapi.com/i/${action?.Url ?? "000000/000405"}.png`;
+        actionIconImg.onerror = null;
+      };
       actionIconDom.appendChild(actionIconImg);
       let actionRecast100ms = document.createElement("footer");
       actionRecast100ms.innerText = action.Recast100ms / 10 + "S";
