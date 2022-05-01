@@ -55,7 +55,7 @@ addOverlayListener("LogLine", (e) => {
 addOverlayListener("ChangeZone", () => resetEverything());
 addOverlayListener("onPartyWipe", () => resetEverything());
 function resetEverything() {
-  document.querySelectorAll("body > article").forEach((article) => {
+  document.querySelectorAll("body > article > article").forEach((article) => {
     article?.cancel();
   });
 }
@@ -71,9 +71,11 @@ document.addEventListener("onOverlayStateUpdate", (e) => {
 });
 startOverlayEvents();
 
-// faker();
-// document.querySelectorAll("article").forEach((element) => element.use());
-// setTimeout(() => resetEverything(), 2000);
+faker();
+document.querySelectorAll("body > article > article").forEach((element) => {
+  element.use();
+});
+setTimeout(() => resetEverything(), 3000);
 
 function faker() {
   show([
@@ -168,7 +170,7 @@ function show(party) {
               }
               shadow.style.clipPath = `inset(${100 - (time / (recast - duration)) * 100}% 0 0 0)`;
             }
-            if (time <= 0) art.cancel();
+            if (time <= 0) art?.cancel();
           }, 250);
           timers.push(art.timer);
         };
