@@ -55,8 +55,8 @@ addOverlayListener("LogLine", (e) => {
 addOverlayListener("ChangeZone", () => resetEverything());
 addOverlayListener("onPartyWipe", () => resetEverything());
 function resetEverything() {
-  document.querySelectorAll("article").forEach((element) => {
-    element.cancel();
+  document.querySelectorAll("body > article").forEach((article) => {
+    article?.cancel();
   });
 }
 
