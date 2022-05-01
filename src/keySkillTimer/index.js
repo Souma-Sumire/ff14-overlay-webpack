@@ -71,11 +71,11 @@ document.addEventListener("onOverlayStateUpdate", (e) => {
 });
 startOverlayEvents();
 
-faker();
-document.querySelectorAll("body > article > article").forEach((element) => {
-  element.use();
-});
-setTimeout(() => resetEverything(), 3000);
+// faker();
+// document.querySelectorAll("body > article > article").forEach((element) => {
+//   element.use();
+// });
+// setTimeout(() => resetEverything(), 3000);
 
 function faker() {
   show([
