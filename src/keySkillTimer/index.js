@@ -52,8 +52,14 @@ addOverlayListener("LogLine", (e) => {
     }
   }
 });
-addOverlayListener("ChangeZone", () => document.querySelectorAll("article").forEach((element) => element.cancel()));
-addOverlayListener("onPartyWipe", () => document.querySelectorAll("article").forEach((element) => element.cancel()));
+addOverlayListener("ChangeZone", () => resetEverything());
+addOverlayListener("onPartyWipe", () => resetEverything());
+function resetEverything() {
+  document.querySelectorAll("article").forEach((element) => {
+    element.cancel();
+  });
+}
+
 document.addEventListener("onOverlayStateUpdate", (e) => {
   if (e.detail.isLocked) {
     inFaker = false;
@@ -64,8 +70,11 @@ document.addEventListener("onOverlayStateUpdate", (e) => {
   }
 });
 startOverlayEvents();
+
 // faker();
 // document.querySelectorAll("article").forEach((element) => element.use());
+// setTimeout(() => resetEverything(), 2000);
+
 function faker() {
   show([
     { id: "0", name: "虚构骑士", job: 19, inParty: true },
@@ -91,8 +100,8 @@ function faker() {
   ]);
 }
 function show(party) {
-  document.querySelectorAll("body>div").forEach((div) => {
-    div.innerHTML = "";
+  document.querySelectorAll("body > article").forEach((article) => {
+    article.innerHTML = "";
   });
   for (const p of party) {
     if (!p.inParty && params.get("inPartyOnly") !== "false") break;
@@ -110,7 +119,7 @@ function show(party) {
         aside.innerText = "";
         art.append(aside);
         let section = document.createElement("img");
-        section.src = `url(https://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png)`;
+        section.src = `https://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png`;
         section.onerror = () => {
           section.src = `https://xivapi.com/i/${action?.Url ?? "000000/000405"}.png`;
           section.onerror = null;

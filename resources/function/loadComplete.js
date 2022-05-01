@@ -30,12 +30,12 @@ export default (function () {
     "onOverlayStateUpdate",
     (e) => (document.querySelector("#readMe").style.display = e.detail.isLocked ? "none" : "flex")
   );
-  let line = document.createElement("span");
-  line.style.height = "5px";
-  line.style.width = "1px";
-  line.style.position = "fixed";
-  line.style.top = "0px";
-  line.style.left = "50%";
-  line.style.backgroundColor = "rgba(0,0,0,0.1)";
-  readMe.appendChild(line);
+  // let line = document.createElement("span");
+  // line.style.height = "5px";
+  // line.style.width = "1px";
+  // line.style.position = "fixed";
+  // line.style.top = "0px";
+  // line.style.left = "50%";
+  // line.style.backgroundColor = "rgba(0,0,0,0.1)";
+  // readMe.appendChild(line);
 })();
