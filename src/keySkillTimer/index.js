@@ -64,6 +64,8 @@ document.addEventListener("onOverlayStateUpdate", (e) => {
   }
 });
 startOverlayEvents();
+// faker();
+// document.querySelectorAll("article").forEach((element) => element.use());
 function faker() {
   show([
     { id: "0", name: "虚构骑士", job: 19, inParty: true },
@@ -107,8 +109,12 @@ function show(party) {
         aside.setAttribute("data-duration", element.duration);
         aside.innerText = "";
         art.append(aside);
-        let section = document.createElement("section");
-        section.style.backgroundImage = `url(https://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png)`;
+        let section = document.createElement("img");
+        section.src = `url(https://cafemaker.wakingsands.com/i/${action?.Url ?? "000000/000405"}.png)`;
+        section.onerror = () => {
+          section.src = `https://xivapi.com/i/${action?.Url ?? "000000/000405"}.png`;
+          section.onerror = null;
+        };
         art.append(section);
         let shadow = document.createElement("div");
         shadow.classList.add("shadow");
