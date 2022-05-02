@@ -1,4 +1,4 @@
-"use strict";
+import "../../resources/function/loadOverlayPluginCommon.js";
 let getLevels = {};
 addOverlayListener("LogLine", (e) => {
   if (e.line[0] === "03" && e.line[2].substring(0, 1) === "1") {
