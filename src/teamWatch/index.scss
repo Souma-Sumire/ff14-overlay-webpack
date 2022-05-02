@@ -18,6 +18,9 @@ html {
         &.reverse {
           flex-direction: row-reverse;
         }
+        &.rightAlign {
+          justify-content: flex-end;
+        }
         article {
           width: 40px;
           height: 40px;

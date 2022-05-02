@@ -97,11 +97,8 @@ function partyChanged(party) {
   party = sortParty(party, playerID, sortRuleUsed);
   const watchJobsActionsIDUsed = load("watchJobsActionsIDUser") ?? watchJobsActionsID;
   for (let m = 0; m < membersDOM.length; m++) {
-    if (params.get("reverse") === "true") {
-      membersDOM[m].classList.add("reverse");
-    } else {
-      membersDOM[m].classList.remove("reverse");
-    }
+    params.get("reverse") === "true" ? membersDOM[m].classList.add("reverse") : membersDOM[m].classList.remove("reverse");
+    params.get("rightAlign") === "true" ? membersDOM[m].classList.add("rightAlign") : membersDOM[m].classList.remove("rightAlign");
     if (party[m] !== undefined) {
       membersDOM[m].innerHTML = "";
       const partyMember = party[m];
