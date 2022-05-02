@@ -237,7 +237,10 @@ function editWatch(dom, td) {
     const action = getAction(id);
     if (
       (((action.ClassJob.toString() === dom?.parentNode?.getAttribute("data-job") ||
-        baseClass?.[action.ClassJob]?.toString() === dom?.parentNode?.getAttribute("data-job")) &&
+        baseClass?.[action.ClassJob]?.toString() === dom?.parentNode?.getAttribute("data-job") ||
+        (action.ClassJobCategory.length &&
+          (action.ClassJobCategory === "所有职业" ||
+            action.ClassJobCategory.includes(getJobByID(dom?.parentNode?.getAttribute("data-job"))?.cn ?? "无")))) &&
         action.ClassJobLevel > 0 &&
         compareSame(id) === id &&
         (action.Recast100ms >= 50 || params.get("ignoreRecast") === "true")) ||

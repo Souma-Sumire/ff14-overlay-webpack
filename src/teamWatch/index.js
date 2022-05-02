@@ -37,10 +37,11 @@ document.querySelector("#fake").addEventListener("click", () => {
 document.querySelector("#real").addEventListener("click", () => {
   partyChanged(party);
 });
-document.addEventListener("onOverlayStateUpdate", (e) => {
-  // partyChanged(e.detail.isLocked ? party : fakeParty);
-  document.querySelector(".menu").style.display = e.detail.isLocked ? "none" : "block";
-});
+// document.addEventListener("onOverlayStateUpdate", (e) => {
+//   // partyChanged(e.detail.isLocked ? party : fakeParty);
+//   document.querySelector(".menu").style.display = e.detail.isLocked ? "none" : "block";
+// });
+
 addOverlayListener("ChangePrimaryPlayer", (e) => {
   playerID = e.charID.toString(16).toUpperCase();
 });
@@ -96,6 +97,11 @@ function partyChanged(party) {
   party = sortParty(party, playerID, sortRuleUsed);
   const watchJobsActionsIDUsed = load("watchJobsActionsIDUser") ?? watchJobsActionsID;
   for (let m = 0; m < membersDOM.length; m++) {
+    if (params.get("reverse") === "true") {
+      membersDOM[m].classList.add("reverse");
+    } else {
+      membersDOM[m].classList.remove("reverse");
+    }
     if (party[m] !== undefined) {
       membersDOM[m].innerHTML = "";
       const partyMember = party[m];
@@ -207,3 +213,4 @@ const fakeParty = [
   { id: "1002E5AA", name: "Suzu", job: 33, inParty: true },
 ];
 // if (!!window?.OverlayPluginApi) partyChanged(fakeParty);
+partyChanged(fakeParty);
