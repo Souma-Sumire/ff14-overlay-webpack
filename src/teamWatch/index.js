@@ -37,10 +37,10 @@ document.querySelector("#fake").addEventListener("click", () => {
 document.querySelector("#real").addEventListener("click", () => {
   partyChanged(party);
 });
-// document.addEventListener("onOverlayStateUpdate", (e) => {
-//   // partyChanged(e.detail.isLocked ? party : fakeParty);
-//   document.querySelector(".menu").style.display = e.detail.isLocked ? "none" : "block";
-// });
+document.addEventListener("onOverlayStateUpdate", (e) => {
+  // partyChanged(e.detail.isLocked ? party : fakeParty);
+  document.querySelector(".menu").style.display = e.detail.isLocked ? "none" : "block";
+});
 
 addOverlayListener("ChangePrimaryPlayer", (e) => {
   playerID = e.charID.toString(16).toUpperCase();
