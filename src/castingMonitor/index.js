@@ -17,13 +17,13 @@ let params = new URLSearchParams(new URL(window.location).search);
 let durationTime = parseInt(params.get("duration") ?? "35");
 document.body.style.backgroundColor = `rgba(5,5,5,${params.get("bgOpacity") ?? 0.25})`;
 addOverlayListener("ChangePrimaryPlayer", (e) => {
-  playerID = e.charID.toString(16).toUpperCase();
-  targetID = playerID.toString();
+  playerID = e?.charID?.toString(16)?.toUpperCase();
+  targetID = playerID?.toString();
 });
 addOverlayListener("PartyChanged", (e) => {
   document.body.style.display = "block";
   header.innerHTML = "";
-  targetID = playerID.toString();
+  targetID = playerID?.toString();
   if (e.party.length > 0) {
     for (const p of e.party) {
       if (!p.inParty) break;
@@ -38,7 +38,7 @@ addOverlayListener("PartyChanged", (e) => {
             dom.classList.remove("selecting");
             if (dom.innerText === "YOU") dom.classList.add("selecting");
           });
-          targetID = playerID.toString();
+          targetID = playerID?.toString();
         } else {
           document.querySelectorAll("header>article").forEach((dom) => dom.classList.remove("selecting"));
           this.classList.add("selecting");
