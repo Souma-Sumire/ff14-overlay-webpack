@@ -37,6 +37,7 @@ document.querySelector("#fake").addEventListener("click", () => {
 document.querySelector("#real").addEventListener("click", () => {
   partyChanged(party);
 });
+
 document.addEventListener("onOverlayStateUpdate", (e) => {
   // partyChanged(e.detail.isLocked ? party : fakeParty);
   document.querySelector(".menu").style.display = e.detail.isLocked ? "none" : "block";
@@ -103,6 +104,7 @@ function partyChanged(party) {
       membersDOM[m].innerHTML = "";
       const partyMember = party[m];
       membersDOM[m].setAttribute("data-party-job", party[m].job);
+      membersDOM[m].setAttribute("data-party-name", party[m].name);
       const jobActionsID = watchJobsActionsIDUsed?.[partyMember?.job.toString()];
       for (let i = 0; i < jobActionsID?.length; i++) {
         let memberActionDOM = document.createElement("article");
@@ -114,7 +116,7 @@ function partyChanged(party) {
           if (action.ID === undefined) {
             memberActionDOM.style.opacity = "0";
           } else {
-            memberActionDOM.style.background = `url(https://cafemaker.wakingsands.com/i/${action.Url}.png) no-repeat`;
+            memberActionDOM.style.background = `url(https://cafemaker.wakingsands.com/i/${action.Url}.png) no-repeat, url(https://xivapi.com/i/${action.Url}.png) no-repeat`;
             memberActionDOM.style.animationDuration = action?.Recast100ms * 100 + "ms";
             memberActionDOM.setAttribute("data-action-proto-recastNow", "");
             memberActionDOM.setAttribute("data-action-proto-chargesNow", action?.MaxCharges);
@@ -126,6 +128,30 @@ function partyChanged(party) {
               chargesCountDOM.innerText = maxCharges;
               memberActionDOM.appendChild(chargesCountDOM);
             }
+            memberActionDOM.onclick = () => {
+              let result = "";
+              if (maxCharges !== 0) {
+                const charges = memberActionDOM.getAttribute("data-action-proto-chargesNow");
+                result = `${memberActionDOM.parentElement.getAttribute("data-party-name")} ${memberActionDOM.getAttribute(
+                  "data-action-proto-name"
+                )} ${
+                  charges === memberActionDOM.getAttribute("data-action-proto-maxcharges") ? `已就绪(${charges}层)` : `当前(${charges}层)`
+                }`;
+              } else {
+                const recast100ms = memberActionDOM.getAttribute("data-action-proto-recastNow");
+                result = `${memberActionDOM.parentElement.getAttribute("data-party-name")} ${memberActionDOM.getAttribute(
+                  "data-action-proto-name"
+                )} ${recast100ms === "" ? "已就绪" : "冷却：" + recast100ms}`;
+              }
+              document.querySelector("#toCopy").value = result;
+              document.querySelector("#toCopy").select();
+              document.execCommand("copy");
+              if (!!JSON.parse(params.get("postNamazu"))) {
+                try {
+                  callOverlayHandler({ call: "PostNamazu", c: "DoTextCommand", p: `/p ${result}` });
+                } catch {}
+              }
+            };
           }
         }
         membersDOM[m].appendChild(memberActionDOM);
@@ -211,3 +237,7 @@ const fakeParty = [
 ];
 // if (!!window?.OverlayPluginApi) partyChanged(fakeParty);
 // partyChanged(fakeParty);
+if (location.href.includes("localhost")) {
+  document.querySelector(".menu").style.display = "block";
+  partyChanged(fakeParty);
+}

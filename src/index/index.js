@@ -31,7 +31,7 @@ const list = {
     img: IMGkeySkillTimer,
     params: "?inPartyOnly=true&dajinengTTS=true&jianshangTTS=true&tuanfuTTS=true",
   },
-  "teamWatch": { type: "ACT悬浮窗", describe: "技能监控", img: IMGteamWatch, params: "?scale=1&reverse=false&rightAlign=false" },
+  "teamWatch": { type: "ACT悬浮窗", describe: "技能监控", img: IMGteamWatch, params: "?scale=1&reverse=false&rightAlign=false&postNamazu=false" },
   "mpTick": { type: "ACT悬浮窗", describe: "回蓝计时", img: "", params: "" },
   "castingToChinese": {
     type: "ACT悬浮窗",

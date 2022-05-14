@@ -22,10 +22,14 @@ html {
           justify-content: flex-end;
         }
         article {
+          cursor: pointer;
           width: 40px;
           height: 40px;
           position: relative;
           padding: 5px 2px;
+          &:hover {
+            filter: drop-shadow(1px 2px 4px black);
+          }
         }
       }
     }
@@ -91,7 +95,10 @@ article.normalActionAnimation::after {
   clip-path: polygon(4% 0, 100% 0, 100% 100%, 4% 100%);
 }
 .nocharges {
-  filter: contrast(0.8);
+  // filter: contrast(0.6);
+  > span {
+    color: orangered;
+  }
 }
 .charges {
   position: absolute;
