@@ -29,7 +29,7 @@ const list = {
     type: "ACT悬浮窗",
     describe: "团辅监控",
     img: IMGkeySkillTimer,
-    params: "?inPartyOnly=true&dajinengTTS=true&jianshangTTS=true&tuanfuTTS=true",
+    params: "?international=false&dajinengTTS=true&jianshangTTS=true&tuanfuTTS=true",
   },
   "teamWatch": { type: "ACT悬浮窗", describe: "技能监控", img: IMGteamWatch, params: "?scale=1&reverse=false&rightAlign=false&postNamazu=false" },
   "mpTick": { type: "ACT悬浮窗", describe: "回蓝计时", img: "", params: "" },

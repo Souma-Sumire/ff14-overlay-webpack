@@ -99,5 +99,15 @@ let keigenns = {
   847: { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //仙人盾
   "6b7": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //强力守护
   842: { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //哥布防御
+  
+  //TLB
+  "c2": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //铜墙铁盾
+  "c3": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //坚守要塞
+  "c4": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //终极壁垒
+  "35f": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //原初大地
+  "360": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //暗黑之力
+  "78b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //灵魂之青
+
+
 };
 export { keigenns };

@@ -1,5 +1,3 @@
-"use strict";
-
 import "../../resources/function/loadOverlayPluginCommon.js";
 import { getAction } from "../../resources/data/actions";
 import { compareSame } from "../../resources/function/compareSameGroup";
@@ -8,7 +6,7 @@ import { logProcessing } from "../../resources/function/logProcessing";
 import { TTS } from "../../resources/function/TTS";
 import "../../resources/function/xianyu";
 import "./index.scss";
-import { raidBuffs60 } from "./raidbuffs";
+import { raidBuffs国服, raidBuffs国际服 } from "./raidbuffs";
 import { getLevels } from "../../resources/function/getLevels";
 import "../../resources/function/isOverlayPlugin";
 import { getJobByID } from "../../resources/data/job";
@@ -19,7 +17,7 @@ let party = [];
 let youID = null;
 let inFaker = true;
 // let TTSLast1S = new Set();
-const raidBuffs = raidBuffs60;
+const raidBuffs = params.get("international") === "true" ? raidBuffs国际服 : raidBuffs国服;
 
 addOverlayListener("ChangePrimaryPlayer", (e) => (youID = e.charID.toString(16).toUpperCase()));
 addOverlayListener("PartyChanged", (e) => {
