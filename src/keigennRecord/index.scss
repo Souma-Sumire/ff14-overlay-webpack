@@ -110,17 +110,57 @@ body {
           &:hover {
             background-color: rgba(216, 216, 216, 0.4);
           }
-          height: 20px;
+          height: 30px;
           td {
             padding: 0px 2px;
+            > article {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              align-content: center;
+              align-items: flex-start;
+              justify-content: flex-start;
+              > span {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                top: -3px;
+                height: 22px;
+                margin: 3px 0px;
+
+                > aside {
+                  position: absolute;
+                  bottom: -8px;
+                  transform: scale(0.75);
+                  // text-shadow: -2px 0 2px rgb(55, 103, 61), 0 2px 2px rgb(55, 103, 61), 2px 0 2px rgb(55, 103, 61),
+                  //   0 -2px 2px rgb(55, 103, 61);
+                  left: 0;
+                  text-align: center;
+                  transform-origin: left bottom;
+                  opacity: 0.8;
+                  font-family: emoji;
+                  &.playerself {
+                    // text-shadow: -4px 0 4px rgb(55, 103, 61), 0 4px 4px rgb(55, 103, 61), 4px 0 4px rgb(55, 103, 61),
+                    // 0 -4px 4px rgb(55, 103, 61);
+                    color: aquamarine;
+                  }
+                }
+              }
+            }
+            // > span {
+            //   position: relative;
+            //   aside {
+            //     position: absolute;
+            //   }
+            // }
           }
 
-          td:last-child:not(:first-child) {
-            img {
-              height: 20px;
-              float: left;
-            }
-          }
+          // td:last-child:not(:first-child) {
+          //   img {
+          //     height: 20px;
+          //     float: left;
+          //   }
+          // }
           .YOU {
             font-weight: bold;
             text-shadow: -1px 0 1px rgb(3, 169, 244), 0 1px 1px rgb(3, 169, 244), 1px 0 1px rgb(3, 169, 244), 0 -1px 1px rgb(3, 169, 244);
@@ -145,8 +185,8 @@ body {
       filter: grayscale(50%);
     }
     .useless {
-      display: none;
-      // filter: grayscale(100%);
+      // display: none;
+      filter: grayscale(100%);
     }
   }
   footer {

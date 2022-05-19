@@ -1,5 +1,4 @@
 "use strict";
-import { statusForCN } from "../../resources/data/statusForCN";
 import { getJobByID } from "../../resources/data/job";
 import { status } from "../../resources/data/status";
 import { getDamage } from "../../resources/function/damage";
@@ -21,6 +20,7 @@ document.querySelector("body main table th:nth-child(3)").style.width = params?.
 document.querySelector("body main table th:nth-child(4)").style.width = params?.get("th4") ?? "46px";
 let party = [],
   youID = "",
+  playerName = "",
   duration = "00:00",
   FFXIVObject = {},
   scrollMove = true,
@@ -87,6 +87,7 @@ function addFooter() {
 }
 addOverlayListener("ChangePrimaryPlayer", (e) => {
   youID = e.charID.toString(16).toUpperCase();
+  playerName = e.charName;
   addFooter();
 });
 addOverlayListener("PartyChanged", (e) => {
@@ -150,36 +151,37 @@ addOverlayListener("LogLine", (e) => {
         } else {
           tr.style.display = "none";
         }
-        let tr1 = tr.insertCell(0);
-        let tr2 = tr.insertCell(1);
-        let tr3 = tr.insertCell(2);
-        let tr4 = tr.insertCell(3);
-        let tr5 = tr.insertCell(4);
-
-        tr1.innerHTML = duration; //战斗时间
-        tr2.innerHTML = /unknown_/i.test(damageLog.skillName)
+        let td1 = tr.insertCell(0); //时间
+        let td2 = tr.insertCell(1); //技能名
+        let td3 = tr.insertCell(2); //目标
+        let td4 = tr.insertCell(3); //伤害值
+        let td5 = tr.insertCell(4); //状态
+        let td5inside = document.createElement("article");
+        td1.innerHTML = duration; //战斗时间
+        td2.innerHTML = /unknown_/i.test(damageLog.skillName)
           ? "未知"
           : actionChinese?.[parseInt(damageLog.skillID, 16)] ?? damageLog.skillName ?? "未知";
         try {
           if (damageLog.targetID === youID) {
-            tr3.innerText = "YOU";
-            tr3.classList.add("YOU");
+            td3.innerText = "YOU";
+            td3.classList.add("YOU");
           } else {
             let job = getJobByID(party.find((p) => p.id === damageLog.targetID)?.job);
-            tr3.innerText = job?.simple2 ?? "?";
-            tr3.classList.add(job?.en);
+            td3.innerText = job?.simple2 ?? "?";
+            td3.classList.add(job?.en);
           }
         } catch (e) {
           console.warn(e);
-          tr3.innerHTML = damageLog.targetName;
+          td3.innerHTML = damageLog.targetName;
         }
-        tr4.innerHTML = damageLog.value.toLocaleString();
-        tr4.setAttribute("data-damage-effect", damageLog.damageEffect);
-        tr4.title = damageLog.fromName;
-        tr4.classList.add(damageLog.damageType);
+        td4.innerHTML = damageLog.value.toLocaleString();
+        td4.setAttribute("data-damage-effect", damageLog.damageEffect);
+        td4.title = damageLog.fromName;
+        td4.classList.add(damageLog.damageType);
         function createImg(type, key, stack = 0) {
+          let span = document.createElement("span");
           let img = new Image();
-          img.style.height = parseInt(params?.get("imgHeight") ?? 22) + "px";
+          img.style.height = parseInt(params?.get("imgHeight") ?? 20) + 5 + "px";
           let statusNow = status[parseInt(key, 16)] ?? { "CN": "未知", "url": "000000/000405" };
           img.src = `https://cafemaker.wakingsands.com/i/${stackUrl(statusNow.url)}.png`;
           function stackUrl(url) {
@@ -189,14 +191,25 @@ addOverlayListener("LogLine", (e) => {
           }
           img.title = FFXIVObject[damageLog[type]].Status[key].name;
           if (playerKeigenns?.[key]?.[damageLog.damageType] === 0) {
-            img.classList.add("useless");
+            span.classList.add("useless");
           } else if (playerKeigenns?.[key]?.[damageLog.damageType] === 0.5) {
-            img.classList.add("halfUseful");
+            span.classList.add("halfUseful");
           }
-          tr5.appendChild(img);
+          span.appendChild(img);
+          let seconds = document.createElement("aside");
+          seconds.style.width = ((parseInt(img.style.height) / 32) * 24) / 0.75 + "px";
+          if (FFXIVObject[damageLog[type]].Status[key].caster === playerName) seconds.classList.add("playerself");
+          try {
+            seconds.innerText = Math.round((FFXIVObject[damageLog[type]]?.Status[key]?.expiration - new Date().getTime()) / 1000);
+          } catch {
+            seconds.innerText = "";
+          }
+          span.appendChild(seconds);
+          td5inside.appendChild(span);
         }
         if (FFXIVObject[damageLog["targetName"]]) forStatus("targetName");
         if (FFXIVObject[damageLog["fromName"]]) forStatus("fromName");
+        td5.appendChild(td5inside);
         function forStatus(c) {
           for (const key in FFXIVObject[damageLog[c]].Status) {
             createImg(c, key, parseInt(FFXIVObject[damageLog[c]].Status[key].stack));
@@ -217,7 +230,7 @@ addOverlayListener("LogLine", (e) => {
           result.push(tr.children[1].innerHTML);
           result.push(tr.getAttribute("data-master-name"));
           result.push(tr.children[3].innerHTML);
-          for (const kg of tr.children[4].children) result.push(kg.title);
+          for (const kg of tr.querySelectorAll("td>article>span>img")) result.push(kg.title);
           document.querySelector("#toCopy").value = result.join(" ");
           document.querySelector("#toCopy").select();
           document.execCommand("copy");
@@ -231,7 +244,7 @@ addOverlayListener("LogLine", (e) => {
     case "30":
       let statusLog = logProcessing(e.line, "status");
       const logStatus = statusLog["statusID"].toLowerCase();
-      const statusCN = statusForCN[parseInt(logStatus, 16)];
+      const statusCN = status[parseInt(logStatus, 16)]?.CN ?? "";
       let playerKeigenn = /(受伤|耐性|防御力)(提升|(大幅)?降低|低下|加重|减轻)|最大体力/.test(statusCN)
         ? { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }
         : playerKeigenns?.[logStatus];
@@ -248,6 +261,7 @@ addOverlayListener("LogLine", (e) => {
             name: statusCN ?? statusLog["statusName"],
             caster: statusLog["casterName"],
             stack: e.line[9] > 1 ? e.line[9] : 0,
+            expiration: new Date().getTime() + Number(statusLog["statusTime"]) * 1000,
           };
         } else {
           try {
