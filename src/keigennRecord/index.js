@@ -12,6 +12,15 @@ import "../../resources/function/isOverlayPlugin";
 import "../../resources/function/loadOverlayPluginCommon.js";
 
 const params = new URLSearchParams(new URL(window.location).search);
+let MiniMode = params?.get("mini") === "true" || false;
+let AutoClean = params?.get("autoclean") === "true" || false;
+if (!MiniMode) { 
+  import("./index.scss") ;
+}
+else {
+  import("./index_mini.scss");
+}
+ 
 const body = document.body;
 const main = document.querySelector("main");
 document.querySelector("body main table th:nth-child(1)").style.width = params?.get("th1") ?? "36px";
@@ -35,11 +44,11 @@ class FFObject {
     this.Status = {};
   }
 }
-
-main.style.backgroundColor = `rgba(5,5,5,${params?.get("bgOpacity") || 0.45})`;
-body.style.opacity = params?.get("bodyOpacity") || 1;
+if (!MiniMode) {
+  main.style.backgroundColor = `rgba(5,5,5,${params?.get("bgOpacity") || 0.45})`;
+  body.style.opacity = params?.get("bodyOpacity") || 1;
+}
 body.style.fontSize = params?.get("fontSize") || "12px";
-
 function addFooter() {
   document.querySelector(
     "body > footer > ul"
@@ -112,14 +121,24 @@ function speTr(text, className = null, colSpan = 5) {
 addOverlayListener("ChangeZone", (e) => {
   FFXIVObject = {};
   if (tbody.lastChild !== null && tbody.lastChild.firstChild.getAttribute("data-type") === "changeZone") tbody.lastChild.remove();
-  speTr(e.zoneName, "changeZone");
+  if(!MiniMode)
+    speTr(e.zoneName, "changeZone");
+    if (AutoClean) { 
+      cleanTable();
+  }
   inCombat = false;
   clearTimeout(combatTimer);
   duration = "00:00";
 });
 addOverlayListener("onPartyWipe", () => {
   FFXIVObject = {};
-  speTr("团灭", "ace");
+  if (!MiniMode) {
+    speTr("团灭", "ace");
+  }
+  else { 
+    let aceTr = speTr(`🗑️团灭了！`, "deathEvent", 4);;
+    aceTr.insertCell(0).innerHTML = duration; //战斗时间
+  }
   inCombat = false;
   clearTimeout(combatTimer);
   duration = "00:00";
@@ -317,6 +336,9 @@ document.querySelector("header").onclick = function () {
 function startCombat() {
   main.scrollTop = main.scrollHeight;
   inCombat = true;
+    if (AutoClean) { 
+      cleanTable();
+  }
   clearTimeout(combatTimer);
   let d = 0;
   combatTimer = setInterval(() => {
@@ -326,4 +348,10 @@ function startCombat() {
       .toString()
       .padStart(2, "0")}`;
   }, 1000);
+}
+function cleanTable() { 
+  var tbody = document.querySelector("body > main > table > tbody");
+  while (tbody.firstChild) {
+  tbody.removeChild(tbody.lastChild);
+  }
 }
