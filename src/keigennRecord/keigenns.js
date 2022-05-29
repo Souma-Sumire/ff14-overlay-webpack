@@ -73,7 +73,8 @@ let keigenns = {
   "78e": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //行吟
   "79f": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //策动
   722: { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //防守之桑巴
-
+  "a89": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //即兴表演结束
+  
   "1e8": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //残影
   a8: { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //魔罩
   "a8e": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //守りの光
@@ -99,7 +100,7 @@ let keigenns = {
   847: { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //仙人盾
   "6b7": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //强力守护
   842: { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //哥布防御
-  
+
   //TLB
   "c2": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //铜墙铁盾
   "c3": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //坚守要塞
@@ -107,7 +108,5 @@ let keigenns = {
   "35f": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //原初大地
   "360": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //暗黑之力
   "78b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //灵魂之青
-
-
 };
 export { keigenns };
