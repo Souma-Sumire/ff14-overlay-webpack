@@ -1,0 +1,267 @@
+@import "../../resources/style/jobColor.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "微软雅黑", "Microsoft Yahei UI", Lato, Arial, Helvetica, sans-serif;
+  text-align: center;
+  user-select: none;
+}
+
+body {
+  header {
+    display: none;
+    cursor: pointer;
+    z-index: 30;
+    position: fixed;
+    top: 0px;
+    right: 2px;
+    opacity: 1;
+
+    &.hide {
+      opacity: 1;
+      background-color: rgba(216, 216, 216, 0.8);
+      border-radius: 50%;
+    }
+  }
+
+  .anim-opacity2 {
+    display: block !important;
+    opacity: 0;
+    animation: opacity2 1s ease-in-out;
+  }
+
+  @keyframes opacity2 {
+    0% {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  #hint {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    line-height: 100vh;
+    position: fixed;
+    font-size: 300%;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px #ff0000;
+    z-index: 20;
+  }
+
+  main {
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: rgba(51, 51, 51, 1);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 30px;
+      border-radius: 5px;
+      background-color: rgba(216, 216, 216, 0.4);
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background-color: rgba(160, 160, 160, 1);
+    }
+
+    margin: 0px 0px 20px 0px;
+    height: calc(100vh - 20px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: rgba(5, 5, 5, 0);
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: white;
+      border: none;
+      // white-space: nowrap;
+      table-layout: fixed;
+
+      thead {
+        visibility: hidden;
+        background-color: rgba(5, 5, 5, 0.45);
+      }
+
+      tr>th:nth-child(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      tbody {
+        .spe {
+          font-weight: bold;
+        }
+
+        .changeZone {
+          background: rgba(40, 40, 40, 0.5);
+          height: 30px;
+        }
+
+        .ace {
+          background: rgba(0, 0, 55, 0.5);
+        }
+
+        .deathEvent {
+          text-align: left;
+          font-weight: normal;
+          padding-left: 0.5em;
+          display: table-cell !important;
+          font-weight: bold;
+        }
+
+        tr {
+          // td:nth-child(2) {
+          //   white-space: nowrap;
+          //   overflow: hidden;
+          // }
+
+          border: none;
+          cursor: pointer;
+
+          &:hover {
+            background-color: rgba(216, 216, 216, 0.4);
+          }
+
+          height: 30px;
+
+          td {
+            padding: 0px 2px;
+
+            >article {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              align-content: center;
+              align-items: flex-start;
+              justify-content: flex-start;
+
+              >span {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                top: -3px;
+                height: 22px;
+                margin: 3px 0px;
+
+                >aside {
+                  position: absolute;
+                  bottom: -8px;
+                  transform: scale(0.75);
+                  // text-shadow: -2px 0 2px rgb(55, 103, 61), 0 2px 2px rgb(55, 103, 61), 2px 0 2px rgb(55, 103, 61),
+                  //   0 -2px 2px rgb(55, 103, 61);
+                  left: 0;
+                  text-align: center;
+                  transform-origin: left bottom;
+                  opacity: 0.8;
+                  font-family: emoji;
+
+                  &.playerself {
+                    // text-shadow: -4px 0 4px rgb(55, 103, 61), 0 4px 4px rgb(55, 103, 61), 4px 0 4px rgb(55, 103, 61),
+                    // 0 -4px 4px rgb(55, 103, 61);
+                    color: aquamarine;
+                  }
+                }
+              }
+            }
+
+            // > span {
+            //   position: relative;
+            //   aside {
+            //     position: absolute;
+            //   }
+            // }
+          }
+
+          // td:last-child:not(:first-child) {
+          //   img {
+          //     height: 20px;
+          //     float: left;
+          //   }
+          // }
+          .YOU {
+            font-weight: bold;
+            text-shadow: -1px 0 1px rgb(3, 169, 244), 0 1px 1px rgb(3, 169, 244), 1px 0 1px rgb(3, 169, 244), 0 -1px 1px rgb(3, 169, 244);
+            overflow: visible;
+          }
+        }
+
+        tr:nth-child(even) {
+          background-color: rgba(20, 20, 20, 0.3);
+        }
+
+        tr:nth-child(odd) {
+          background-color: rgba(50, 50, 50, 0.3);
+        }
+      }
+    }
+
+    .dodge {
+      text-decoration: line-through;
+    }
+
+    .physics {
+      color: rgb(255, 100, 100);
+    }
+
+    .magic {
+      color: rgb(100, 200, 255);
+    }
+
+    .darkness {
+      color: rgb(255, 175, 255);
+    }
+
+    .halfUseful {
+      filter: grayscale(50%);
+    }
+
+    .useless {
+      // display: none;
+      filter: grayscale(100%);
+    }
+  }
+
+  footer {
+    display: none;
+    position: fixed;
+    bottom: 0;
+
+    ul {
+      width: 100vw;
+      list-style: none;
+      display: inline-flex;
+      height: 20px;
+
+      li {
+        flex-grow: 1;
+        cursor: pointer;
+        background: rgba(51, 51, 51, 0.8);
+        color: white;
+
+        &:not(:last-of-type) {
+          border-right: 0.1rem solid rgba(255, 255, 255, 0.5);
+        }
+      }
+
+      li.select {
+        color: #a0d8ef;
+        font-weight: bold;
+      }
+    }
+  }
+}
