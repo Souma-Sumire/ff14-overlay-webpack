@@ -24,5 +24,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@master
       with:
-        name: ff14-overlay-webpack
+        name: ff14-overlay-dist
         path: ./dist/
