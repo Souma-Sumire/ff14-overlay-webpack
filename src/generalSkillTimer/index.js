@@ -34,7 +34,6 @@ inputID.addEventListener("keyup", handleInputIDKeyup, false);
 addOverlayListener("ChangePrimaryPlayer", handleChangePrimaryPlayer);
 addOverlayListener("LogLine", handelLogLine);
 addOverlayListener("ChangeZone", () => clearTimer());
-addOverlayListener("onPartyWipe", () => clearTimer());
 startOverlayEvents();
 
 function handleChangePrimaryPlayer(e) {
@@ -65,7 +64,7 @@ function handelLogLine(e) {
         }, delay);
       }
     }
-  }
+  } else if (e.line[0] === "33" && e.line[3] === "40000010") clearTimer();
 }
 
 function handleAddBtnClick() {

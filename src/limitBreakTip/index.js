@@ -16,7 +16,6 @@ const show = document.querySelector("#show");
 const extra = document.querySelector("#extra");
 const extraAll = document.querySelector("#extraAll");
 addOverlayListener("ChangeZone", () => handleClear());
-addOverlayListener("onPartyWipe", () => handleClear());
 addOverlayListener("LogLine", (e) => handleLogLine(e));
 startOverlayEvents();
 
@@ -90,5 +89,5 @@ export function handleLogLine(e) {
     }
     LBBefore = LBNow;
     if (LBAdd < -0.1) handleClear();
-  }
+  } else if (e.line[0] === "33" && e.line[3] === "40000010") handleClear();
 }

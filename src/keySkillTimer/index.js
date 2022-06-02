@@ -38,26 +38,23 @@ addOverlayListener("LogLine", (e) => {
     } else if (log["casterID"] === youID && raidBuffs[actionID] !== undefined) {
       doTTS(actionID);
     }
-  }
-
-  function doTTS(actionID) {
-    if (
-      (raidBuffs[actionID]?.type === 0 && params.get("dajinengTTS") !== "false") ||
-      (raidBuffs[actionID]?.type === 1 && params.get("jianshangTTS") !== "false") ||
-      (raidBuffs[actionID]?.type === 2 && params.get("tuanfuTTS") !== "false")
-    ) {
-      TTS(raidBuffs[actionID]?.tts);
-    }
-  }
+  } else if (e.line[0] === "33" && e.line[3] === "40000010") resetEverything();
 });
 addOverlayListener("ChangeZone", () => resetEverything());
-addOverlayListener("onPartyWipe", () => resetEverything());
 function resetEverything() {
   document.querySelectorAll("body > article > article").forEach((article) => {
     article?.cancel();
   });
 }
-
+function doTTS(actionID) {
+  if (
+    (raidBuffs[actionID]?.type === 0 && params.get("dajinengTTS") !== "false") ||
+    (raidBuffs[actionID]?.type === 1 && params.get("jianshangTTS") !== "false") ||
+    (raidBuffs[actionID]?.type === 2 && params.get("tuanfuTTS") !== "false")
+  ) {
+    TTS(raidBuffs[actionID]?.tts);
+  }
+}
 document.addEventListener("onOverlayStateUpdate", (e) => {
   if (e.detail.isLocked) {
     inFaker = false;

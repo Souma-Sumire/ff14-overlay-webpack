@@ -51,11 +51,6 @@ addOverlayListener("ChangeZone", () => {
     partyChanged(party);
   }, 1000);
 });
-addOverlayListener("onPartyWipe", () => {
-  // setTimeout(() => {
-  partyChanged(party);
-  // }, 1000);
-});
 addOverlayListener("PartyChanged", (e) => {
   setTimeout(() => {
     party = e.party.filter((p) => p.inParty);
@@ -75,7 +70,7 @@ addOverlayListener("LogLine", (e) => {
           ?.querySelector(`article[data-action-proto-id="${actionID}"]`)
       );
     }
-  }
+  } else if (e.line[0] === "33" && e.line[3] === "40000010") partyChanged(party);
 });
 startOverlayEvents();
 const body = document.body;

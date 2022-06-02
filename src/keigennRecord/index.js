@@ -14,13 +14,12 @@ import "../../resources/function/loadOverlayPluginCommon.js";
 const params = new URLSearchParams(new URL(window.location).search);
 let MiniMode = params?.get("mini") === "true" || false;
 let AutoClean = params?.get("autoclean") === "true" || false;
-if (!MiniMode) { 
-  import("./index.scss") ;
-}
-else {
+if (!MiniMode) {
+  import("./index.scss");
+} else {
   import("./index_mini.scss");
 }
- 
+
 const body = document.body;
 const main = document.querySelector("main");
 document.querySelector("body main table th:nth-child(1)").style.width = params?.get("th1") ?? "36px";
@@ -121,28 +120,26 @@ function speTr(text, className = null, colSpan = 5) {
 addOverlayListener("ChangeZone", (e) => {
   FFXIVObject = {};
   if (tbody.lastChild !== null && tbody.lastChild.firstChild.getAttribute("data-type") === "changeZone") tbody.lastChild.remove();
-  if(!MiniMode)
-    speTr(e.zoneName, "changeZone");
-    if (AutoClean) { 
-      cleanTable();
+  if (!MiniMode) speTr(e.zoneName, "changeZone");
+  if (AutoClean) {
+    cleanTable();
   }
   inCombat = false;
   clearTimeout(combatTimer);
   duration = "00:00";
 });
-addOverlayListener("onPartyWipe", () => {
+function partyWipe() {
   FFXIVObject = {};
   if (!MiniMode) {
     speTr("团灭", "ace");
-  }
-  else { 
-    let aceTr = speTr(`🗑️团灭了！`, "deathEvent", 4);;
+  } else {
+    let aceTr = speTr(`🗑️团灭了！`, "deathEvent", 4);
     aceTr.insertCell(0).innerHTML = duration; //战斗时间
   }
   inCombat = false;
   clearTimeout(combatTimer);
   duration = "00:00";
-});
+}
 const tbody = document.querySelector("body > main > table > tbody");
 addOverlayListener("LogLine", (e) => {
   switch (e.line[0]) {
@@ -310,6 +307,8 @@ addOverlayListener("LogLine", (e) => {
         }
         deathTr.insertCell(0).innerHTML = duration; //战斗时间
       }
+    case "33":
+      if (e.line[3] === "40000010") partyWipe();
     default:
       break;
   }
@@ -336,8 +335,8 @@ document.querySelector("header").onclick = function () {
 function startCombat() {
   main.scrollTop = main.scrollHeight;
   inCombat = true;
-    if (AutoClean) { 
-      cleanTable();
+  if (AutoClean) {
+    cleanTable();
   }
   clearTimeout(combatTimer);
   let d = 0;
@@ -349,9 +348,9 @@ function startCombat() {
       .padStart(2, "0")}`;
   }, 1000);
 }
-function cleanTable() { 
+function cleanTable() {
   var tbody = document.querySelector("body > main > table > tbody");
   while (tbody.firstChild) {
-  tbody.removeChild(tbody.lastChild);
+    tbody.removeChild(tbody.lastChild);
   }
 }
