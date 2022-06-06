@@ -1,14 +1,3 @@
-/*
- * @Author: Souma
- * @LastEditTime: 2021-11-14 17:42:23
- */
-// console.log(
-//   getDamage({
-//     line: `22|2022-01-09T22:24:53.4710000+08:00|400177E4|ヘスペロス|6A37|アルティメットインパルス|1002E5AA|Suzu Komura|3|967F4098|1B|6A378000|0|0|0|0|0|0|0|0|0|0|0|0|50850|50850|1350|10000|||98.60|95.41|0.00|1.05|606583|24237992|10000|10000|||104.33|96.36|0.00|-0.40|000154B1|5|8|27701e8ec289775a`.split(
-//       "|"
-//     ),
-//   })
-// );
 function getDamage(e) {
   let offset = 0;
   if (e.line[8] === "3C" || e.line[8] === "A10") offset += 2;
@@ -59,8 +48,7 @@ function getDamage(e) {
       result.value = parseInt(D + A + BsubD, 16);
     }
   }
-  // console.log(e.line[8 + offset]);
-  if (/^F/.test(e.line[8 + offset])) {
+  if (/^F.*[^13456]$/.test(e.line[8 + offset])) {
     return result;
   } else if (/1$/.test(e.line[8 + offset])) {
     if (result.value === 0) {
@@ -74,7 +62,6 @@ function getDamage(e) {
     result.type = "damage";
     result.damageType = "death";
     result.damageEffect = "即死";
-    // } else if (/[1-4].{2}(33|.[356])$/.test(e.line[8 + offset])) {
   } else if (/(?<!5...)[356]$/.test(e.line[8 + offset])) {
     result.type = "damage";
     result.damageType = "physics";
