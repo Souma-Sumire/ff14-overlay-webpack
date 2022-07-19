@@ -1,6 +1,6 @@
 "use strict";
 import { getJobByID } from "../../resources/data/job";
-import { status } from "../../resources/data/status";
+import { getStatus } from "../../resources/data/status";
 import { getDamage } from "../../resources/function/damage";
 import { logProcessing } from "../../resources/function/logProcessing";
 import { keigenns as playerKeigenns } from "./keigenns";
@@ -198,7 +198,7 @@ addOverlayListener("LogLine", (e) => {
           let span = document.createElement("span");
           let img = new Image();
           img.style.height = parseInt(params?.get("imgHeight") ?? 20) + 5 + "px";
-          let statusNow = status[parseInt(key, 16)] ?? { "CN": "未知", "url": "000000/000405" };
+          let statusNow = getStatus(parseInt(key, 16));
           img.src = `https://cafemaker.wakingsands.com/i/${stackUrl(statusNow.url)}.png`;
           function stackUrl(url) {
             return stack > 1 && stack <= 16
@@ -260,7 +260,7 @@ addOverlayListener("LogLine", (e) => {
     case "30":
       let statusLog = logProcessing(e.line, "status");
       const logStatus = statusLog["statusID"].toLowerCase();
-      const statusCN = status[parseInt(logStatus, 16)]?.CN ?? "";
+      const statusCN = getStatus(parseInt(logStatus, 16))?.CN ?? "";
       let playerKeigenn = /(受伤|耐性|防御力)(提升|(大幅)?降低|低下|加重|减轻)|最大体力/.test(statusCN)
         ? { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }
         : playerKeigenns?.[logStatus];
