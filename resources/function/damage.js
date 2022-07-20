@@ -45,6 +45,7 @@ function getDamage(e) {
       let C = damage.substring(4, 6);
       let D = damage.substring(6, 8);
       let BsubD = ("0x" + B - ("0x" + D)).toString(16).toUpperCase();
+      if (BsubD.length === 1) BsubD = "0" + BsubD;
       result.value = parseInt(D + A + BsubD, 16);
     }
   }
