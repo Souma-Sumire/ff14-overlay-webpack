@@ -167,6 +167,7 @@ addOverlayListener("LogLine", (e) => {
         } else {
           tr.style.display = "none";
         }
+        let timenow = new Date().getTime();
         let td1 = tr.insertCell(0); //时间
         let td2 = tr.insertCell(1); //技能名
         let td3 = tr.insertCell(2); //目标
@@ -200,6 +201,10 @@ addOverlayListener("LogLine", (e) => {
           img.style.height = parseInt(params?.get("imgHeight") ?? 20) + 5 + "px";
           let statusNow = getStatus(parseInt(key, 16));
           img.src = `https://cafemaker.wakingsands.com/i/${stackUrl(statusNow.url)}.png`;
+          img.onerror = () => {
+            img.src = `https://xivapi.com/i/${stackUrl(statusNow.url)}.png`;
+            img.onerror = null;
+          };
           function stackUrl(url) {
             return stack > 1 && stack <= 16
               ? url.substring(0, 7) + (Array(6).join(0) + (parseInt(url.substring(7)) + stack - 1)).slice(-6)
@@ -215,11 +220,11 @@ addOverlayListener("LogLine", (e) => {
           let seconds = document.createElement("aside");
           seconds.style.width = ((parseInt(img.style.height) / 32) * 24) / 0.75 + "px";
           if (FFXIVObject[damageLog[type]].Status[key].caster === playerName) seconds.classList.add("playerself");
-          try {
-            seconds.innerText = Math.round((FFXIVObject[damageLog[type]]?.Status[key]?.expiration - new Date().getTime()) / 1000);
-          } catch {
-            seconds.innerText = "";
-          }
+          // try {
+          seconds.innerText = Math.ceil((FFXIVObject[damageLog[type]].Status[key].expiration - timenow) / 1000);
+          // } catch {
+          //   seconds.innerText = "";
+          // }
           span.appendChild(seconds);
           td5inside.appendChild(span);
         }
