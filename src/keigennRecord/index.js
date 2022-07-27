@@ -167,7 +167,6 @@ addOverlayListener("LogLine", (e) => {
         } else {
           tr.style.display = "none";
         }
-        let timenow = new Date().getTime();
         let td1 = tr.insertCell(0); //时间
         let td2 = tr.insertCell(1); //技能名
         let td3 = tr.insertCell(2); //目标
@@ -221,7 +220,11 @@ addOverlayListener("LogLine", (e) => {
           seconds.style.width = ((parseInt(img.style.height) / 32) * 24) / 0.75 + "px";
           if (FFXIVObject[damageLog[type]].Status[key].caster === playerName) seconds.classList.add("playerself");
           // try {
-          seconds.innerText = Math.ceil((FFXIVObject[damageLog[type]].Status[key].expiration - timenow) / 1000);
+
+          seconds.innerText = Math.max(
+            Math.ceil((FFXIVObject[damageLog[type]].Status[key].expiration - new Date(e.line[1]).getTime()) / 1000),
+            0
+          );
           // } catch {
           //   seconds.innerText = "";
           // }
@@ -282,7 +285,7 @@ addOverlayListener("LogLine", (e) => {
             name: statusCN ?? statusLog["statusName"],
             caster: statusLog["casterName"],
             stack: e.line[9] > 1 ? e.line[9] : 0,
-            expiration: new Date().getTime() + Number(statusLog["statusTime"]) * 1000,
+            expiration: new Date(e.line[1]).getTime() + Number(statusLog["statusTime"]) * 1000,
           };
         } else {
           try {
