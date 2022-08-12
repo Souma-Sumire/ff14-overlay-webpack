@@ -7,25 +7,31 @@
   </head>
 
   <body>
-    <!-- <div>平台</div> -->
-    <select id="selectAssets" hidden>
-      <option value="4" selected="selected">Windows</option>
-      <!-- <option value="0">mac</option>
-      <option value="1">AppImage</option>
-      <option value="2">dmg</option> -->
-    </select>
-    <div>第三方加速源</div>
-    <select id="selectProxy">
-      <option value="https://download.fastgit.org">fastgit</option>
-      <option value="https://gh.xiu2.xyz/https://github.com" selected="selected">gh.xiu2.xyz</option>
-      <option value="https://ghproxy.com/https://github.com">ghproxy.com</option>
-      <option value="https://gh.api.99988866.xyz/https://github.com">gh.api.99988866.xyz</option>
-      <option value="https://pd.zwc365.com/seturl/https://github.com">pd.zwc365.com</option>
-    </select>
-    <div id="Text">
+    <div>
       <p id="p1">Loading...</p>
       <p id="p2"></p>
     </div>
-    <button id="btn1">Loading...</button>
   </body>
+  <style>
+    article {
+      width: 300px;
+      display: grid;
+      grid-template-columns: auto auto auto;
+      justify-content: start;
+      justify-items: stretch;
+      grid-gap: 5px;
+    }
+    a {
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid;
+      border-radius: 2px;
+      font-size: 12px;
+      text-decoration: none;
+      margin: 0px 2px;
+      padding: 2px 4px;
+      color: sienna;
+    }
+  </style>
 </html>
