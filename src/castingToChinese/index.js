@@ -35,9 +35,10 @@ addOverlayListener("LogLine", (e) => {
     // console.log(castDirective?.[parseInt(log?.actionID, 16)]);
     casting[log.casterID] = {
       name:
-        castDirective?.[parseInt(log?.actionID, 16)] ??
-        actionChinese?.[parseInt(log?.actionID, 16)] ??
+        castDirective?.[parseInt(log.actionID, 16)] ??
+        actionChinese?.[parseInt(log.actionID, 16)] ??
         (() => {
+          if (/^_rsv/.test(log.actionName)) return parseInt(log.actionID, 16);
           let res = roomajiEnable ? toRoomaji(log.actionName) : log.actionName;
           // if (res === log.actionName) {
           // console.log(log.actionID, parseInt(log.actionID, 16));
@@ -81,7 +82,9 @@ function update() {
   if (casting?.[target] !== undefined) {
     const now = Date.now();
     const count = (casting[target].overTime - now - pingMs) / 1000;
-    castingProgressInner.style.width = `${((now - casting[target].startTime + pingMs) / casting[target].castTime) * 100}%`;
+    castingProgressInner.style.width = `${
+      ((now - casting[target].startTime + pingMs) / casting[target].castTime) * 100
+    }%`;
     castingCountdown.innerText = Math.max(count, 0).toFixed(2);
     if (count <= -0.1) {
       delete casting[target];

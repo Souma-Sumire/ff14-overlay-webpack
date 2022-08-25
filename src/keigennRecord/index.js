@@ -316,7 +316,7 @@ addOverlayListener("LogLine", (e) => {
         deathTr.insertCell(0).innerHTML = duration; //战斗时间
       }
     case "33":
-      if (e.line[3] === "40000010") partyWipe();
+      if ((e.line[3] === "40000010" || e.line[3] === "4000000F")) partyWipe();
     default:
       break;
   }

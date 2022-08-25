@@ -22,7 +22,7 @@ saveBtn.innerText = "save";
 list.innerHTML = skillList
   .map(
     (value) =>
-      `<li><input type="number" value="${value.id}"><span>${value.name}</span><input type="number" step="1000" value="${value.delay}"><input type="number" value="${value.tts}"></li>`
+      `<li><input type="number" value="${value.id}"><span>${value.name}</span><input type="number" step="1000" value="${value.delay}"><input type="number" value="${value.tts}"></li>`,
   )
   .join("");
 document.querySelector("main").appendChild(addBtn);
@@ -64,7 +64,7 @@ function handelLogLine(e) {
         }, delay);
       }
     }
-  } else if (e.line[0] === "33" && e.line[3] === "40000010") clearTimer();
+  } else if (e.line[0] === "33" && (e.line[3] === "40000010" || e.line[3] === "4000000F")) clearTimer();
 }
 
 function handleAddBtnClick() {
