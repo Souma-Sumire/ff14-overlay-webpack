@@ -38,7 +38,7 @@ const list = {
     describe: "读条汉化",
     img: IMGcastingToChinese,
     params:
-      "?directive=false&focus=false&tts=false&hideProg=false&hideCountdown=false&roomaji=true&progHeight=10px&fontSize=20px&fontFamily=SmartisanHei&ping=80",
+      "?directive=false&focus=false&tts=false&hideProg=false&hideCountdown=false&roomaji=true&progHeight=10px&fontSize=20px&fontFamily=SmartisanHei&ping=80&showCastId=true",
   },
   "textCommandHelper": { type: "Any", describe: "文本指令助手", img: IMGtextCommandHelper, params: "?postNamazuPort=2019" },
   "generalSkillTimer": { type: "ACT悬浮窗", describe: "通用技能冷却TTS", img: "", params: "" },

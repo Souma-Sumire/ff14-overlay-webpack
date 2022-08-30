@@ -1,7 +1,8 @@
-@font-face{
-  font-family:'SmartisanHei';
-  src: url("//cdn.diemoe.net/files/fonts/SmartisanHei.woff2") format("woff2"),
-       url("//cdn.diemoe.net/files/fonts/SmartisanHei.ttf");
+@font-face {
+  font-family: "SmartisanHei";
+  src: url("//ffxiv-res.diemoe.net/SmartisanHei.woff2") format("woff2"), url("//ffxiv-res.diemoe.net/SmartisanHei.ttf"),
+    url("//cdn.diemoe.net/files/fonts/SmartisanHei.woff2") format("woff2"),
+    url("//cdn.diemoe.net/files/fonts/SmartisanHei.ttf");
   font-weight: normal;
   font-style: normal;
 }
@@ -10,14 +11,23 @@ body {
   main {
     position: relative;
     color: rgb(254, 254, 253);
-    text-shadow: -1px 0 3px rgb(179, 137, 21), 0 1px 3px rgb(179, 137, 21), 1px 0 3px rgb(179, 137, 21), 0 -1px 3px rgb(179, 137, 21);
-    //伤害类型
-    #type {
+    text-shadow: -1px 0 3px rgb(179, 137, 21), 0 1px 3px rgb(179, 137, 21), 1px 0 3px rgb(179, 137, 21),
+      0 -1px 3px rgb(179, 137, 21);
+
+    #cast-id {
       padding: 0px 3px;
       position: absolute;
       top: 0;
       left: 0;
     }
+
+    //伤害类型
+    // #type {
+    //   padding: 0px 3px;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    // }
 
     //倒计时
     #countdown {
