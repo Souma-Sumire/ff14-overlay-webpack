@@ -50,7 +50,7 @@ if (!MiniMode) {
 body.style.fontSize = params?.get("fontSize") || "12px";
 function addFooter() {
   document.querySelector(
-    "body > footer > ul"
+    "body > footer > ul",
   ).innerHTML = `<li class="select" data-select="true" data-job-name="All" data-reality-name="All" id="all">ALL</li>`;
   if (party.length) {
     document.querySelector("body > footer > ul").append(
@@ -62,7 +62,7 @@ function addFooter() {
         li.setAttribute("data-object-id", value.id);
         li.setAttribute("data-select", "false");
         return li;
-      })
+      }),
     );
   }
   document.querySelectorAll("body > footer > ul > li ").forEach((li) => {
@@ -74,7 +74,10 @@ function addFooter() {
       this.setAttribute("data-select", "true");
       li.classList.add(`select`);
       document.querySelectorAll("body > main > table > tbody > tr").forEach((element) => {
-        if (li.getAttribute("id") === "all" || element.getAttribute("data-master-id") === li.getAttribute("data-object-id")) {
+        if (
+          li.getAttribute("id") === "all" ||
+          element.getAttribute("data-master-id") === li.getAttribute("data-object-id")
+        ) {
           element.style.display = "table-row";
         } else {
           element.style.display = "none";
@@ -89,7 +92,7 @@ function addFooter() {
             (li.innerText =
               li.innerText === li.getAttribute("data-reality-name")
                 ? li.getAttribute("data-job-name")
-                : li.getAttribute("data-reality-name"))
+                : li.getAttribute("data-reality-name")),
         );
   });
 }
@@ -119,7 +122,8 @@ function speTr(text, className = null, colSpan = 5) {
 }
 addOverlayListener("ChangeZone", (e) => {
   FFXIVObject = {};
-  if (tbody.lastChild !== null && tbody.lastChild.firstChild.getAttribute("data-type") === "changeZone") tbody.lastChild.remove();
+  if (tbody.lastChild !== null && tbody.lastChild.firstChild.getAttribute("data-type") === "changeZone")
+    tbody.lastChild.remove();
   if (!MiniMode) speTr(e.zoneName, "changeZone");
   if (AutoClean) {
     cleanTable();
@@ -150,7 +154,8 @@ addOverlayListener("LogLine", (e) => {
         damageLog.type === "damage" &&
         damageLog.fromIsEnemy &&
         damageLog.targetisFriendly &&
-        (damageLog.targetID === youID || party.some((value) => value.id === damageLog.targetID && (value.inParty || is24Mode)))
+        (damageLog.targetID === youID ||
+          party.some((value) => value.id === damageLog.targetID && (value.inParty || is24Mode)))
       ) {
         if (!inCombat && duration === "00:00") startCombat();
         if (maxLength > 0 && tbody.childElementCount >= maxLength) {
@@ -161,7 +166,9 @@ addOverlayListener("LogLine", (e) => {
         tr.setAttribute("data-master-name", damageLog.targetName);
         if (
           document.querySelector("#all").getAttribute("data-select") === "true" ||
-          document.querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`).getAttribute("data-select") === "true"
+          document
+            .querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`)
+            .getAttribute("data-select") === "true"
         ) {
           tr.style.display = "table-row";
         } else {
@@ -194,6 +201,18 @@ addOverlayListener("LogLine", (e) => {
         td4.setAttribute("data-damage-effect", damageLog.damageEffect);
         td4.title = damageLog.fromName;
         td4.classList.add(damageLog.damageType);
+        td4.setAttribute(
+          "data-damage-type",
+          {
+            dodge: "(回避)",
+            death: "(即死)",
+            physics: "(物理)",
+            magic: "(魔法)",
+            darkness: "(黑暗)",
+            heal: "(治疗)",
+            unknown: "(未知)",
+          }[damageLog.damageType] ?? "",
+        );
         function createImg(type, key, stack = 0) {
           let span = document.createElement("span");
           let img = new Image();
@@ -223,7 +242,7 @@ addOverlayListener("LogLine", (e) => {
 
           seconds.innerText = Math.max(
             Math.ceil((FFXIVObject[damageLog[type]].Status[key].expiration - new Date(e.line[1]).getTime()) / 1000),
-            0
+            0,
           );
           // } catch {
           //   seconds.innerText = "";
@@ -242,8 +261,9 @@ addOverlayListener("LogLine", (e) => {
         if (
           scrollMove &&
           (document.querySelector("#all").getAttribute("data-select") === "true" ||
-            document.querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`).getAttribute("data-select") ===
-              "true")
+            document
+              .querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`)
+              .getAttribute("data-select") === "true")
         ) {
           main.scrollTop = main.scrollHeight;
         }
@@ -253,7 +273,7 @@ addOverlayListener("LogLine", (e) => {
           result.push(tr.children[3].title);
           result.push(tr.children[1].innerHTML);
           result.push(tr.getAttribute("data-master-name"));
-          result.push(tr.children[3].innerHTML);
+          result.push(tr.children[3].innerHTML + tr.children[3].getAttribute("data-damage-type"));
           for (const kg of tr.querySelectorAll("td>article>span>img")) result.push(kg.title);
           document.querySelector("#toCopy").value = result.join(" ");
           document.querySelector("#toCopy").select();
@@ -298,7 +318,8 @@ addOverlayListener("LogLine", (e) => {
       if (e.line[2] === youID || party.some((p) => p.id === e.line[2] && (p.inParty || is24Mode))) {
         let target;
         try {
-          target = e.line[2] === youID ? "你" : getJobByID(party.find((p) => p.id === e.line[2])?.job)?.simple2 ?? "unknown";
+          target =
+            e.line[2] === youID ? "你" : getJobByID(party.find((p) => p.id === e.line[2])?.job)?.simple2 ?? "unknown";
         } catch {
           target = e.line[3];
         }
@@ -307,7 +328,9 @@ addOverlayListener("LogLine", (e) => {
         deathTr.setAttribute("data-master-name", e.line[3]);
         if (
           document.querySelector("#all").getAttribute("data-select") === "true" ||
-          document.querySelector(`body > footer > ul > li[data-object-id="${e.line[2]}"]`).getAttribute("data-select") === "true"
+          document
+            .querySelector(`body > footer > ul > li[data-object-id="${e.line[2]}"]`)
+            .getAttribute("data-select") === "true"
         ) {
           deathTr.style.display = "table-row";
         } else {
@@ -316,7 +339,7 @@ addOverlayListener("LogLine", (e) => {
         deathTr.insertCell(0).innerHTML = duration; //战斗时间
       }
     case "33":
-      if ((e.line[3] === "40000010" || e.line[3] === "4000000F")) partyWipe();
+      if (e.line[3] === "4000000F") partyWipe();
     default:
       break;
   }
