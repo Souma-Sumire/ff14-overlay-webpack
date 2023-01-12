@@ -38,7 +38,7 @@ addOverlayListener("LogLine", (e) => {
     } else if (log["casterID"] === youID && raidBuffs[actionID] !== undefined) {
       doTTS(actionID);
     }
-  } else if (e.line[0] === "33" && (e.line[3] === "40000010" || e.line[3] === "4000000F")) resetEverything();
+  } else if (e.line[0] === "33" && e.line[3] === "4000000F") resetEverything();
 });
 addOverlayListener("ChangeZone", () => resetEverything());
 function resetEverything() {

@@ -89,5 +89,5 @@ export function handleLogLine(e) {
     }
     LBBefore = LBNow;
     if (LBAdd < -0.1) handleClear();
-  } else if (e.line[0] === "33" && (e.line[3] === "40000010" || e.line[3] === "4000000F")) handleClear();
+  } else if (e.line[0] === "33" && e.line[3] === "4000000F") handleClear();
 }

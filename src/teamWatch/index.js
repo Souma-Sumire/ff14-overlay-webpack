@@ -70,7 +70,7 @@ addOverlayListener("LogLine", (e) => {
           ?.querySelector(`article[data-action-proto-id="${actionID}"]`)
       );
     }
-  } else if (e.line[0] === "33" && (e.line[3] === "40000010" || e.line[3] === "4000000F")) partyChanged(party);
+  } else if (e.line[0] === "33" && e.line[3] === "4000000F") partyChanged(party);
 });
 startOverlayEvents();
 const body = document.body;

@@ -64,7 +64,7 @@ function handelLogLine(e) {
         }, delay);
       }
     }
-  } else if (e.line[0] === "33" && (e.line[3] === "40000010" || e.line[3] === "4000000F")) clearTimer();
+  } else if (e.line[0] === "33" && e.line[3] === "4000000F") clearTimer();
 }
 
 function handleAddBtnClick() {
