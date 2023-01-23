@@ -50,14 +50,14 @@ let keigenns = {
   "a97": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //怒濤の計
 
   "351": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //命运之轮
-  "4b6": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服夜占命运之轮
+  // "4b6": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服夜占命运之轮
   "761": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //天星交错
   "a9d": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //エクザルテーション 82级新技能
   "781": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //中间学派
-  "7fb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服中间学派（夜）
-  "758": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服天星冲日（夜）
-  "817": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服天星冲日（夜）
-  "345": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服黑夜领域
+  // "7fb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服中间学派（夜）
+  // "758": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服天星冲日（夜）
+  // "817": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服天星冲日（夜）
+  // "345": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服黑夜领域
 
   "a2f": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //エウクラシア・ディアグノシス 贤单盾
   "a30": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //エウクラシア・ディアグノシス[強] 贤单盾暴击
@@ -65,6 +65,7 @@ let keigenns = {
   "a3a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //ケーラコレ 贤罩子
   "a3b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //タウロコレ 贤绿帽
   "bbb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //ホーリズム 整体论
+  "d25": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //整体盾
   "a52": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //海马
   "a53": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //胖海马
 
