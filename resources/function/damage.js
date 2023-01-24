@@ -1,8 +1,9 @@
 function getDamage(e) {
   let offset = 0;
-  if (e.line[8] === "3C" || e.line[8] === "A10") offset += 2;
+  if (["3C", "A10", "100000E"].includes(e.line[8])) offset += 2;
   //5.0 特殊偏移=3C
   //6.0 武士心眼=A10
+  //P6S麻将喷=100000E
   function getEffect() {
     if (e.line[8 + offset].length < 3) return "";
     switch (e.line[8 + offset].substr(e.line[8 + offset].length - 3, 1)) {
@@ -37,7 +38,7 @@ function getDamage(e) {
     result.value = parseInt(damage.substring(0, 4), 16);
   } else {
     if (result.skillID === "6A37") {
-      //E3S死之超越
+      //P3S死之超越
       result.value = "9999999";
     } else {
       let A = damage.substring(0, 2);
