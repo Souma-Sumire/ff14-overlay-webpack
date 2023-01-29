@@ -81,8 +81,8 @@ let keigenns = {
   "a8e": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //守りの光
   "a25": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //守護のクレスト 钐镰魔罩
   "a93": { dodge: 0, physics: 0, magic: 1, darkness: 0, condition: "player" }, //バマジク 赤魔新86级群减
-  "2ab": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //土之加护
-  "790": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服防护障壁
+  // "2ab": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //土之加护
+  // "790": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //国服防护障壁
 
   //ClassJob
   "4b9": { dodge: 1, physics: 1, magic: 0, darkness: 0, condition: "player" }, //亲疏自行
