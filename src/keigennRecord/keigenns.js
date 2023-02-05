@@ -75,6 +75,7 @@ let keigenns = {
   "79f": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //策动
   "722": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //防守之桑巴
   "a89": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //即兴表演结束
+  "35c": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //武装解除
 
   "1e8": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //残影
   "a8": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //魔罩
