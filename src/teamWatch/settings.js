@@ -72,9 +72,7 @@ const role = {
 };
 const allJob = [1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
 const sortRuleUser = load("sortRuleUser", undefined) ?? sortRule;
-let sortRuleShow = allJob.sort(
-  (a, b) => sortRuleUser.indexOf((baseClass[a] ?? a).toString()) - sortRuleUser.indexOf((baseClass[b] ?? b).toString())
-);
+let sortRuleShow = allJob.sort((a, b) => sortRuleUser.indexOf((baseClass[a] ?? a).toString()) - sortRuleUser.indexOf((baseClass[b] ?? b).toString()));
 let watchJobsActionsIDShow = load("watchJobsActionsIDUser") ?? watchJobsActionsID;
 
 function loadAction(watchJobsActionsIDShow) {
@@ -163,10 +161,10 @@ function newTD(id) {
 
 function saveSettings() {
   let toSaveSortRuleUser = [];
+  const sortRuleDiv = document.querySelector("#sortRuleDiv");
   sortRuleDiv.childNodes.forEach((v) => {
     toSaveSortRuleUser.push(v.id);
   });
-
   let toSaveWatchJobsActionsID = [].reduce.call(
     sortRuleDiv.childNodes,
     (pre, value) => {
@@ -176,11 +174,11 @@ function saveSettings() {
           arr.push(parseInt(td.getAttribute("data-action-id")));
           return arr;
         },
-        []
+        [],
       );
       return pre;
     },
-    {}
+    {},
   );
   try {
     save("sortRuleUser", toSaveSortRuleUser);
@@ -217,8 +215,7 @@ function editWatch(dom, td) {
       closeEditDiv();
     }
   });
-  editID.innerText =
-    "技能ID：" + dom.getAttribute("data-action-id") + " (" + parseInt(dom.getAttribute("data-action-id")).toString(16).toUpperCase() + ")";
+  editID.innerText = "技能ID：" + dom.getAttribute("data-action-id") + " (" + parseInt(dom.getAttribute("data-action-id")).toString(16).toUpperCase() + ")";
   editName.innerText = "技能名称：" + dom.querySelector("article").innerText;
   editIcon.appendChild(dom.querySelector("img").cloneNode(true));
   editDiv.appendChild(ul);
@@ -236,16 +233,16 @@ function editWatch(dom, td) {
   for (const id in actions) {
     const action = getAction(id);
     if (
-      (((action.ClassJob.toString() === dom?.parentNode?.getAttribute("data-job") ||
+      id === "0" ||
+      ((((action.ClassJob.toString() === dom?.parentNode?.getAttribute("data-job") ||
         baseClass?.[action.ClassJob]?.toString() === dom?.parentNode?.getAttribute("data-job") ||
         (action.ClassJobCategory.length &&
-          (action.ClassJobCategory === "所有职业" ||
-            action.ClassJobCategory.includes(getJobByID(dom?.parentNode?.getAttribute("data-job"))?.cn ?? "无")))) &&
+          (action.ClassJobCategory === "所有职业" || action.ClassJobCategory.includes(getJobByID(dom?.parentNode?.getAttribute("data-job"))?.cn ?? "无")))) &&
         action.ClassJobLevel > 0 &&
         compareSame(id) === id &&
         (action.Recast100ms >= 50 || params.get("ignoreRecast") === "true")) ||
         id == "0") &&
-      !tdList?.some((value) => value === id)
+        !tdList?.some((value) => value === id))
     ) {
       action.Name = action.Name;
       let actionDom = document.createElement("div");
@@ -305,11 +302,11 @@ exp.addEventListener("click", () => {
           arr.push(parseInt(td.getAttribute("data-action-id")));
           return arr;
         },
-        []
+        [],
       );
       return pre;
     },
-    {}
+    {},
   );
   try {
     share.value = window.btoa(JSON.stringify(toSaveWatchJobsActionsID));
