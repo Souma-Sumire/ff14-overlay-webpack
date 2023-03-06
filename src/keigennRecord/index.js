@@ -3,7 +3,7 @@ import { getJobByID } from "../../resources/data/job";
 import { getStatus } from "../../resources/data/status";
 import { getDamage } from "../../resources/function/damage";
 import { logProcessing } from "../../resources/function/logProcessing";
-import { keigenns as playerKeigenns } from "./keigenns";
+import { keigenns } from "./keigenns";
 import { actionChinese } from "../../resources/data/actionChinese";
 import "../../resources/function/xianyu";
 import "../../resources/function/loadComplete";
@@ -229,9 +229,9 @@ addOverlayListener("LogLine", (e) => {
               : url;
           }
           img.title = FFXIVObject[damageLog[type]].Status[key].name;
-          if (playerKeigenns?.[key]?.[damageLog.damageType] === 0) {
+          if (keigenns?.[key]?.[damageLog.damageType] === 0) {
             span.classList.add("useless");
-          } else if (playerKeigenns?.[key]?.[damageLog.damageType] === 0.5) {
+          } else if (keigenns?.[key]?.[damageLog.damageType] === 0.5) {
             span.classList.add("halfUseful");
           }
           span.appendChild(img);
@@ -291,7 +291,7 @@ addOverlayListener("LogLine", (e) => {
       const statusCN = getStatus(parseInt(logStatus, 16))?.CN ?? "";
       let playerKeigenn = /(受伤|耐性|防御力)(提升|(大幅)?降低|低下|加重|减轻)|最大体力/.test(statusCN)
         ? { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }
-        : playerKeigenns?.[logStatus];
+        : keigenns?.[logStatus];
       if (
         playerKeigenn !== undefined &&
         ((playerKeigenn?.condition === "player" &&
