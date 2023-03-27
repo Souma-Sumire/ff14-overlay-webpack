@@ -14,7 +14,7 @@ const list = {
     describe: "减伤监控",
     img: IMGkeigennRecord,
     params:
-      "?maxLength=800&24Mode=false&bgOpacity=0.45&bodyOpacity=1&fontSize=12px&th1=36px&th2=75px&th3=34px&th4=46px&imgHeight=20&mini=false&autoclean=false&showName=false&th3FullName=66px&abbreviationID=true",
+      "?maxLength=800&24Mode=false&bgOpacity=0.45&bodyOpacity=1&fontSize=12px&th1=36px&th2=75px&th3=34px&th4=46px&imgHeight=20&mini=false&autoclean=false&showName=false&abbreviationID=true",
   },
   keySkillTimer: {
     type: "ACT悬浮窗",

@@ -23,7 +23,6 @@ document.querySelector("body main table th:nth-child(1)").style.width = params?.
 document.querySelector("body main table th:nth-child(2)").style.width = params?.get("th2") ?? "75px";
 document.querySelector("body main table th:nth-child(3)").style.width = params?.get("th3") ?? "34px";
 document.querySelector("body main table th:nth-child(4)").style.width = params?.get("th4") ?? "46px";
-if (showName && !abbreviationID) document.querySelector("body main table th:nth-child(3)").style.width = params?.get("th3FullName") ?? "66px";
 
 let party = [],
   youID = "",
