@@ -12,20 +12,19 @@ import "../../resources/function/isOverlayPlugin";
 import "../../resources/function/loadOverlayPluginCommon.js";
 
 const params = new URLSearchParams(new URL(window.location).search);
-let MiniMode = params?.get("mini") === "true" || false;
-let AutoClean = params?.get("autoclean") === "true" || false;
-if (!MiniMode) {
-  import("./index.scss");
-} else {
-  import("./index_mini.scss");
-}
-
+const miniMode = params?.get("mini") === "true" || false;
+const autoClean = params?.get("autoclean") === "true" || false;
+const showName = params?.get("showName") === "true" || false;
+const abbreviationID = params?.get("abbreviationID") === "true" || true;
+miniMode && import("./index_mini.scss");
 const body = document.body;
 const main = document.querySelector("main");
 document.querySelector("body main table th:nth-child(1)").style.width = params?.get("th1") ?? "36px";
 document.querySelector("body main table th:nth-child(2)").style.width = params?.get("th2") ?? "75px";
 document.querySelector("body main table th:nth-child(3)").style.width = params?.get("th3") ?? "34px";
 document.querySelector("body main table th:nth-child(4)").style.width = params?.get("th4") ?? "46px";
+if (showName && !abbreviationID) document.querySelector("body main table th:nth-child(3)").style.width = params?.get("th3FullName") ?? "66px";
+
 let party = [],
   youID = "",
   playerName = "",
@@ -43,7 +42,13 @@ class FFObject {
     this.Status = {};
   }
 }
-if (!MiniMode) {
+try {
+  party = JSON.parse(localStorage.getItem("keigennRecordParty"));
+  if (!(party instanceof Array)) party = [];
+} catch {
+  party = [];
+}
+if (!miniMode) {
   main.style.backgroundColor = `rgba(5,5,5,${params?.get("bgOpacity") || 0.45})`;
   body.style.opacity = params?.get("bodyOpacity") || 1;
 }
@@ -74,10 +79,7 @@ function addFooter() {
       this.setAttribute("data-select", "true");
       li.classList.add(`select`);
       document.querySelectorAll("body > main > table > tbody > tr").forEach((element) => {
-        if (
-          li.getAttribute("id") === "all" ||
-          element.getAttribute("data-master-id") === li.getAttribute("data-object-id")
-        ) {
+        if (li.getAttribute("id") === "all" || element.getAttribute("data-master-id") === li.getAttribute("data-object-id")) {
           element.style.display = "table-row";
         } else {
           element.style.display = "none";
@@ -89,10 +91,7 @@ function addFooter() {
         .querySelectorAll("body > footer > ul > li ")
         .forEach(
           (li) =>
-            (li.innerText =
-              li.innerText === li.getAttribute("data-reality-name")
-                ? li.getAttribute("data-job-name")
-                : li.getAttribute("data-reality-name")),
+            (li.innerText = li.innerText === li.getAttribute("data-reality-name") ? li.getAttribute("data-job-name") : li.getAttribute("data-reality-name")),
         );
   });
 }
@@ -103,6 +102,7 @@ addOverlayListener("ChangePrimaryPlayer", (e) => {
 });
 addOverlayListener("PartyChanged", (e) => {
   party = e.party.filter((p) => p.inParty || is24Mode);
+  localStorage.setItem("keigennRecordParty", party);
   addFooter();
 });
 try {
@@ -122,10 +122,9 @@ function speTr(text, className = null, colSpan = 5) {
 }
 addOverlayListener("ChangeZone", (e) => {
   FFXIVObject = {};
-  if (tbody.lastChild !== null && tbody.lastChild.firstChild.getAttribute("data-type") === "changeZone")
-    tbody.lastChild.remove();
-  if (!MiniMode) speTr(e.zoneName, "changeZone");
-  if (AutoClean) {
+  if (tbody.lastChild !== null && tbody.lastChild.firstChild.getAttribute("data-type") === "changeZone") tbody.lastChild.remove();
+  if (!miniMode) speTr(e.zoneName, "changeZone");
+  if (autoClean) {
     cleanTable();
   }
   inCombat = false;
@@ -134,7 +133,7 @@ addOverlayListener("ChangeZone", (e) => {
 });
 function partyWipe() {
   FFXIVObject = {};
-  if (!MiniMode) {
+  if (!miniMode) {
     speTr("团灭", "ace");
   } else {
     let aceTr = speTr(`🗑️团灭了！`, "deathEvent", 4);
@@ -154,8 +153,7 @@ addOverlayListener("LogLine", (e) => {
         damageLog.type === "damage" &&
         damageLog.fromIsEnemy &&
         damageLog.targetisFriendly &&
-        (damageLog.targetID === youID ||
-          party.some((value) => value.id === damageLog.targetID && (value.inParty || is24Mode)))
+        (damageLog.targetID === youID || party.some((value) => value.id === damageLog.targetID && (value.inParty || is24Mode)))
       ) {
         if (!inCombat && duration === "00:00") startCombat();
         if (maxLength > 0 && tbody.childElementCount >= maxLength) {
@@ -166,9 +164,7 @@ addOverlayListener("LogLine", (e) => {
         tr.setAttribute("data-master-name", damageLog.targetName);
         if (
           document.querySelector("#all").getAttribute("data-select") === "true" ||
-          document
-            .querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`)
-            .getAttribute("data-select") === "true"
+          document.querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`).getAttribute("data-select") === "true"
         ) {
           tr.style.display = "table-row";
         } else {
@@ -181,16 +177,19 @@ addOverlayListener("LogLine", (e) => {
         let td5 = tr.insertCell(4); //状态
         let td5inside = document.createElement("article");
         td1.innerHTML = duration; //战斗时间
-        td2.innerHTML = /unknown_/i.test(damageLog.skillName)
-          ? "未知"
-          : actionChinese?.[parseInt(damageLog.skillID, 16)] ?? damageLog.skillName ?? "未知";
+        td2.innerHTML = /unknown_/i.test(damageLog.skillName) ? "未知" : actionChinese?.[parseInt(damageLog.skillID, 16)] ?? damageLog.skillName ?? "未知";
         try {
           if (damageLog.targetID === youID) {
             td3.innerText = "YOU";
             td3.classList.add("YOU");
           } else {
             let job = getJobByID(party.find((p) => p.id === damageLog.targetID)?.job);
-            td3.innerText = job?.simple2 ?? "?";
+            let name = damageLog.targetName
+            if (showName && abbreviationID) {
+              name = name.replace(/([A-Z])\S+ ([A-Z])\S+/, `$1.$2.`);
+            }
+
+            td3.innerText = (showName ? job.simple1 : job.simple2) + (showName ? "(" + name + ")" : "");
             td3.classList.add(job?.en);
           }
         } catch (e) {
@@ -224,9 +223,7 @@ addOverlayListener("LogLine", (e) => {
             img.onerror = null;
           };
           function stackUrl(url) {
-            return stack > 1 && stack <= 16
-              ? url.substring(0, 7) + (Array(6).join(0) + (parseInt(url.substring(7)) + stack - 1)).slice(-6)
-              : url;
+            return stack > 1 && stack <= 16 ? url.substring(0, 7) + (Array(6).join(0) + (parseInt(url.substring(7)) + stack - 1)).slice(-6) : url;
           }
           img.title = FFXIVObject[damageLog[type]].Status[key].name;
           if (keigenns?.[key]?.[damageLog.damageType] === 0) {
@@ -240,10 +237,7 @@ addOverlayListener("LogLine", (e) => {
           if (FFXIVObject[damageLog[type]].Status[key].caster === playerName) seconds.classList.add("playerself");
           // try {
 
-          seconds.innerText = Math.max(
-            Math.ceil((FFXIVObject[damageLog[type]].Status[key].expiration - new Date(e.line[1]).getTime()) / 1000),
-            0,
-          );
+          seconds.innerText = Math.max(Math.ceil((FFXIVObject[damageLog[type]].Status[key].expiration - new Date(e.line[1]).getTime()) / 1000), 0);
           // } catch {
           //   seconds.innerText = "";
           // }
@@ -261,9 +255,7 @@ addOverlayListener("LogLine", (e) => {
         if (
           scrollMove &&
           (document.querySelector("#all").getAttribute("data-select") === "true" ||
-            document
-              .querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`)
-              .getAttribute("data-select") === "true")
+            document.querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`).getAttribute("data-select") === "true")
         ) {
           main.scrollTop = main.scrollHeight;
         }
@@ -294,13 +286,11 @@ addOverlayListener("LogLine", (e) => {
         : keigenns?.[logStatus];
       if (
         playerKeigenn !== undefined &&
-        ((playerKeigenn?.condition === "player" &&
-          (party.some((value) => value.id === statusLog["targetID"]) || statusLog["targetID"] === youID)) ||
+        ((playerKeigenn?.condition === "player" && (party.some((value) => value.id === statusLog["targetID"]) || statusLog["targetID"] === youID)) ||
           (playerKeigenn?.condition === "enemy" && statusLog["targetID"].substring(0, 1) === "4"))
       ) {
         if (e.line[0] === "26") {
-          FFXIVObject[statusLog["targetName"]] =
-            FFXIVObject[statusLog["targetName"]] || new FFObject(statusLog["targetID"], statusLog["targetName"]);
+          FFXIVObject[statusLog["targetName"]] = FFXIVObject[statusLog["targetName"]] || new FFObject(statusLog["targetID"], statusLog["targetName"]);
           FFXIVObject[statusLog["targetName"]].Status[logStatus] = {
             name: statusCN ?? statusLog["statusName"],
             caster: statusLog["casterName"],
@@ -318,8 +308,7 @@ addOverlayListener("LogLine", (e) => {
       if (e.line[2] === youID || party.some((p) => p.id === e.line[2] && (p.inParty || is24Mode))) {
         let target;
         try {
-          target =
-            e.line[2] === youID ? "你" : getJobByID(party.find((p) => p.id === e.line[2])?.job)?.simple2 ?? "unknown";
+          target = e.line[2] === youID ? "你" : getJobByID(party.find((p) => p.id === e.line[2])?.job)?.simple2 ?? "unknown";
         } catch {
           target = e.line[3];
         }
@@ -328,9 +317,7 @@ addOverlayListener("LogLine", (e) => {
         deathTr.setAttribute("data-master-name", e.line[3]);
         if (
           document.querySelector("#all").getAttribute("data-select") === "true" ||
-          document
-            .querySelector(`body > footer > ul > li[data-object-id="${e.line[2]}"]`)
-            .getAttribute("data-select") === "true"
+          document.querySelector(`body > footer > ul > li[data-object-id="${e.line[2]}"]`).getAttribute("data-select") === "true"
         ) {
           deathTr.style.display = "table-row";
         } else {
@@ -366,7 +353,7 @@ document.querySelector("header").onclick = function () {
 function startCombat() {
   main.scrollTop = main.scrollHeight;
   inCombat = true;
-  if (AutoClean) {
+  if (autoClean) {
     cleanTable();
   }
   clearTimeout(combatTimer);
