@@ -86,9 +86,7 @@ function update() {
   if (casting?.[target] !== undefined) {
     const now = Date.now();
     const count = (casting[target].overTime - now - pingMs) / 1000;
-    castingProgressInner.style.width = `${
-      ((now - casting[target].startTime + pingMs) / casting[target].castTime) * 100
-    }%`;
+    castingProgressInner.style.width = `${((now - casting[target].startTime + pingMs) / casting[target].castTime) * 100}%`;
     castingCountdown.innerText = Math.max(count, 0).toFixed(2);
     castingId.innerText = `${casting[target].castIdDec} (${casting[target].castIdHex})`;
     if (count <= -0.1) {
@@ -99,3 +97,4 @@ function update() {
   window.requestAnimationFrame(update);
 }
 window.requestAnimationFrame(update);
+console.log("该版本已停止维护，访问 https://nga.178.com/read.php?tid=29937582 以获得新版");

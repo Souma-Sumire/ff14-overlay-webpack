@@ -4,7 +4,6 @@ import "./index.scss";
 import IMGkeigennRecord from "./images/keigennRecord.jpg";
 import IMGkeySkillTimer from "./images/keySkillTimer.jpg";
 import IMGteamWatch from "./images/teamWatch.jpg";
-import IMGcastingToChinese from "./images/castingToChinese.gif";
 import IMGlimitBreakTip from "./images/limitBreakTip.gif";
 
 const table = document.querySelector("table");
@@ -27,13 +26,6 @@ const list = {
     describe: "技能监控",
     img: IMGteamWatch,
     params: "?scale=1&reverse=false&rightAlign=false&postNamazu=false",
-  },
-  castingToChinese: {
-    type: "ACT悬浮窗",
-    describe: "读条汉化",
-    img: IMGcastingToChinese,
-    params:
-      "?directive=false&focus=false&tts=false&hideProg=false&hideCountdown=false&roomaji=true&progHeight=10px&fontSize=20px&fontFamily=SmartisanHei&ping=80&showCastId=true",
   },
   limitBreakTip: {
     type: "ACT悬浮窗",

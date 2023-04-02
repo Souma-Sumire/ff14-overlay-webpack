@@ -118,3 +118,5 @@ function autoHide() {
     document.body.style.display = "none";
   }, Math.max(parseInt(params.get("autoHideTime")), 10000) || 30000);
 }
+
+console.log("该版本已停止维护，访问 https://nga.178.com/read.php?tid=33989985 以获得新版");
