@@ -5,7 +5,7 @@ const keigenns = {
   "4a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 预警
   "498": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 武装
   "52": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 神圣领域
-  "2d7": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 圣光幕帘
+  "552": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 圣光幕帘
   "a72": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 圣盾阵
   "a73": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 骑士的坚守
   "2df": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的直觉
@@ -22,6 +22,8 @@ const keigenns = {
   "2eb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 暗影墙
   "766": { dodge: 0, physics: 0, magic: 1, darkness: 0, condition: "player" }, // 暗黑布道
   "32a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 行尸走肉
+  "32b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 死而不僵
+  "cb7": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 出死入生
   "811": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 极光
   "a7a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 献奉
   "730": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 石之心
