@@ -183,7 +183,7 @@ addOverlayListener("LogLine", (e) => {
             td3.classList.add("YOU");
           } else {
             let job = getJobByID(party.find((p) => p.id === damageLog.targetID)?.job);
-            let name = damageLog.targetName
+            let name = damageLog.targetName;
             if (showName && abbreviationID) {
               name = name.replace(/([A-Z])\S+ ([A-Z])\S+/, `$1.$2.`);
             }
