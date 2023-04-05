@@ -160,7 +160,7 @@ addOverlayListener("LogLine", (e) => {
             value: parseInt(e.line[6], 16),
           }
         : null;
-      isDoT && console.log(dot);
+      // isDoT && console.log(dot);
       if (
         (isDoT && dot.which === "DoT" && dot.id[0] === "1" && (dot.id === youID || party.some((v) => v.id === dot.id && (v.inParty || is24Mode)))) ||
         (ability.type === "damage" &&
