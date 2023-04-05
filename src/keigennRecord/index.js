@@ -145,25 +145,44 @@ function partyWipe() {
 const tbody = document.querySelector("body > main > table > tbody");
 addOverlayListener("LogLine", (e) => {
   switch (e.line[0]) {
+    case "24":
     case "21":
     case "22":
-      let damageLog = getDamage(e);
+      const ability = getDamage(e);
+      const isDoT = e.line[0] === "24";
+      const dot = isDoT
+        ? {
+            id: e.line[2],
+            name: e.line[3],
+            which: e.line[4],
+            effectId: e.line[5],
+            damage: e.line[6],
+            value: parseInt(e.line[6], 16),
+          }
+        : null;
+      isDoT && console.log(dot);
       if (
-        damageLog.type === "damage" &&
-        damageLog.fromIsEnemy &&
-        damageLog.targetisFriendly &&
-        (damageLog.targetID === youID || party.some((value) => value.id === damageLog.targetID && (value.inParty || is24Mode)))
+        (isDoT && dot.which === "DoT" && dot.id[0] === "1" && (dot.id === youID || party.some((v) => v.id === dot.id && (v.inParty || is24Mode)))) ||
+        (ability.type === "damage" &&
+          ability.fromIsEnemy &&
+          ability.targetisFriendly &&
+          (ability.targetID === youID || party.some((value) => value.id === ability.targetID && (value.inParty || is24Mode))))
       ) {
         if (!inCombat && duration === "00:00") startCombat();
         if (maxLength > 0 && tbody.childElementCount >= maxLength) {
           tbody.deleteRow(0);
         }
         let tr = tbody.insertRow(-1);
-        tr.setAttribute("data-master-id", damageLog.targetID);
-        tr.setAttribute("data-master-name", damageLog.targetName);
+        if (isDoT) {
+          tr.setAttribute("data-master-id", dot.id);
+          tr.setAttribute("data-master-name", dot.name);
+        } else {
+          tr.setAttribute("data-master-id", ability.targetID);
+          tr.setAttribute("data-master-name", ability.targetName);
+        }
         if (
           document.querySelector("#all").getAttribute("data-select") === "true" ||
-          document.querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`).getAttribute("data-select") === "true"
+          document.querySelector(`body > footer > ul > li[data-object-id="${isDoT ? dot.id : ability.targetID}"]`).getAttribute("data-select") === "true"
         ) {
           tr.style.display = "table-row";
         } else {
@@ -176,14 +195,18 @@ addOverlayListener("LogLine", (e) => {
         let td5 = tr.insertCell(4); //状态
         let td5inside = document.createElement("article");
         td1.innerHTML = duration; //战斗时间
-        td2.innerHTML = /unknown_/i.test(damageLog.skillName) ? "未知" : actionChinese?.[parseInt(damageLog.skillID, 16)] ?? damageLog.skillName ?? "未知";
+        td2.innerHTML = isDoT
+          ? "DoT"
+          : /unknown_/i.test(ability.skillName)
+          ? "未知"
+          : actionChinese?.[parseInt(ability.skillID, 16)] ?? ability.skillName ?? "未知";
         try {
-          if (damageLog.targetID === youID) {
+          if ((isDoT ? dot.id : ability.targetID) === youID) {
             td3.innerText = "YOU";
             td3.classList.add("YOU");
           } else {
-            let job = getJobByID(party.find((p) => p.id === damageLog.targetID)?.job);
-            let name = damageLog.targetName;
+            let job = getJobByID(party.find((p) => p.id === (isDoT ? dot.id : ability.targetID))?.job);
+            let name = isDoT ? dot.name : ability.targetName;
             if (showName && abbreviationID) {
               name = name.replace(/([A-Z])\S+ ([A-Z])\S+/, `$1.$2.`);
             }
@@ -193,25 +216,27 @@ addOverlayListener("LogLine", (e) => {
           }
         } catch (e) {
           console.warn(e);
-          td3.innerHTML = damageLog.targetName;
+          td3.innerHTML = isDoT ? dot.name : ability.targetName;
         }
-        td4.innerHTML = damageLog.value.toLocaleString();
-        td4.setAttribute("data-damage-effect", damageLog.damageEffect);
-        td4.title = damageLog.fromName;
-        td4.classList.add(damageLog.damageType);
+        td4.innerHTML = (isDoT ? dot.value : ability.value).toLocaleString();
+        td4.setAttribute("data-damage-effect", isDoT ? "DoT" : ability.damageEffect);
+        td4.title = isDoT ? "DoT" : ability.fromName;
+        td4.classList.add(isDoT ? "DoT" : ability.damageType);
         td4.setAttribute(
           "data-damage-type",
-          {
-            dodge: "(回避)",
-            death: "(即死)",
-            physics: "(物理)",
-            magic: "(魔法)",
-            darkness: "(黑暗)",
-            heal: "(治疗)",
-            unknown: "(未知)",
-          }[damageLog.damageType] ?? "",
+          isDoT
+            ? "DoT"
+            : {
+                dodge: "(回避)",
+                death: "(即死)",
+                physics: "(物理)",
+                magic: "(魔法)",
+                darkness: "(黑暗)",
+                heal: "(治疗)",
+                unknown: "(未知)",
+              }[ability.damageType] ?? "",
         );
-        function createImg(type, key, stack = 0) {
+        function createImg(name, key, stack = 0) {
           let span = document.createElement("span");
           let img = new Image();
           img.style.height = parseInt(params?.get("imgHeight") ?? 20) + 5 + "px";
@@ -224,37 +249,34 @@ addOverlayListener("LogLine", (e) => {
           function stackUrl(url) {
             return stack > 1 && stack <= 16 ? url.substring(0, 7) + (Array(6).join(0) + (parseInt(url.substring(7)) + stack - 1)).slice(-6) : url;
           }
-          img.title = FFXIVObject[damageLog[type]].Status[key].name;
-          if (keigenns?.[key]?.[damageLog.damageType] === 0) {
+          img.title = FFXIVObject[name].Status[key].name;
+          if (keigenns?.[key]?.[ability.damageType] === 0) {
             span.classList.add("useless");
-          } else if (keigenns?.[key]?.[damageLog.damageType] === 0.5) {
+          } else if (keigenns?.[key]?.[ability.damageType] === 0.5) {
             span.classList.add("halfUseful");
           }
           span.appendChild(img);
           let seconds = document.createElement("aside");
           seconds.style.width = ((parseInt(img.style.height) / 32) * 24) / 0.75 + "px";
-          if (FFXIVObject[damageLog[type]].Status[key].caster === playerName) seconds.classList.add("playerself");
-          // try {
-
-          seconds.innerText = Math.max(Math.ceil((FFXIVObject[damageLog[type]].Status[key].expiration - new Date(e.line[1]).getTime()) / 1000), 0);
-          // } catch {
-          //   seconds.innerText = "";
-          // }
+          if (FFXIVObject[name].Status[key].caster === playerName) seconds.classList.add("playerself");
+          seconds.innerText = Math.max(Math.ceil((FFXIVObject[name].Status[key].expiration - new Date(e.line[1]).getTime()) / 1000), 0);
           span.appendChild(seconds);
           td5inside.appendChild(span);
         }
-        if (FFXIVObject[damageLog["targetName"]]) forStatus("targetName");
-        if (FFXIVObject[damageLog["fromName"]]) forStatus("fromName");
+        if (isDoT) {
+          if (FFXIVObject[dot.name]) forStatus(dot.name);
+        } else {
+          if (FFXIVObject[ability.targetName]) forStatus(ability.targetName);
+          if (FFXIVObject[ability.fromName]) forStatus(ability.fromName);
+        }
         td5.appendChild(td5inside);
-        function forStatus(c) {
-          for (const key in FFXIVObject[damageLog[c]].Status) {
-            createImg(c, key, parseInt(FFXIVObject[damageLog[c]].Status[key].stack));
-          }
+        function forStatus(name) {
+          for (const key in FFXIVObject[name].Status) createImg(name, key, parseInt(FFXIVObject[name].Status[key].stack));
         }
         if (
           scrollMove &&
           (document.querySelector("#all").getAttribute("data-select") === "true" ||
-            document.querySelector(`body > footer > ul > li[data-object-id="${damageLog.targetID}"]`).getAttribute("data-select") === "true")
+            document.querySelector(`body > footer > ul > li[data-object-id="${isDoT ? dot.id : ability.targetID}"]`).getAttribute("data-select") === "true")
         ) {
           main.scrollTop = main.scrollHeight;
         }
