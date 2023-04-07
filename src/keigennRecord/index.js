@@ -175,7 +175,7 @@ addOverlayListener("LogLine", (e) => {
         let tr = tbody.insertRow(-1);
         if (isDoT) {
           tr.setAttribute("data-master-id", dot.id);
-          tr.setAttribute("data-master-name", dot.name);
+          tr.setAttribute("data-master-name", '');
         } else {
           tr.setAttribute("data-master-id", ability.targetID);
           tr.setAttribute("data-master-name", ability.targetName);
@@ -219,13 +219,13 @@ addOverlayListener("LogLine", (e) => {
           td3.innerHTML = isDoT ? dot.name : ability.targetName;
         }
         td4.innerHTML = (isDoT ? dot.value : ability.value).toLocaleString();
-        td4.setAttribute("data-damage-effect", isDoT ? "DoT" : ability.damageEffect);
+        td4.setAttribute("data-damage-effect", isDoT ? "" : ability.damageEffect);
         td4.title = isDoT ? "DoT" : ability.fromName;
         td4.classList.add(isDoT ? "DoT" : ability.damageType);
         td4.setAttribute(
           "data-damage-type",
           isDoT
-            ? "DoT"
+            ? "(DoT)"
             : {
                 dodge: "(回避)",
                 death: "(即死)",
