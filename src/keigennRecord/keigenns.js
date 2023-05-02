@@ -5,7 +5,8 @@ const keigenns = {
   "4a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 预警
   "498": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 武装
   "52": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 神圣领域
-  "552": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 圣光幕帘
+  "2d7": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 国服圣光幕帘
+  "552": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 6.3新圣光幕帘
   "a72": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 圣盾阵
   "a73": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 骑士的坚守
   "2df": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的直觉
