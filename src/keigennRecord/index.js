@@ -101,7 +101,7 @@ addOverlayListener("ChangePrimaryPlayer", (e) => {
 });
 addOverlayListener("PartyChanged", (e) => {
   party = e.party.filter((p) => p.inParty || is24Mode);
-  localStorage.setItem("keigennRecordParty", party);
+  localStorage.setItem("keigennRecordParty", JSON.stringify(party));
   addFooter();
 });
 try {
