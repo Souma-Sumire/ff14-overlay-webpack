@@ -175,7 +175,7 @@ addOverlayListener("LogLine", (e) => {
         let tr = tbody.insertRow(-1);
         if (isDoT) {
           tr.setAttribute("data-master-id", dot.id);
-          tr.setAttribute("data-master-name", '');
+          tr.setAttribute("data-master-name", "");
         } else {
           tr.setAttribute("data-master-id", ability.targetID);
           tr.setAttribute("data-master-name", ability.targetName);
@@ -302,9 +302,14 @@ addOverlayListener("LogLine", (e) => {
       let statusLog = logProcessing(e.line, "status");
       const logStatus = statusLog["statusID"].toLowerCase();
       const statusCN = getStatus(parseInt(logStatus, 16))?.CN ?? "";
-      let playerKeigenn = /(受伤|耐性|防御力)(提升|(大幅)?降低|低下|加重|减轻)|最大体力/.test(statusCN)
-        ? { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }
-        : keigenns?.[logStatus];
+      let playerKeigenn;
+      if (/(受伤|耐性|防御力)(提升|(大幅)?降低|低下|加重|减轻)|体力(增加|减少|衰减)/.test(statusCN)) {
+        playerKeigenn = { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" };
+      } else if (/(精神|力量|灵巧|智力){1,2}(大幅)?降低/.test(statusCN)) {
+        playerKeigenn = { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "enemy" };
+      } else {
+        keigenns?.[logStatus];
+      }
       if (
         playerKeigenn !== undefined &&
         ((playerKeigenn?.condition === "player" && (party.some((value) => value.id === statusLog["targetID"]) || statusLog["targetID"] === youID)) ||

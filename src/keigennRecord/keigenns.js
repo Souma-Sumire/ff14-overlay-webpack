@@ -5,7 +5,6 @@ const keigenns = {
   "4a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 预警
   "498": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 武装
   "52": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 神圣领域
-  "2d7": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 国服圣光幕帘
   "552": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 6.3新圣光幕帘
   "a72": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 圣盾阵
   "a73": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 骑士的坚守
@@ -17,7 +16,7 @@ const keigenns = {
   "a76": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的血气
   "a77": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的血潮
   "a78": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的血烟
-    // "59": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //复仇 "受伤减轻"已经包括在默认buff中
+  "59": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //复仇
   "49a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 至黑之夜
   "2ea": { dodge: 0, physics: 0, magic: 1, darkness: 0, condition: "player" }, // 弃明投暗
   "2eb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 暗影墙

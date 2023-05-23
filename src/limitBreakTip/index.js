@@ -54,7 +54,7 @@ if (params.get("test") === "true")
       ["36", "2021-12-28T21:39:04.2630000+08:00", "1D60"],
       ["36", "2021-12-28T21:39:06.3600000+08:00", "1E3C"],
     ],
-    2
+    2,
   );
 
 function handleClear() {
@@ -74,7 +74,8 @@ export function handleLogLine(e) {
       LBextraAll += LBAdd;
       extraAll.innerText = `${(LBextraAll * 100).toFixed(0)}%`;
       let value = (LBAddUp * 100).toFixed(0);
-      let continuousIncrease = parseInt(extra.lastChild?.innerText) === value - 1;
+      const difference = parseInt(extra.lastChild?.innerText) - value;
+      let continuousIncrease = difference === 1 || difference === 5;
       if (continuousIncrease) {
         extra.lastChild.innerText = `+${value}%`;
       } else {
