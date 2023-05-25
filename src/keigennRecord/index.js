@@ -308,7 +308,7 @@ addOverlayListener("LogLine", (e) => {
       } else if (/(精神|力量|灵巧|智力){1,2}(大幅)?降低/.test(statusCN)) {
         playerKeigenn = { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "enemy" };
       } else {
-        keigenns?.[logStatus];
+        playerKeigenn = keigenns?.[logStatus];
       }
       if (
         playerKeigenn !== undefined &&
