@@ -160,7 +160,6 @@ addOverlayListener("LogLine", (e) => {
             value: parseInt(e.line[6], 16),
           }
         : null;
-      // isDoT && console.log(dot);
       if (
         (isDoT && dot.which === "DoT" && dot.id[0] === "1" && (dot.id === youID || party.some((v) => v.id === dot.id && (v.inParty || is24Mode)))) ||
         (ability.type === "damage" &&
@@ -264,7 +263,7 @@ addOverlayListener("LogLine", (e) => {
           td5inside.appendChild(span);
         }
         if (isDoT) {
-          if (FFXIVObject[dot.name]) forStatus(dot.name);
+          // if (FFXIVObject[dot.name]) forStatus(dot.name);
         } else {
           if (FFXIVObject[ability.targetName]) forStatus(ability.targetName);
           if (FFXIVObject[ability.fromName]) forStatus(ability.fromName);
