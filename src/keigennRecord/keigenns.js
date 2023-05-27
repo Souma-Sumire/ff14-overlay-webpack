@@ -57,8 +57,8 @@ const keigenns = {
   "a3b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 白牛清汁
   "bbb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 整体论
   "d25": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 整体盾
-  "a52": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 血印
-  "a53": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 泛血印
+  "a34": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 输血
+  "a35": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 泛输血
   "4d0": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 心眼
   "49b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 金刚极意
   "78e": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 行吟
