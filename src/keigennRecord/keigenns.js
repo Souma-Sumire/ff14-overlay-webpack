@@ -8,6 +8,7 @@ const keigenns = {
   "552": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 6.3新圣光幕帘
   "a72": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 圣盾阵
   "a73": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 骑士的坚守
+  "4d": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 6.4壁垒
   "2df": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的直觉
   "8b3": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的勇猛
   "57": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 战栗
