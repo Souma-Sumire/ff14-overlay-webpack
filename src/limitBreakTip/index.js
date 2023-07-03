@@ -74,8 +74,7 @@ export function handleLogLine(e) {
       LBextraAll += LBAdd;
       extraAll.innerText = `${(LBextraAll * 100).toFixed(0)}%`;
       let value = (LBAddUp * 100).toFixed(0);
-      const difference = parseInt(extra.lastChild?.innerText) - value;
-      let continuousIncrease = difference === 1 || difference === 5;
+      const continuousIncrease = parseInt(extra.lastChild?.innerText) === value - 1 || value - 5;
       if (continuousIncrease) {
         extra.lastChild.innerText = `+${value}%`;
       } else {
