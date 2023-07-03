@@ -15,6 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -27,7 +35,7 @@ jobs:
         run: |
           npm install -g pnpm
           pnpm install
-
+          
       - name: Build
         run: pnpm run build
 
