@@ -3,7 +3,7 @@ import "../../resources/function/loadOverlayPluginCommon.js";
 import "./index.scss";
 import "../../resources/function/loadComplete";
 import { testLogLine } from "../../resources/function/testLogLine";
-import "../../resources/function/isOverlayPlugin";
+// import "../../resources/function/isOverlayPlugin";
 
 let params = new URLSearchParams(new URL(window.location).search);
 const LBMax = parseInt(params.get("LBMax") ?? 30000);
@@ -74,7 +74,8 @@ export function handleLogLine(e) {
       LBextraAll += LBAdd;
       extraAll.innerText = `${(LBextraAll * 100).toFixed(0)}%`;
       let value = (LBAddUp * 100).toFixed(0);
-      const continuousIncrease = parseInt(extra.lastChild?.innerText) === value - 1 || value - 5;
+      const c = parseInt(extra.lastChild?.innerText);
+      const continuousIncrease = extra.lastChild && (c === value - 1 || c === value - 5);
       if (continuousIncrease) {
         extra.lastChild.innerText = `+${value}%`;
       } else {
