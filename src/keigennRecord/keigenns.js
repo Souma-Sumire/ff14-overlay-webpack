@@ -10,14 +10,15 @@ const keigenns = {
   "a73": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 骑士的坚守
   "4d": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 6.4壁垒
   "2df": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的直觉
-  "8b3": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的勇猛
+  "741": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的勇猛
+  "742": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的武猛
   "57": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 战栗
+  "59": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //复仇
   "5b1": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 摆脱
   "199": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 死斗
   "a76": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的血气
   "a77": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的血潮
   "a78": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初的血烟
-  "59": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, //复仇
   "49a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 至黑之夜
   "2ea": { dodge: 0, physics: 0, magic: 1, darkness: 0, condition: "player" }, // 弃明投暗
   "2eb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 暗影墙
@@ -25,7 +26,6 @@ const keigenns = {
   "32a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 行尸走肉
   "32b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 死而不僵
   "cb7": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 出死入生
-  "811": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 极光
   "a7a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 献奉
   "730": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 石之心
   "76a": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 残暴弹
@@ -70,11 +70,11 @@ const keigenns = {
   "a8e": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 守护之光
   "a25": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 守护纹
   "a93": { dodge: 0, physics: 0, magic: 1, darkness: 0, condition: "player" }, // 抗死
-  "4b9": { dodge: 1, physics: 1, magic: 0, darkness: 0, condition: "player" }, // 亲疏自行
   "4a9": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "enemy" }, // 雪仇
   "4ab": { dodge: 1, physics: 1, magic: 0.5, darkness: 0, condition: "enemy" }, // 牵制
   "4b3": { dodge: 1, physics: 0.5, magic: 1, darkness: 0, condition: "enemy" }, // 昏乱
   "35c": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "enemy" }, // 武装解除
+  "09": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "enemy" }, // 减速
   "848": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 体力增加
   "6b3": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "enemy" }, // 腐臭（臭气）
   "843": { dodge: 0, physics: 0, magic: 1, darkness: 0, condition: "enemy" }, // 智力精神降低（魔法锤）
