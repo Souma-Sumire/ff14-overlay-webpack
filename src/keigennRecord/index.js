@@ -5,20 +5,34 @@ import { getDamage } from "../../resources/function/damage";
 import { logProcessing } from "../../resources/function/logProcessing";
 import { keigenns } from "./keigenns";
 import { actionChinese } from "../../resources/data/actionChinese";
-import "../../resources/function/xianyu";
+// import "../../resources/function/xianyu";
 import "../../resources/function/loadComplete";
 import "./index.scss";
 import "../../resources/function/isOverlayPlugin";
 import "../../resources/function/loadOverlayPluginCommon.js";
 
+if (new Date() < new Date("2024-01-01")) {
+  console.log(
+    "2023年10月26日更新,带来3个新功能参数,他们分别是originAction用于控制技能名是否取原文(默认关), originStatus用于控制状态名是否取原文(默认关), hideOnStartup用于控制启动时是否自动缩起(默认开)",
+  );
+}
+
+const trueStr = ["true", "1", "yes", "y", "t", "on", "enable", "enabled", "ok", "okay", "agree", "agreed"];
 const params = new URLSearchParams(new URL(window.location).search);
-const miniMode = params?.get("mini") === "true" || false;
-const autoClean = params?.get("autoclean") === "true" || false;
-const showName = params?.get("showName") === "true" || false;
-const abbreviationID = params?.get("abbreviationID") === "true" || true;
+const miniMode = trueStr.includes(params?.get("mini")?.toLocaleLowerCase()) || false;
+const autoClean = trueStr.includes(params?.get("autoclean")?.toLocaleLowerCase()) || false;
+const showName = trueStr.includes(params?.get("showName")?.toLocaleLowerCase()) || false;
+const abbreviationID = trueStr.includes(params?.get("abbreviationID")?.toLocaleLowerCase()) || true;
+const originAction = trueStr.includes(params?.get("originAction")?.toLocaleLowerCase()) || false;
+const originStatus = trueStr.includes(params?.get("originStatus")?.toLocaleLowerCase()) || false;
+const hideOnStartup = trueStr.includes(params?.get("hideOnStartup")?.toLocaleLowerCase()) || true;
+
 miniMode && import("./index_mini.scss");
 const body = document.body;
 const main = document.querySelector("main");
+const header = document.querySelector("header");
+const footer = document.querySelector("footer");
+
 document.querySelector("body main table th:nth-child(1)").style.width = params?.get("th1") ?? "36px";
 document.querySelector("body main table th:nth-child(2)").style.width = params?.get("th2") ?? "75px";
 document.querySelector("body main table th:nth-child(3)").style.width = params?.get("th3") ?? "34px";
@@ -104,11 +118,17 @@ addOverlayListener("PartyChanged", (e) => {
   localStorage.setItem("keigennRecordParty", JSON.stringify(party));
   addFooter();
 });
-try {
-  addOverlayListener("onInCombatChangedEvent", (e) => (e.detail.inACTCombat && !inCombat ? startCombat() : ""));
-} catch {
-  addOverlayListener("CombatData", (e) => (duration = e.Encounter.duration));
-}
+
+callOverlayHandler({ call: "cactbotRequestState" }).then(
+  () => {
+    // console.log("存在cactbot");
+    addOverlayListener("onInCombatChangedEvent", (e) => (e.detail.inACTCombat && !inCombat ? startCombat() : ""));
+  },
+  () => {
+    console.log("不存在cactbot,采用次选方案,战斗计时可能存在偏差");
+    addOverlayListener("CombatData", (e) => (duration = e.Encounter.duration));
+  },
+);
 function speTr(text, className = null, colSpan = 5) {
   let td = tbody.insertRow(-1).insertCell(0);
   td.innerText = text;
@@ -194,10 +214,13 @@ addOverlayListener("LogLine", (e) => {
         let td5 = tr.insertCell(4); //状态
         let td5inside = document.createElement("article");
         td1.innerHTML = duration; //战斗时间
+        const curHP = Number(e.line[24]);
         td2.innerHTML = isDoT
           ? "DoT"
           : /unknown_/i.test(ability.skillName)
           ? "未知"
+          : originAction
+          ? ability.skillName
           : actionChinese?.[parseInt(ability.skillID, 16)] ?? ability.skillName ?? "未知";
         try {
           if ((isDoT ? dot.id : ability.targetID) === youID) {
@@ -217,7 +240,13 @@ addOverlayListener("LogLine", (e) => {
           console.warn(e);
           td3.innerHTML = isDoT ? dot.name : ability.targetName;
         }
-        td4.innerHTML = (isDoT ? dot.value : ability.value).toLocaleString();
+        const damageValue = isDoT ? dot.value : ability.value;
+        td4.innerHTML = damageValue.toLocaleString();
+        if (damageValue >= curHP) {
+          // 致死
+          const spe = speTr(`😱${td3.innerHTML}受到致死伤害，生前HP：${curHP}`, 'lethalLevel', 4);
+          spe.insertCell(0).innerHTML = duration; //战斗时间
+        }
         td4.setAttribute("data-damage-effect", isDoT ? "" : ability.damageEffect);
         td4.title = isDoT ? "DoT" : ability.fromName;
         td4.classList.add(isDoT ? "DoT" : ability.damageType);
@@ -317,7 +346,7 @@ addOverlayListener("LogLine", (e) => {
         if (e.line[0] === "26") {
           FFXIVObject[statusLog["targetName"]] = FFXIVObject[statusLog["targetName"]] || new FFObject(statusLog["targetID"], statusLog["targetName"]);
           FFXIVObject[statusLog["targetName"]].Status[logStatus] = {
-            name: statusCN ?? statusLog["statusName"],
+            name: originStatus ? statusLog.statusName : statusCN ?? statusLog["statusName"],
             caster: statusLog["casterName"],
             stack: e.line[9] > 1 ? e.line[9] : 0,
             expiration: new Date(e.line[1]).getTime() + Number(statusLog["statusTime"]) * 1000,
@@ -360,19 +389,22 @@ startOverlayEvents();
 main.onscroll = (e) => {
   scrollMove = main.scrollHeight - body.offsetHeight - e.target.scrollTop < body.clientHeight;
 };
-document.querySelector("header").onclick = function () {
-  let m = document.querySelector("main");
-  let f = document.querySelector("footer");
-  if (m.style.opacity === "0") {
-    m.style.opacity = "1";
-    f.style.opacity = "1";
-    this.classList.remove(`hide`);
-    // this.style.opacity = "0.75";
+
+if (hideOnStartup) {
+  main.style.opacity = "0";
+  footer.style.opacity = "0";
+  header.classList.add(`hide`);
+}
+
+header.onclick = function () {
+  if (main.style.opacity === "0") {
+    main.style.opacity = "1";
+    footer.style.opacity = "1";
+    header.classList.remove(`hide`);
   } else {
-    m.style.opacity = "0";
-    f.style.opacity = "0";
-    this.classList.add(`hide`);
-    // this.style.opacity = "1";
+    main.style.opacity = "0";
+    footer.style.opacity = "0";
+    header.classList.add(`hide`);
   }
 };
 function startCombat() {
