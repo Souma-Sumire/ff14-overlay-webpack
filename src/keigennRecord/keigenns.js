@@ -68,7 +68,8 @@ const keigenns = {
   "1e8": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 残影
   "a8": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 魔罩
   "a8e": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 守护之光
-  "a25": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 守护纹
+  "a24": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 守护纹（低等级）
+  "a25": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 守护纹（高等级进化后）
   "a93": { dodge: 0, physics: 0, magic: 1, darkness: 0, condition: "player" }, // 抗死
   "4a9": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "enemy" }, // 雪仇
   "4ab": { dodge: 1, physics: 1, magic: 0.5, darkness: 0, condition: "enemy" }, // 牵制
