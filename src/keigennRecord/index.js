@@ -53,7 +53,7 @@ let party = [],
   combatTimer = 0,
   maxLength = parseInt(params?.get("maxLength") || 800),
   is24Mode = params?.get("24Mode") === "true" || false;
-const lethal = {};
+let lethal = {};
 class FFObject {
   constructor(id, name) {
     this.ID = id;
@@ -167,10 +167,14 @@ function partyWipe() {
   inCombat = false;
   clearTimeout(combatTimer);
   duration = "00:00";
+  lethal = {};
 }
 const tbody = document.querySelector("body > main > table > tbody");
 addOverlayListener("LogLine", (e) => {
   switch (e.line[0]) {
+    case "39":
+      lethal[e.line[3]] = Number(e.line[4]);
+      break;
     case "24":
     case "21":
     case "22":
@@ -247,16 +251,8 @@ addOverlayListener("LogLine", (e) => {
         }
         const damageValue = isDoT ? dot.value : ability.value;
         td4.innerHTML = damageValue.toLocaleString();
-        if (!isDoT) {
-          const curHP = Number(e.line[24]);
-          if (damageValue >= curHP) {
-            // 致死
-            lethal[ability.targetName] = curHP;
-            setTimeout(() => {
-              if (lethal[ability.targetName] === curHP) delete lethal[ability.targetName];
-            }, 3000);
-          }
-        }
+        const curHP = Number(e.line[isDoT ? 7 : 24]);
+        lethal[ability.targetName] = curHP;
         td4.setAttribute("data-damage-effect", isDoT ? "" : ability.damageEffect);
         td4.title = isDoT ? "DoT" : ability.fromName;
         td4.classList.add(isDoT ? "DoT" : ability.damageType);
@@ -376,8 +372,7 @@ addOverlayListener("LogLine", (e) => {
         } catch {
           target = e.line[3];
         }
-        console.warn(lethal, e.line[3]);
-        let deathTr = speTr(`💀${target}被${e.line[5]}做掉了！${lethal[e.line[3]] ? "生前HP：" + lethal[e.line[3]] : ""}`, "deathEvent", 4);
+        let deathTr = speTr(`💀${target}被${e.line[5]}做掉了！${lethal[e.line[3]] ? "生前大概HP：" + lethal[e.line[3]] : ""}`, "deathEvent", 4);
         deathTr.setAttribute("data-master-id", e.line[2]);
         deathTr.setAttribute("data-master-name", e.line[3]);
         if (
