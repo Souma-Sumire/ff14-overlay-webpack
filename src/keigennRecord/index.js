@@ -13,19 +13,24 @@ import "../../resources/function/loadOverlayPluginCommon.js";
 
 if (new Date() < new Date("2024-01-01")) {
   console.log(
-    "2023年10月26日更新,带来3个新功能参数,他们分别是originAction用于控制技能名是否取原文(默认关), originStatus用于控制状态名是否取原文(默认关), hideOnStartup用于控制启动时是否自动缩起(默认开)",
+    "2023年10月26日更新,带来3个新功能参数,他们分别是originAction用于控制技能名是否取原文(默认关), originStatus用于控制状态名是否取原文(默认关), hideOnStartup用于控制启动时是否自动缩起(默认关)",
   );
 }
 
 const trueStr = ["true", "1", "yes", "y", "t", "on", "enable", "enabled", "ok", "okay", "agree", "agreed"];
+const getConfig = (key, defaultresult) => {
+  const p = params?.get(key)?.toLocaleLowerCase();
+  if (p && trueStr.includes(p)) return true;
+  return defaultresult;
+};
 const params = new URLSearchParams(new URL(window.location).search);
-const miniMode = trueStr.includes(params?.get("mini")?.toLocaleLowerCase()) || false;
-const autoClean = trueStr.includes(params?.get("autoclean")?.toLocaleLowerCase()) || false;
-const showName = trueStr.includes(params?.get("showName")?.toLocaleLowerCase()) || false;
-const abbreviationID = trueStr.includes(params?.get("abbreviationID")?.toLocaleLowerCase()) || true;
-const originAction = trueStr.includes(params?.get("originAction")?.toLocaleLowerCase()) || false;
-const originStatus = trueStr.includes(params?.get("originStatus")?.toLocaleLowerCase()) || false;
-const hideOnStartup = trueStr.includes(params?.get("hideOnStartup")?.toLocaleLowerCase()) || true;
+const miniMode = getConfig("mini", false);
+const autoClean = getConfig("autoclean", false);
+const showName = getConfig("showName", false);
+const abbreviationID = getConfig("abbreviationID", true);
+const originAction = getConfig("originAction", false);
+const originStatus = getConfig("originStatus", false);
+const hideOnStartup = getConfig("hideOnStartup", false);
 
 miniMode && import("./index_mini.scss");
 const body = document.body;
@@ -48,6 +53,7 @@ let party = [],
   combatTimer = 0,
   maxLength = parseInt(params?.get("maxLength") || 800),
   is24Mode = params?.get("24Mode") === "true" || false;
+const lethal = {};
 class FFObject {
   constructor(id, name) {
     this.ID = id;
@@ -214,7 +220,6 @@ addOverlayListener("LogLine", (e) => {
         let td5 = tr.insertCell(4); //状态
         let td5inside = document.createElement("article");
         td1.innerHTML = duration; //战斗时间
-        const curHP = Number(e.line[24]);
         td2.innerHTML = isDoT
           ? "DoT"
           : /unknown_/i.test(ability.skillName)
@@ -242,10 +247,15 @@ addOverlayListener("LogLine", (e) => {
         }
         const damageValue = isDoT ? dot.value : ability.value;
         td4.innerHTML = damageValue.toLocaleString();
-        if (damageValue >= curHP) {
-          // 致死
-          const spe = speTr(`😱${td3.innerHTML}受到致死伤害，生前HP：${curHP}`, 'lethalLevel', 4);
-          spe.insertCell(0).innerHTML = duration; //战斗时间
+        if (!isDoT) {
+          const curHP = Number(e.line[24]);
+          if (damageValue >= curHP) {
+            // 致死
+            lethal[ability.targetName] = curHP;
+            setTimeout(() => {
+              if (lethal[ability.targetName] === curHP) delete lethal[ability.targetName];
+            }, 3000);
+          }
         }
         td4.setAttribute("data-damage-effect", isDoT ? "" : ability.damageEffect);
         td4.title = isDoT ? "DoT" : ability.fromName;
@@ -366,7 +376,8 @@ addOverlayListener("LogLine", (e) => {
         } catch {
           target = e.line[3];
         }
-        let deathTr = speTr(`💀${target}被${e.line[5]}做掉了！`, "deathEvent", 4);
+        console.warn(lethal, e.line[3]);
+        let deathTr = speTr(`💀${target}被${e.line[5]}做掉了！${lethal[e.line[3]] ? "生前HP：" + lethal[e.line[3]] : ""}`, "deathEvent", 4);
         deathTr.setAttribute("data-master-id", e.line[2]);
         deathTr.setAttribute("data-master-name", e.line[3]);
         if (
@@ -394,6 +405,10 @@ if (hideOnStartup) {
   main.style.opacity = "0";
   footer.style.opacity = "0";
   header.classList.add(`hide`);
+} else {
+  main.style.opacity = "1";
+  footer.style.opacity = "1";
+  header.classList.remove(`hide`);
 }
 
 header.onclick = function () {
