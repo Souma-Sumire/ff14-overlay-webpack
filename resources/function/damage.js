@@ -64,7 +64,7 @@ function getDamage(e) {
     result.type = "damage";
     result.damageType = "death";
     result.damageEffect = "即死";
-  } else if (/(?<!5...)[356]$/.test(e.line[8 + offset])) {
+  } else if (/(?<![56]...)[356]$/.test(e.line[8 + offset])) {
     result.type = "damage";
     result.damageType = "physics";
     result.damageEffect = getEffect();
