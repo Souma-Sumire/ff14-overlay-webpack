@@ -22,16 +22,16 @@ module.exports = {
     assetModuleFilename: "images/[hash][ext][query]",
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/castingMonitor/index.html",
-      filename: "castingMonitor.html",
-      chunks: ["castingMonitor"],
-    }),
-    new HtmlWebpackPlugin({
-      template: "./src/fflogsUploaderDownload/index.html",
-      filename: "fflogsUploaderDownload.html",
-      chunks: ["fflogsUploaderDownload"],
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "./src/castingMonitor/index.html",
+    //   filename: "castingMonitor.html",
+    //   chunks: ["castingMonitor"],
+    // }),
+    // new HtmlWebpackPlugin({
+    //   template: "./src/fflogsUploaderDownload/index.html",
+    //   filename: "fflogsUploaderDownload.html",
+    //   chunks: ["fflogsUploaderDownload"],
+    // }),
     new HtmlWebpackPlugin({
       template: "./src/keigennRecord/index.html",
       filename: "keigennRecord.html",
@@ -62,11 +62,11 @@ module.exports = {
       filename: "index.html",
       chunks: ["index"],
     }),
-    new HtmlWebpackPlugin({
-      template: "./src/castingToChinese/index.html",
-      filename: "castingToChinese.html",
-      chunks: ["castingToChinese"],
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "./src/castingToChinese/index.html",
+    //   filename: "castingToChinese.html",
+    //   chunks: ["castingToChinese"],
+    // }),
     new HtmlWebpackPlugin({
       template: "./src/limitBreakTip/index.html",
       filename: "limitBreakTip.html",
