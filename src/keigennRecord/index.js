@@ -372,7 +372,7 @@ addOverlayListener("LogLine", (e) => {
         } catch {
           target = e.line[3];
         }
-        let deathTr = speTr(`💀${target}被${e.line[5]}做掉了！${lethal[e.line[3]] ? "生前大概HP：" + lethal[e.line[3]] : ""}`, "deathEvent", 4);
+        let deathTr = speTr(`💀${target}被做掉了！${lethal[e.line[3]] ? "生前大概HP:" + lethal[e.line[3]] : ""}`, "deathEvent", 4);
         deathTr.setAttribute("data-master-id", e.line[2]);
         deathTr.setAttribute("data-master-name", e.line[3]);
         if (
