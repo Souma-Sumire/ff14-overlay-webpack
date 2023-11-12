@@ -225,7 +225,7 @@ addOverlayListener("LogLine", (e) => {
         let td5inside = document.createElement("article");
         td1.innerHTML = duration; //战斗时间
         td2.innerHTML = isDoT
-          ? "DoT"
+          ? ""
           : /unknown_/i.test(ability.skillName)
           ? "未知"
           : originAction
@@ -259,7 +259,7 @@ addOverlayListener("LogLine", (e) => {
         td4.setAttribute(
           "data-damage-type",
           isDoT
-            ? "(DoT)"
+            ? ""
             : {
                 dodge: "(回避)",
                 death: "(即死)",

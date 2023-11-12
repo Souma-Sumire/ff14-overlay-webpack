@@ -5,15 +5,15 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   performance: { hints: false },
   entry: {
-    castingMonitor: "./src/castingMonitor/index.js",
-    fflogsUploaderDownload: "./src/fflogsUploaderDownload/index.js",
+    // castingMonitor: "./src/castingMonitor/index.js",
+    // fflogsUploaderDownload: "./src/fflogsUploaderDownload/index.js",
     keigennRecord: "./src/keigennRecord/index.js",
     keySkillTimer: "./src/keySkillTimer/index.js",
     teamWatch: "./src/teamWatch/index.js",
     teamWatchSettings: "./src/teamWatch/settings.js",
     mpTick: "./src/mpTick/index.js",
     index: "./src/index/index.js",
-    castingToChinese: "./src/castingToChinese/index.js",
+    // castingToChinese: "./src/castingToChinese/index.js",
     limitBreakTip: "./src/limitBreakTip/index.js",
   },
   output: {
