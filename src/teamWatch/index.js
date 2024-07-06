@@ -89,7 +89,7 @@ function partyChanged(party) {
   for (const member of membersDOM) member.innerHTML = "";
   for (const timer of timers) clearTimeout(timer);
   timers = [];
-  if (party.length === 0 || party === []) return;
+  if (party.length === 0) return;
   party = sortParty(party, playerID, sortRuleUsed);
   const watchJobsActionsIDUsed = load("watchJobsActionsIDUser") ?? watchJobsActionsID;
   for (let m = 0; m < membersDOM.length; m++) {
@@ -225,8 +225,8 @@ const fakeParty = [
   { id: "1039CE69", name: "Souma", job: 25, inParty: true },
   { id: "10000004", name: "Faker4", job: 35, inParty: true },
   { id: "10000005", name: "Faker5", job: 34, inParty: true },
-  { id: "10000006", name: "Faker6", job: 39, inParty: true },
-  { id: "10000007", name: "Faker7", job: 40, inParty: true },
+  { id: "10000006", name: "Faker6", job: 42, inParty: true },
+  { id: "10000007", name: "Faker7", job: 41, inParty: true },
   { id: "10000008", name: "Faker8", job: 28, inParty: true },
   { id: "1002E5AA", name: "Suzu", job: 33, inParty: true },
 ];

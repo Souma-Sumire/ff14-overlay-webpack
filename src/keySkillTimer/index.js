@@ -66,7 +66,10 @@ document.addEventListener("onOverlayStateUpdate", (e) => {
 });
 startOverlayEvents();
 
-// faker();
+if (location.href.includes("localhost") || location.href.includes("127.0.0.1")) {
+  faker();
+}
+
 // document.querySelectorAll("body > article > article").forEach((element) => {
 //   element.use();
 // });
@@ -80,20 +83,22 @@ function faker() {
     { id: "0", name: "虚构龙骑", job: 22, inParty: true },
     { id: "0", name: "虚构诗人", job: 23, inParty: true },
     { id: "0", name: "虚构白魔", job: 24, inParty: true },
-    { id: "0", name: "虚构黑魔", job: 25, inParty: true },
+    // { id: "0", name: "虚构黑魔", job: 25, inParty: true },
     { id: "0", name: "虚构召唤", job: 27, inParty: true },
     { id: "0", name: "虚构学者", job: 28, inParty: true },
     { id: "0", name: "虚构忍者", job: 30, inParty: true },
     { id: "0", name: "虚构机工", job: 31, inParty: true },
     { id: "0", name: "虚构暗骑", job: 32, inParty: true },
     { id: "0", name: "虚构占星", job: 33, inParty: true },
-    { id: "0", name: "虚构武士", job: 34, inParty: true },
+    // { id: "0", name: "虚构武士", job: 34, inParty: true },
     { id: "0", name: "虚构赤魔", job: 35, inParty: true },
-    { id: "0", name: "虚构青魔", job: 36, inParty: true },
+    // { id: "0", name: "虚构青魔", job: 36, inParty: true },
     { id: "0", name: "虚构绝枪", job: 37, inParty: true },
     { id: "0", name: "虚构舞者", job: 38, inParty: true },
     { id: "0", name: "虚构钐镰", job: 39, inParty: true },
     { id: "0", name: "虚构贤者", job: 40, inParty: true },
+    { id: "0", name: "虚构蝰蛇", job: 41, inParty: true },
+    { id: "0", name: "虚构画家", job: 42, inParty: true },
   ]);
 }
 function show(party) {
@@ -111,7 +116,8 @@ function show(party) {
         art.classList.add("useful_" + action.Useful);
         art.setAttribute("data-from", `${p.id}-${key}`);
         let aside = document.createElement("aside");
-        aside.setAttribute("data-recast", element.recast1000ms);
+        const recast = typeof element.recast1000ms === 'function' ? element.recast1000ms(p.level) : element.recast1000ms;
+        aside.setAttribute("data-recast", recast);
         aside.setAttribute("data-duration", element.duration);
         aside.innerText = "";
         art.append(aside);

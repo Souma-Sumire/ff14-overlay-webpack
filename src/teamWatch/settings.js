@@ -55,6 +55,7 @@ const role = {
   4: "dps", //枪术士
   5: "dps", //弓箭手
   7: "dps", //咒术师
+  41: "dps", //蝰蛇剑士
   20: "dps", //武僧
   22: "dps", //龙骑士
   23: "dps", //吟游诗人
@@ -66,11 +67,12 @@ const role = {
   31: "dps", //机工士
   34: "dps", //武士
   35: "dps", //赤魔法师
+  42: "dps", //绘灵法师
   36: "dps", //青魔法师
   38: "dps", //舞者
   39: "dps", //钐镰
 };
-const allJob = [1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+const allJob = [1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42];
 const sortRuleUser = load("sortRuleUser", undefined) ?? sortRule;
 let sortRuleShow = allJob.sort((a, b) => sortRuleUser.indexOf((baseClass[a] ?? a).toString()) - sortRuleUser.indexOf((baseClass[b] ?? b).toString()));
 let watchJobsActionsIDShow = load("watchJobsActionsIDUser") ?? watchJobsActionsID;
