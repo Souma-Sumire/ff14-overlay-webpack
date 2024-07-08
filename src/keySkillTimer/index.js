@@ -23,7 +23,7 @@ const TTS_CONFIG = [
 
 const MODE = params.get("international") === "true" ? 'global' : 'cn'
 
-const RAID_BUFFS = MODE === 'global' ? raidBuffs国际服 : raidBuffs国服;
+const raidbuffs = MODE === 'global' ? raidBuffs国际服 : raidBuffs国服;
 
 console.log(`当前处于${MODE === 'global' ? '国际服' : '国服'}模式`)
 
@@ -46,7 +46,7 @@ addOverlayListener("LogLine", (e) => {
       if (TTS_CONFIG[member.getAttribute("data-type")])
         doTTS(member.getAttribute("data-tts"));
     } else if (log["casterID"] === youID) {
-      const buff = RAID_BUFFS.find(v => v.id === actionID);
+      const buff = raidbuffs.find(v => v.id === actionID);
       if (buff && TTS_CONFIG[buff.type] && buff.tts) {
         doTTS(buff.tts);
       }
@@ -139,8 +139,8 @@ function show(party) {
   });
   for (const p of party) {
     if (!p.inParty && params.get("inPartyOnly") !== "false") break;
-    for (let index = 0; index < RAID_BUFFS.length; index++) {
-      const item = RAID_BUFFS[index];
+    for (let index = 0; index < raidbuffs.length; index++) {
+      const item = raidbuffs[index];
       if (item.job.includes(p.job)) {
         const art = document.createElement("article");
         const id = typeof item.id === 'function' ? item.id(p.level) : item.id;
