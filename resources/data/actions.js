@@ -41254,6 +41254,7 @@ class Action {
       )?.split(/[ 、]/) ?? [];
   }
 }
+
 const TraitRecast100ms = {
   3606: { trait: (level) => (level >= 68 ? 900 : 1200) }, //光速
   7521: { trait: (level) => (level >= 74 ? 1100 : 1200) }, //倍增
