@@ -43,13 +43,6 @@ addOverlayListener("LogLine", (e) => {
     const member = document.querySelector(`article[data-from="${log["casterID"]}-${compareSame(actionID)}"]`)
     if (member) {
       member.use();
-      if (TTS_CONFIG[member.getAttribute("data-type")])
-        doTTS(member.getAttribute("data-tts"));
-    } else if (log["casterID"] === youID) {
-      const buff = raidbuffs.find(v => v.id === actionID);
-      if (buff && TTS_CONFIG[buff.type] && buff.tts) {
-        doTTS(buff.tts);
-      }
     }
   } else if (e.line[0] === "33" && e.line[3] === "4000000F") resetEverything();
 });
@@ -189,6 +182,8 @@ function show(party) {
         document.querySelector(`#no${item.type}`).append(art);
 
         art.use = function () {
+          if (TTS_CONFIG[type])
+            doTTS(tts);
           let recast = aside.getAttribute("data-recast");
           let time = parseInt(recast);
           let duration = aside.getAttribute("data-duration");
