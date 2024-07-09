@@ -8,14 +8,34 @@ import { raidBuffs国服, raidBuffs国际服 } from "./raidbuffs";
 import "../../resources/function/isOverlayPlugin";
 import { getJobByID } from "../../resources/data/job";
 
-let params = new URLSearchParams(new URL(window.location).search);
+const params = new URLSearchParams(new URL(window.location).search);
 let timers = [];
 let party = [];
-let youID = null;
+let inPVP = false;
 let inFaker = true;
 
+const zoneIdPVP = [
+  376, // 周边遗迹群（阵地战）
+  431, // 尘封秘岩（争夺战）
+  554, // 荣誉野（碎冰战）
+  729, // 距骨研究所（机动战）
+  791, // 隐塞（机动战）
+  888, // 昂萨哈凯尔（竞争战）
+  1058, // 水晶冲突（角力学校：自定赛）
+  1059, // 水晶冲突（火山之心：自定赛）
+  1060, // 水晶冲突（九霄云上：自定赛）
+  1116, // 机关大殿
+  1117, // 水晶冲突（机关大殿：自定赛）
+  1138, // 赤土红沙
+  1139, // 水晶冲突（赤土红沙：自定赛）
+  967, // 帝国海上基地干船坞
+  1032, // 水晶冲突（角力学校）
+  1033, // 水晶冲突（火山之心）
+  1034, // 水晶冲突（九霄云上）
+]
 
-const TTS_CONFIG = [
+
+const ttsConfig = [
   params.get("dajinengTTS") !== "false",
   params.get("jianshangTTS") !== "false",
   params.get("tuanfuTTS") !== "false"
@@ -27,7 +47,6 @@ const raidbuffs = MODE === 'global' ? raidBuffs国际服 : raidBuffs国服;
 
 console.log(`当前处于${MODE === 'global' ? '国际服' : '国服'}模式`)
 
-addOverlayListener("ChangePrimaryPlayer", (e) => (youID = e.charID.toString(16).toUpperCase()));
 addOverlayListener("PartyChanged", (e) => {
   party = e.party || [];
   if (!inFaker) {
@@ -46,7 +65,12 @@ addOverlayListener("LogLine", (e) => {
     }
   } else if (e.line[0] === "33" && e.line[3] === "4000000F") resetEverything();
 });
-addOverlayListener("ChangeZone", () => resetEverything());
+addOverlayListener("ChangeZone", handleChangeZone);
+
+function handleChangeZone(e) {
+  inPVP = zoneIdPVP.includes(e.zoneID);
+  resetEverything();
+}
 
 function doTTS(string) {
   if (string) {
@@ -130,6 +154,8 @@ function show(party) {
   document.querySelectorAll("body > article").forEach((article) => {
     article.innerHTML = "";
   });
+  if (inPVP)
+    return;
   for (const p of party) {
     if (!p.inParty && params.get("inPartyOnly") !== "false") break;
     for (let index = 0; index < raidbuffs.length; index++) {
@@ -182,7 +208,7 @@ function show(party) {
         document.querySelector(`#no${item.type}`).append(art);
 
         art.use = function () {
-          if (TTS_CONFIG[type])
+          if (ttsConfig[type])
             doTTS(tts);
           let recast = aside.getAttribute("data-recast");
           let time = parseInt(recast);

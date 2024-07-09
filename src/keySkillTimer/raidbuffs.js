@@ -67,7 +67,7 @@ const raidBuffs国际服 = [
   { id: 3557, tts: "连祷", duration: 20, recast1000ms: 120, job: [4, 22], type: 2, level: 52, icon: 2585 },
   { id: 7396, tts: "义结金兰", duration: 20, recast1000ms: 120, job: [2, 20], type: 2, level: 70, icon: 2542 },
   { id: 25801, tts: "灼热之光", duration: 20, recast1000ms: 120, job: [27], type: 2, level: 66, icon: 2780 },
-  { id: 34675, tts: "画魔纹", duration: 20, recast1000ms: 120, job: [42], type: 2, level: 70, icon: 3826 },
+  { id: 34675, tts: "星空", duration: 20, recast1000ms: 120, job: [42], type: 2, level: 70, icon: 3826 },
   { id: 7436, tts: "连环计", duration: 20, recast1000ms: 120, job: [28], type: 2, level: 66, icon: 2815 },
   { id: 7520, tts: "鼓励", duration: 20, recast1000ms: 120, job: [35], type: 2, level: 58, icon: 3218 },
   { id: 16196, tts: "技巧舞", duration: 20, recast1000ms: 120, job: [38], type: 2, level: 70, icon: 3474 },
