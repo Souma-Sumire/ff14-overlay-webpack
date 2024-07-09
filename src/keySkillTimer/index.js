@@ -195,7 +195,7 @@ function show(party) {
         art.append(shadow);
         if (
           party?.reduce((pre, cur) => {
-            if (cur.job === p.job || item.job.find((value) => value === cur.job)) pre++;
+            if (cur.inParty && (cur.job === p.job || item.job.find((value) => value === cur.job))) pre++;
             return pre;
           }, 0) >= 2
         ) {
