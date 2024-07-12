@@ -48,11 +48,14 @@ const raidbuffs = MODE === 'global' ? raidBuffs国际服 : raidBuffs国服;
 console.log(`当前处于${MODE === 'global' ? '国际服' : '国服'}模式`)
 
 addOverlayListener("PartyChanged", (e) => {
-  party = e.party || [];
-  if (!inFaker) {
-    setTimeout(() => {
-      show(party);
-    }, 1000);
+  const eventParty = e.party.filter(v => v.inParty) || [];
+  if (JSON.stringify(eventParty) !== JSON.stringify(party)) {
+    party = eventParty;
+    if (!inFaker) {
+      setTimeout(() => {
+        show(party);
+      }, 1000);
+    }
   }
 });
 addOverlayListener("LogLine", (e) => {
