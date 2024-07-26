@@ -41,16 +41,14 @@ const ttsConfig = [
   params.get("tuanfuTTS") !== "false"
 ]
 
-const MODE = params.get("international") === "true" ? 'global' : 'cn'
-
-const raidbuffs = MODE === 'global' ? raidBuffs国际服 : raidBuffs国服;
-
-console.log(`当前处于${MODE === 'global' ? '国际服' : '国服'}模式`)
-
+let raidbuffs = raidBuffs国服;
+let lastParty = ''
 addOverlayListener("PartyChanged", (e) => {
   const eventParty = e.party.filter(v => v.inParty) || [];
-  if (JSON.stringify(eventParty) !== JSON.stringify(party)) {
-    party = eventParty;
+  const thisParty = eventParty.map((v) => v.id).sort().join('|')
+  party = eventParty;
+  if (thisParty !== lastParty) {
+    lastParty = thisParty;
     if (!inFaker) {
       setTimeout(() => {
         show(party);
@@ -69,6 +67,10 @@ addOverlayListener("LogLine", (e) => {
   } else if (e.line[0] === "33" && e.line[3] === "4000000F") resetEverything();
 });
 addOverlayListener("ChangeZone", handleChangeZone);
+addOverlayListener("ChangePrimaryPlayer", (e) => {
+  raidbuffs = e.charName.includes(" ") ? raidBuffs国际服 : raidBuffs国服
+  show(party);
+});
 
 function handleChangeZone(e) {
   inPVP = zoneIdPVP.includes(e.zoneID);

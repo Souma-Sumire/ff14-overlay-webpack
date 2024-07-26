@@ -11,11 +11,7 @@ import "./index.scss";
 import "../../resources/function/isOverlayPlugin";
 import "../../resources/function/loadOverlayPluginCommon.js";
 
-if (new Date() < new Date("2024-01-01")) {
-  console.log(
-    "2023年10月26日更新,带来3个新功能参数,他们分别是originAction用于控制技能名是否取原文(默认关), originStatus用于控制状态名是否取原文(默认关), hideOnStartup用于控制启动时是否自动缩起(默认关)",
-  );
-}
+console.log("该悬浮窗2024年7月1日后仅提供最基础的数据更新，如有bug不再修复，新版：https://souma.diemoe.net/ff14-overlay-vue/#/keigennRecord2",);
 
 const trueStr = ["true", "1", "yes", "y", "t", "on", "enable", "enabled", "ok", "okay", "agree", "agreed"];
 const getConfig = (key, defaultresult) => {
@@ -182,13 +178,13 @@ addOverlayListener("LogLine", (e) => {
       const isDoT = e.line[0] === "24";
       const dot = isDoT
         ? {
-            id: e.line[2],
-            name: e.line[3],
-            which: e.line[4],
-            effectId: e.line[5],
-            damage: e.line[6],
-            value: parseInt(e.line[6], 16),
-          }
+          id: e.line[2],
+          name: e.line[3],
+          which: e.line[4],
+          effectId: e.line[5],
+          damage: e.line[6],
+          value: parseInt(e.line[6], 16),
+        }
         : null;
       if (
         (isDoT && dot.which === "DoT" && dot.id[0] === "1" && (dot.id === youID || party.some((v) => v.id === dot.id && (v.inParty || is24Mode)))) ||
@@ -227,10 +223,10 @@ addOverlayListener("LogLine", (e) => {
         td2.innerHTML = isDoT
           ? ""
           : /unknown_/i.test(ability.skillName)
-          ? "未知"
-          : originAction
-          ? ability.skillName
-          : actionChinese?.[parseInt(ability.skillID, 16)] ?? ability.skillName ?? "未知";
+            ? "未知"
+            : originAction
+              ? ability.skillName
+              : actionChinese?.[parseInt(ability.skillID, 16)] ?? ability.skillName ?? "未知";
         try {
           if ((isDoT ? dot.id : ability.targetID) === youID) {
             td3.innerText = "YOU";
@@ -261,14 +257,14 @@ addOverlayListener("LogLine", (e) => {
           isDoT
             ? ""
             : {
-                dodge: "(回避)",
-                death: "(即死)",
-                physics: "(物理)",
-                magic: "(魔法)",
-                darkness: "(黑暗)",
-                heal: "(治疗)",
-                unknown: "(未知)",
-              }[ability.damageType] ?? "",
+              dodge: "(回避)",
+              death: "(即死)",
+              physics: "(物理)",
+              magic: "(魔法)",
+              darkness: "(黑暗)",
+              heal: "(治疗)",
+              unknown: "(未知)",
+            }[ability.damageType] ?? "",
         );
         function createImg(name, key, stack = 0) {
           let span = document.createElement("span");
@@ -360,7 +356,7 @@ addOverlayListener("LogLine", (e) => {
         } else {
           try {
             delete FFXIVObject[statusLog["targetName"]].Status[logStatus];
-          } catch {}
+          } catch { }
         }
       }
       break;
@@ -429,8 +425,8 @@ function startCombat() {
     duration = `${parseInt(++d / 60)
       .toString()
       .padStart(2, "0")}:${parseInt(d % 60)
-      .toString()
-      .padStart(2, "0")}`;
+        .toString()
+        .padStart(2, "0")}`;
   }, 1000);
 }
 function cleanTable() {
