@@ -76,7 +76,19 @@ const allJob = [1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 const sortRuleUser = load("sortRuleUser", undefined) ?? sortRule;
 let sortRuleShow = allJob.sort((a, b) => sortRuleUser.indexOf((baseClass[a] ?? a).toString()) - sortRuleUser.indexOf((baseClass[b] ?? b).toString()));
 let watchJobsActionsIDShow = load("watchJobsActionsIDUser") ?? watchJobsActionsID;
-
+for (const key in watchJobsActionsIDShow) {
+  const baseClassIds = Object.keys(baseClass);
+  if (Object.hasOwnProperty.call(watchJobsActionsIDShow, key)) {
+    const skillIds = watchJobsActionsIDShow[key];
+    for (let i = 0; i < skillIds.length; i++) {
+      const skillId = skillIds[i];
+      const compare = compareSame(skillId);
+      if (compare > 0 && !baseClassIds.includes(key)) {
+        skillIds[i] = compare;
+      }
+    }
+  }
+}
 function loadAction(watchJobsActionsIDShow) {
   document.querySelector("#sortRuleDiv")?.remove();
   const sortRuleDiv = document.createElement("table");
