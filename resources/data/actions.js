@@ -41005,7 +41005,7 @@ const actions = {
   41000: [0, 0, 0, 0, 0, 0, 0],
 
 };
-actions['4'][0] = 104
+actions['3'][0] = 104 // 冲刺
 actions['7398'][0] = 2587 // 龙肠
 //="["""&B5&""", """&C5&"""],"
 const ClassJobCategoryConvert = new Map([

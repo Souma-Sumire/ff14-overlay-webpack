@@ -1,9 +1,12 @@
+const kShiftFlagValues = ['3E', '113', '213', '313']
+const kShiftFlagValues2 = ['A10', 'E']
+
 function getDamage(e) {
   let offset = 0;
-  if (["3C", "A10", "100000E"].includes(e.line[8])) offset += 2;
-  //5.0 特殊偏移=3C
-  //6.0 武士心眼=A10
-  //P6S麻将喷=100000E
+  const flags = e.line[8] ?? ''
+  if (kShiftFlagValues.includes(flags) || kShiftFlagValues2.includes(flags)) {
+    offset += 2
+  }
   function getEffect() {
     if (e.line[8 + offset].length < 3) return "";
     switch (e.line[8 + offset].substr(e.line[8 + offset].length - 3, 1)) {
@@ -37,18 +40,13 @@ function getDamage(e) {
   if (damage[4] !== "4") {
     result.value = parseInt(damage.substring(0, 4), 16);
   } else {
-    if (result.skillID === "6A37") {
-      //P3S死之超越
-      result.value = "9999999";
-    } else {
-      let A = damage.substring(0, 2);
-      let B = damage.substring(2, 4);
-      let C = damage.substring(4, 6);
-      let D = damage.substring(6, 8);
-      let BsubD = ("0x" + B - ("0x" + D)).toString(16).toUpperCase();
-      if (BsubD.length === 1) BsubD = "0" + BsubD;
-      result.value = parseInt(D + A + BsubD, 16);
-    }
+    let A = damage.substring(0, 2);
+    let B = damage.substring(2, 4);
+    // let C = damage.substring(4, 6);
+    let D = damage.substring(6, 8);
+    let BsubD = ("0x" + B - ("0x" + D)).toString(16).toUpperCase();
+    if (BsubD.length === 1) BsubD = "0" + BsubD;
+    result.value = parseInt(D + A + BsubD, 16);
   }
   if (/^F.*[^13456]$/.test(e.line[8 + offset])) {
     return result;
@@ -64,15 +62,15 @@ function getDamage(e) {
     result.type = "damage";
     result.damageType = "death";
     result.damageEffect = "即死";
-  } else if (/(?<![56]...)[356]$/.test(e.line[8 + offset])) {
+  } else if (/7?[1-4]\w{3}[35]$|[16]$/.test(e.line[8 + offset])) {
     result.type = "damage";
     result.damageType = "physics";
     result.damageEffect = getEffect();
-  } else if (/5.{3}[356]$/.test(e.line[8 + offset])) {
+  } else if (/5\w{4}$|^E$/.test(e.line[8 + offset])) {
     result.type = "damage";
     result.damageType = "magic";
     result.damageEffect = getEffect();
-  } else if (/6.{3}[356]$/.test(e.line[8 + offset])) {
+  } else if (/^(?:\d0)?3$|6\w{4}$/.test(e.line[8 + offset])) {
     result.type = "damage";
     result.damageType = "darkness";
     result.damageEffect = getEffect();

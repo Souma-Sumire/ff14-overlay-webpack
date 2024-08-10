@@ -32,7 +32,7 @@ let jobList = [
   { ID: "38", en: "DNC", cn: "舞者", jp: "踊り子", Role: "Dps", IsBaseCLass: false, simple1: "舞", simple2: "舞者" },
   { ID: "39", en: "RPR", cn: "钐镰客", jp: "リーパー", Role: "Dps", IsBaseCLass: false, simple1: "镰", simple2: "钐镰" },
   { ID: "40", en: "SGE", cn: "贤者", jp: "賢者", Role: "Healer", IsBaseCLass: false, simple1: "贤", simple2: "贤者" },
-  { ID: "41", en: "VPR", cn: "蝰蛇剑士", jp: "ヴァイパー", Role: "Dps", IsBaseCLass: false, simple1: "蛇", simple2: "蝰蛇" },
+  { ID: "41", en: "VPR", cn: "蛇武士", jp: "ヴァイパー", Role: "Dps", IsBaseCLass: false, simple1: "蛇", simple2: "蛇武" },
   { ID: "42", en: "PCT", cn: "绘灵法师", jp: "ピクトマンサー", Role: "Dps", IsBaseCLass: false, simple1: "绘", simple2: "绘灵" },
 ];
 export function getJobByID(id) {

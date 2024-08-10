@@ -91,5 +91,14 @@ const keigenns = {
   "35f": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 原初大地
   "360": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 暗黑之力
   "78b": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 灵魂之青
+  "ef5": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 大预警
+  "ef6": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 大预警[护盾]
+  "ef8": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 大复仇
+  "efb": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 大暗影墙
+  "efe": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 大星云
+  "e66": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 坦培拉涂层
+  "e67": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 油性坦培拉
+  "f32": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 世界树之干
+  "f34": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 建筑神之塔
 };
 export { keigenns };
