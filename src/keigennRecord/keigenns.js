@@ -100,5 +100,7 @@ const keigenns = {
   "e67": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 油性坦培拉
   "f32": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 世界树之干
   "f34": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 建筑神之塔
+  "f38": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 太阳星座
+  "f3f": { dodge: 1, physics: 1, magic: 1, darkness: 1, condition: "player" }, // 神慰
 };
 export { keigenns };
