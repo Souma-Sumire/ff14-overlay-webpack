@@ -1,5 +1,3 @@
-console.log('2024年9月26日之后，T的无敌不再拥有tts，因为跟cactbot的重复了，过去关闭了cactbot无敌tts的重新启用一下')
-
 const raidBuffs国服 = [
   { id: 30, tts: "", duration: 10, recast1000ms: 420, job: [19], type: 0, level: 50, icon: 2502 }, // 神圣领域 因为跟cactbot的重复报了所以关了
   { id: 43, tts: "", duration: 10, recast1000ms: 240, job: [3, 21], type: 0, level: 42, icon: 266 }, // 死斗 因为跟cactbot的重复报了所以关了
