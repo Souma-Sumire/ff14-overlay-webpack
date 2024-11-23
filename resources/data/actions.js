@@ -41265,7 +41265,7 @@ const TraitRecast100ms = {
   3585: { trait: (level) => (level >= 88 ? 900 : 1200) }, //展开战术
   7496: { trait: (level) => (level >= 94 ? 600 : 1200) }, //必杀剑红莲
   16481: { trait: (level) => (level >= 94 ? 600 : 1200) }, //必杀剑闪影
-  7561: { trait: (level) => (level >= 94 ? 600 : 400) }, //即刻咏唱
+  7561: { trait: (level) => (level >= 94 ? 400 : 600) }, //即刻咏唱
   16542: { trait: (level) => (level >= 92 ? 600 : 900) }, //秘策
   24300: { trait: (level) => (level >= 88 ? 900 : 1200) }, //活化
   24294: { trait: (level) => (level >= 94 ? 600 : 900) }, //拯救
