@@ -24,7 +24,6 @@ const raidBuffs国服 = [
   { id: 16012, tts: "桑巴", duration: 15, recast1000ms: 90, job: [38], type: 1, level: 56, icon: 3469 },
   { id: 25857, tts: "抗死", duration: 10, recast1000ms: 120, job: [35], type: 1, level: 86, icon: 3237 },
   { id: 34686, tts: "涂层", duration: 10, recast1000ms: 90, job: [42], type: 1, level: 88, icon: 3836 },
-  { id: 34686, tts: "涂层", duration: 10, recast1000ms: 90, job: [42], type: 1, level: 88, icon: 3836 },
   { id: 118, tts: "战歌", duration: 20, recast1000ms: 120, job: [23], type: 2, level: 50, icon: 2601 },
   { id: 25785, tts: "光神曲", duration: 20, recast1000ms: 110, job: [23], type: 2, level: 90, icon: 2622 },
   { id: (level) => level >= 66 ? 36957 : 2248, tts: "背刺", duration: 20, recast1000ms: 120, job: [29, 30], type: 2, level: 66, icon: 619 },
