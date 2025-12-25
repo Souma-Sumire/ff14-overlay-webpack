@@ -4,7 +4,7 @@ import "../../resources/function/loadComplete";
 import { logProcessing } from "../../resources/function/logProcessing";
 import { TTS as tts } from "../../resources/function/TTS";
 import "./index.scss";
-import { raidBuffs国服, raidBuffs国际服 } from "./raidbuffs";
+import { raidBuffs国服 } from "./raidbuffs";
 import "../../resources/function/isOverlayPlugin";
 import { getJobByID } from "../../resources/data/job";
 
@@ -68,7 +68,6 @@ addOverlayListener("LogLine", (e) => {
 });
 addOverlayListener("ChangeZone", handleChangeZone);
 addOverlayListener("ChangePrimaryPlayer", (e) => {
-  raidbuffs = e.charName.includes(" ") ? raidBuffs国际服 : raidBuffs国服
   show(party);
 });
 
@@ -178,6 +177,7 @@ function show(party) {
         const duration = getProp(item.duration, p);
         const tts = getProp(item.tts, p);
         const type = getProp(item.type, p);
+        const icon = getProp(item.icon, p);
         aside.setAttribute("data-recast", recast);
         aside.setAttribute("data-duration", duration);
         aside.setAttribute("data-type", type);
@@ -185,10 +185,10 @@ function show(party) {
         aside.innerText = "";
         art.append(aside);
         let section = document.createElement("img");
-        if (!item.icon) {
+        if (!icon) {
           throw new Error('icon is required')
         }
-        const url = createIconUrl(item.icon)
+        const url = createIconUrl(icon);
         section.src = `https://cafemaker.wakingsands.com/i/${url ?? "000000/000405"}.png`;
         section.onerror = () => {
           section.src = `https://xivapi.com/i/${url ?? "000000/000405"}.png`;
